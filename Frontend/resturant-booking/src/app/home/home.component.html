@@ -1,46 +1,56 @@
 <div id="showcase">
-  <button class="btn btn-primary">Sign In</button>
+  <button class="btn signin-button">Sign In</button>
   <img id="logo" src="assets/images/logo.png" alt="logo" />
-  <h3>Find the best restaurants, cafés and bars in Kochi</h3>
+  <h2 id="search-heading">
+    Find the best restaurants, cafés and bars in Kochi
+  </h2>
 
-  <div class="row justify-content-md-center">
-    <div class="col col-md-6">
-      <div id="search-bar" class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search for restaurants, cuisine or a dish"
-          aria-label="search"
-          aria-describedby="earch"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-danger" type="button">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-8">
+        <div id="search-bar" class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search for restaurants, cuisine or a dish"
+            aria-label="search"
+            aria-describedby="search"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-danger" id="search-button" type="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div id="categories">
-  <h3>Here are 4 ways to think about your next meal</h3>
-  <div class="row justify-content-md-center">
-    <div class="category col col-lg-2">
+  <h2>Here are 4 ways to think about your next meal</h2>
+  <div class="row justify-content-center">
+    <div class="category col-6 col-lg-2 col-md-4">
       <img src="assets/images/breakfast.png" alt="" />
       <h4 class="category-name">Breakfast</h4>
     </div>
-    <div class="category col col-lg-2">
+    <div class="category col-6 col-md-4 col-lg-2">
       <img src="assets/images/lunch.png" alt="" />
       <h4 class="category-name">Lunch</h4>
-
     </div>
-    <div class="category col col-lg-2">
-        <img src="assets/images/dinner.png" alt="" />
-        <h4 class="category-name">Dinner</h4>
+    <div class="category col-6 col-md-4 col-lg-2">
+      <img src="assets/images/dinner.png" alt="" />
+      <h4 class="category-name">Dinner</h4>
     </div>
-    <div class="category col col-lg-2">
-        <img src="assets/images/delivery.png" alt="" />
-        <h4 class="category-name">Delivery</h4>
+    <div class="category col-6 col-md-4 col-lg-2">
+      <img src="assets/images/delivery.png" alt="" />
+      <h4 class="category-name">Delivery</h4>
     </div>
   </div>
+</div>
+
+<div id="top-restaurants">
+  <h2>Top Restaurants</h2>
+  <p style="margin-bottom: 0px">
+    Explore curated lists of top restaurants, cafes & bars in and around Kochi
+  </p>
 </div>
