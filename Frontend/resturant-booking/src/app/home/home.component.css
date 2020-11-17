@@ -1,0 +1,55 @@
+
+#showcase{
+    background: url(../../assets/images/home-background.png);
+  
+    /*background: url(../img/showcase.jpg) no-repeat top center fixed/cover;*/
+
+    min-height: 913px;
+    color: #fff;
+    padding-top: 2rem;
+}
+
+#categories{
+  background: url(../../assets/images/home-background1.png);
+
+  /*background: url(../img/showcase.jpg) no-repeat top center fixed/cover;*/
+
+  min-height: 357px;
+  color: #fff;
+  padding-top: 2rem;
+}
+
+.category{
+  position: relative;
+  margin: 0px 30px 30px;
+}
+
+.category-name{
+  position: absolute;
+  bottom: 30px;
+  left: 75px;
+}
+
+
+
+
+
+button{
+  float: right;
+  margin-right: 2em;
+}
+
+img#logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h3{
+  text-align: center;
+}
+
+#search-bar{
+  margin-left: 15px;
+}
+
