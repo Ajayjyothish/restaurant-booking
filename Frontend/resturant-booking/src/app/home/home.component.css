@@ -21,7 +21,7 @@
 
 .category{
   position: relative;
-  margin: 0px 30px 30px 50px;
+  margin: 0px 30px 30px 30px;
 }
 
 .category-name{
@@ -51,6 +51,11 @@ img#logo{
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.cards{
+  
+  margin: 40px 20px 30px 20px;
 }
 
 h2, p{

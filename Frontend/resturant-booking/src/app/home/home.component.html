@@ -28,29 +28,38 @@
 </div>
 <div id="categories">
   <h2>Here are 4 ways to think about your next meal</h2>
-  <div class="row justify-content-center">
-    <div class="category col-6 col-lg-2 col-md-4">
-      <img src="assets/images/breakfast.png" alt="" />
-      <h4 class="category-name">Breakfast</h4>
-    </div>
-    <div class="category col-6 col-md-4 col-lg-2">
-      <img src="assets/images/lunch.png" alt="" />
-      <h4 class="category-name">Lunch</h4>
-    </div>
-    <div class="category col-6 col-md-4 col-lg-2">
-      <img src="assets/images/dinner.png" alt="" />
-      <h4 class="category-name">Dinner</h4>
-    </div>
-    <div class="category col-6 col-md-4 col-lg-2">
-      <img src="assets/images/delivery.png" alt="" />
-      <h4 class="category-name">Delivery</h4>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="category col-6 col-lg-2 col-md-4">
+        <img src="assets/images/breakfast.png" alt="" />
+        <h4 class="category-name">Breakfast</h4>
+      </div>
+      <div class="category col-6 col-md-4 col-lg-2">
+        <img src="assets/images/lunch.png" alt="" />
+        <h4 class="category-name">Lunch</h4>
+      </div>
+      <div class="category col-6 col-md-4 col-lg-2">
+        <img src="assets/images/dinner.png" alt="" />
+        <h4 class="category-name">Dinner</h4>
+      </div>
+      <div class="category col-6 col-md-4 col-lg-2">
+        <img src="assets/images/delivery.png" alt="" />
+        <h4 class="category-name">Delivery</h4>
+      </div>
     </div>
   </div>
 </div>
 
-<div id="top-restaurants">
+<div id="top-restaurants" class="pt-4">
   <h2>Top Restaurants</h2>
-  <p style="margin-bottom: 0px">
+  <p>
     Explore curated lists of top restaurants, cafes & bars in and around Kochi
   </p>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div *ngFor="let restaurant of restaurants" class="cards col-lg-5 ">
+        <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
+      </div>
+    </div>
+  </div>
 </div>
