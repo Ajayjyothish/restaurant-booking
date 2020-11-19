@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 
 import { RestaurantsService } from './restaurants.service';
 import { RestaurantCardsComponent } from './restaurant-cards/restaurant-cards.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RestaurantCardsComponent } from './restaurant-cards/restaurant-cards.co
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [RestaurantsService],
   bootstrap: [AppComponent]

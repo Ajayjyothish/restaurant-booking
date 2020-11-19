@@ -16,7 +16,8 @@ interface Restaurant{
 })
 export class RestaurantCardsComponent implements OnInit {
 
-  @Input() restaurant: Restaurant;
+  @Input() restaurant;
+  currentRate = 5;
 
   constructor() { }
 
