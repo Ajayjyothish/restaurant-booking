@@ -1,6 +1,28 @@
-<h4>
-    {{restaurant.name}}
-</h4>
-<p id="location">
-    {{restaurant.location}}
-</p>
+<div class="restaurant-card">
+  <div class="container pt-3">
+    <div class="row justify-content-between"><h4>
+    {{ restaurant.name }}
+    </h4>
+    <i class="fa fa-heart" aria-hidden="true"></i></div>
+
+    <p id="location">
+      {{ restaurant.location }}
+    </p>
+  </div>
+  <hr />
+  <div class="container">
+    <p>
+      {{ restaurant.cuisine }}
+    </p>
+    <p>
+      {{ restaurant.price }}
+    </p>
+    <p>
+      {{ restaurant.time }}
+    </p>
+  </div>
+  <hr />
+  <div class="container pb-3">
+    <h5>Photos !!!</h5>
+  </div>
+</div>

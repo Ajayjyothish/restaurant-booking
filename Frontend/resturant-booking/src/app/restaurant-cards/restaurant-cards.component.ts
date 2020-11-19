@@ -4,7 +4,9 @@ interface Restaurant{
   id: number;
   name: string;
   cuisine: string;
-
+  location: string;
+  price: number;
+  time: string;
 }
 
 @Component({
