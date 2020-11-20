@@ -1,5 +1,5 @@
 <div id="showcase">
-  <button class="btn signin-button">Sign In</button>
+  <app-signup></app-signup>
   <img id="logo" src="assets/images/logo.png" alt="logo" />
   <div class="container">
     <h2 id="search-heading">
@@ -28,6 +28,7 @@
 </div>
 <div id="categories">
   <h2>Here are 4 ways to think about your next meal</h2>
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="category col-6 col-lg-2 col-md-4">
@@ -55,9 +56,10 @@
   <p>
     Explore curated lists of top restaurants, cafes & bars in and around Kochi
   </p>
+
   <div class="container">
     <div class="row justify-content-center">
-      <div *ngFor="let restaurant of restaurants" class="cards col-lg-5 ">
+      <div *ngFor="let restaurant of restaurants" class="cards col-lg-5">
         <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
       </div>
     </div>
