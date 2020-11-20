@@ -16,14 +16,17 @@ export class HomeComponent implements OnInit {
   constructor(private restaurantsService: RestaurantsService) {}
 
   ngOnInit(): void {
-    this.restaurantsService
-      .getRestaurants()
-      .subscribe((data: Array<object>) => {
+    this.restaurantsService.getRestaurants().subscribe({
+      next: (data: Array<object>) => {
         this.restaurants = data.sort((a: Restaurant, b: Restaurant) => {
           return b.rating - a.rating;
         });
         this.restaurants = this.restaurants.slice(0, 4);
         console.log('We got', this.restaurants);
-      });
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
   }
 }

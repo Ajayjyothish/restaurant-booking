@@ -1,5 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { RestaurantsService } from './../restaurants.service';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { stringify } from 'querystring';
 
 interface User {
   name: string;
@@ -16,8 +18,12 @@ interface User {
 })
 export class SignupComponent implements OnInit {
   user: User;
+  serverError = '';
 
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private modalService: NgbModal,
+    private restaurantService: RestaurantsService
+  ) {}
 
   ngOnInit(): void {
     this.user = {
@@ -35,17 +41,33 @@ export class SignupComponent implements OnInit {
 
   onSubmit(newUser: User, valid: boolean): void {
     console.log(newUser, 'valid: ', valid);
-    this.resetForm();
+    this.serverError = '';
+    this.restaurantService.postUser(newUser).subscribe({
+      next: (data) => {
+        this.resetForm();
+
+        console.log('This is next: ', data);
+      },
+      error: (error) => {
+        console.error('There was a error: ', error.error);
+        if (error.status === 403) {
+          this.serverError = error.error;
+        }
+      },
+    });
   }
 
   resetForm(): void {
-    this.user = {
-      name: '',
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
-    };
+    this.modalService.dismissAll();
+    setTimeout(() => {
+      this.user = {
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
+      };
+    }, 1000);
   }
 
   open(content: any): any {

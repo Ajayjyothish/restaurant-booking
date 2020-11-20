@@ -13,7 +13,10 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value, userForm.valid); modal.dismiss()">
+    <form
+      #userForm="ngForm"
+      (ngSubmit)="onSubmit(userForm.value, userForm.valid)"
+    >
       <div class="modal-body">
         <div class="form-group">
           <i class="fa fa-user-o fa-lg"></i>
@@ -54,6 +57,9 @@
           <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
             <div *ngIf="email.errors.required">Email is required</div>
             <div *ngIf="email.errors.pattern">Enter a valid email</div>
+          </div>
+          <div class="alert alert-danger" *ngIf="serverError !== ''">
+            {{ serverError }}
           </div>
         </div>
         <div class="form-group">
@@ -100,11 +106,11 @@
           <i class="fa fa-lock fa-lg"></i>
           <input
             type="password"
-            ngValidateEqual='password'
+            ngValidateEqual="password"
             class="form-control"
             name="confirmPassword"
             required
-            (change)='log(confirmPassword)'
+            (change)="log(confirmPassword)"
             #confirmPassword="ngModel"
             [(ngModel)]="user.confirmPassword"
             placeholder="Confirm Password"
@@ -116,7 +122,9 @@
             <div *ngIf="confirmPassword.errors.required">
               Please confirm password
             </div>
-            <div *ngIf="confirmPassword.hasError('notEqual') && password.valid">The passwords do not match</div>
+            <div *ngIf="confirmPassword.hasError('notEqual')">
+              The passwords do not match
+            </div>
           </div>
         </div>
       </div>
