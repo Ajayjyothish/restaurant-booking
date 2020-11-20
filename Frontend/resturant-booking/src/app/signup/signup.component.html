@@ -1,0 +1,144 @@
+<ng-template #content let-modal>
+  <div class="container">
+    <div class="modal-header">
+      <h4 class="modal-title w-100 text-center" id="modal-basic-title">
+        Sign Up
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form
+      #userForm="ngForm"
+      (ngSubmit)="onSubmit(userForm.value, userForm.valid)"
+    >
+      <div class="modal-body">
+        <div class="form-group">
+          <i class="fa fa-user-o fa-lg"></i>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            minlength="3"
+            pattern="[A-Za-z]{3,}[A-Za-z ]*"
+            #name="ngModel"
+            (change)="log(name)"
+            required
+            [(ngModel)]="user.name"
+            placeholder="Name"
+          />
+          <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+            <div *ngIf="name.errors.required">First name is required</div>
+            <div *ngIf="name.errors.minlength">
+              Minimum {{ name.errors.minlength.requiredLength }} characters
+              required
+            </div>
+            <div *ngIf="name.errors.pattern">Only alphabets permitted</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fa fa-envelope-o fa-lg"></i>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            #email="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            [(ngModel)]="user.email"
+            (change)="log(email)"
+            placeholder="Email"
+            required
+          />
+          <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.pattern">Enter a valid email</div>
+          </div>
+          <div class="alert alert-danger" *ngIf="serverError !== ''">
+            {{ serverError }}
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fa fa-mobile-phone fa-lg"></i>
+          <input
+            type="text"
+            class="form-control"
+            name="phone"
+            pattern="[0-9]{10}"
+            #phone="ngModel"
+            [(ngModel)]="user.phone"
+            placeholder="Phone"
+          />
+          <div class="alert alert-danger" *ngIf="phone.touched && !phone.valid">
+            <div *ngIf="phone.errors.pattern">
+              Enter a valid 10 digit number
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fa fa-unlock-alt fa-lg"></i>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="user.password"
+            placeholder="Password"
+            required
+            minlength="8"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="password.touched && !password.valid"
+          >
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+              Minimum {{ password.errors.minlength.requiredLength }} characters
+              required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="fa fa-lock fa-lg"></i>
+          <input
+            type="password"
+            ngValidateEqual="password"
+            class="form-control"
+            name="confirmPassword"
+            required
+            (change)="log(confirmPassword)"
+            #confirmPassword="ngModel"
+            [(ngModel)]="user.confirmPassword"
+            placeholder="Confirm Password"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="confirmPassword.touched && !confirmPassword.valid"
+          >
+            <div *ngIf="confirmPassword.errors.required">
+              Please confirm password
+            </div>
+            <div *ngIf="confirmPassword.hasError('notEqual')">
+              The passwords do not match
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          ngbAutofocus
+          class="btn w-100"
+          [disabled]="!userForm.form.valid"
+        >
+          Go
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<button class="btn signin-button" (click)="open(content)">Sign Up</button>

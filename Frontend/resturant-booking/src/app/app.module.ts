@@ -1,3 +1,4 @@
+import { SignupComponent } from './signup/signup.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,19 +11,25 @@ import { FooterComponent } from './footer/footer.component';
 import { RestaurantsService } from './restaurants.service';
 import { RestaurantCardsComponent } from './restaurant-cards/restaurant-cards.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ValidateEqualModule } from 'ng-validate-equal';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FooterComponent,
-    RestaurantCardsComponent
+    RestaurantCardsComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    ReactiveFormsModule,
+    ValidateEqualModule
   ],
   providers: [RestaurantsService],
   bootstrap: [AppComponent]

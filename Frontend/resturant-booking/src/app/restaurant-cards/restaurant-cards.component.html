@@ -11,23 +11,46 @@
       {{ restaurant.location }}
     </p>
     <!-- <ngb-rating [rate]="restaurant.rating" [readonly]='true'></ngb-rating> -->
-    <ngb-rating [rate]="restaurant.rating" [readonly]='true'>
+    <ngb-rating [rate]="restaurant.rating" [readonly]="true">
       <ng-template let-fill="fill" let-index="index">
-        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3"
+          >&#9733;</span
+        >
       </ng-template>
     </ngb-rating>
   </div>
   <hr />
   <div class="container">
-    <p>
-      {{ restaurant.cuisine }}
-    </p>
-    <p>
-      {{ restaurant.price }}
-    </p>
-    <p>
-      {{ restaurant.time }}
-    </p>
+    <div class="row">
+      <div class="col-1">
+        <i class="fa fa-cutlery"></i>
+      </div>
+      <div class="col-10">
+        <p class="card-fields">
+          {{ restaurant.cuisine }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-1">
+        <i class="fa fa-credit-card"></i>
+      </div>
+      <div class="col-10">
+        <p class="card-fields">
+          {{ restaurant.price }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-1">
+        <i class="fa fa-clock-o"></i>
+      </div>
+      <div class="col-10">
+        <p class="card-fields">
+          {{ restaurant.time }}
+        </p>
+      </div>
+    </div>
   </div>
   <hr />
   <div class="container pb-3">
