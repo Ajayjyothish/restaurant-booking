@@ -12,6 +12,7 @@ import { RestaurantsService } from './restaurants.service';
 import { RestaurantCardsComponent } from './restaurant-cards/restaurant-cards.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ValidateEqualModule } from 'ng-validate-equal';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+    ValidateEqualModule
   ],
   providers: [RestaurantsService],
   bootstrap: [AppComponent]

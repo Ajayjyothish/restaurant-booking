@@ -15,30 +15,30 @@ interface User {
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  user: User = {
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-  };
-
-  @ViewChild('userForm') form: any;
+  user: User;
 
   constructor(private modalService: NgbModal) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = {
+      name: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmPassword: '',
+    };
+  }
 
   log(x: object): any {
     console.log(x);
   }
 
-  onSubmit(): void {
-    console.log(this.user);
+  onSubmit(newUser: User, valid: boolean): void {
+    console.log(newUser, 'valid: ', valid);
     this.resetForm();
   }
 
-  resetForm(): void{
+  resetForm(): void {
     this.user = {
       name: '',
       email: '',

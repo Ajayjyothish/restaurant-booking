@@ -13,7 +13,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <form #userForm="ngForm" (ngSubmit)="onSubmit(); modal.dismiss()">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value, userForm.valid); modal.dismiss()">
       <div class="modal-body">
         <div class="form-group">
           <i class="fa fa-user-o fa-lg"></i>
@@ -100,9 +100,11 @@
           <i class="fa fa-lock fa-lg"></i>
           <input
             type="password"
+            ngValidateEqual='password'
             class="form-control"
             name="confirmPassword"
             required
+            (change)='log(confirmPassword)'
             #confirmPassword="ngModel"
             [(ngModel)]="user.confirmPassword"
             placeholder="Confirm Password"
@@ -114,6 +116,7 @@
             <div *ngIf="confirmPassword.errors.required">
               Please confirm password
             </div>
+            <div *ngIf="confirmPassword.hasError('notEqual') && password.valid">The passwords do not match</div>
           </div>
         </div>
       </div>
