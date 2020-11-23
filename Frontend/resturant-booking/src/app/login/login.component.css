@@ -51,10 +51,23 @@ div.form-group{
   position: relative;
 }
 
-i{
+i.form{
   position: absolute;
   top: 10px;
   left: 15px;
   color: rgba(112, 98, 80, 1) ;
   height: 2em;
+}
+
+p.forgot-link, p.signup-link{
+  color : rgba(168, 106, 27, 1);
+  cursor: pointer;
+}
+
+p{
+  color: rgba(112, 98, 80, 1);
+}
+
+i{
+  color : rgba(168, 106, 27, 1);
 }

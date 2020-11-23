@@ -1,6 +1,7 @@
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignupComponent } from '../signup/signup.component';
 
 interface SigninUser {
   email: string;
@@ -17,10 +18,9 @@ export class LoginComponent implements OnInit {
   user: SigninUser;
   serverError = '';
 
-
   constructor(
     private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +62,10 @@ export class LoginComponent implements OnInit {
 
   open(content: any): any {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+  }
+
+  signup(): void {
+    this.modalService.dismissAll();
+    this.modalService.open(SignupComponent);
   }
 }

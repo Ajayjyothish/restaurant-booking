@@ -1,4 +1,4 @@
-<ng-template #content let-modal>
+<div>
   <div class="modal-header">
     <h4 class="modal-title w-100 text-center" id="modal-basic-title">
       Sign Up
@@ -7,7 +7,7 @@
       type="button"
       class="close"
       aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
+      (click)="activeModal.dismiss('Cross click')"
     >
       <span aria-hidden="true">&times;</span>
     </button>
@@ -142,5 +142,4 @@
       </div>
     </div>
   </form>
-</ng-template>
-<button class="btn signin-button" (click)="open(content)">Sign Up</button>
+</div>

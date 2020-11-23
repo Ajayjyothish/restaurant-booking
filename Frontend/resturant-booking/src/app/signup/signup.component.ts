@@ -1,6 +1,6 @@
 import { RestaurantsService } from './../restaurants.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 interface SignupUser {
@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    public activeModal: NgbActiveModal,
     private restaurantService: RestaurantsService
   ) {}
 

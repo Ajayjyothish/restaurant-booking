@@ -75,3 +75,11 @@ button#search-button{
 
 }
 
+button.signin-button{
+  float: right;
+  margin-right: 2em;
+  border-radius: 30px;
+  background-color: rgba(78, 30, 18, 1);
+  color: white;
+  width: 100px;
+}

@@ -1,6 +1,8 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
 import { Component, OnInit } from '@angular/core';
+import { SignupComponent } from '../signup/signup.component';
 
 interface Restaurant {
   rating: number;
@@ -15,7 +17,7 @@ export class HomeComponent implements OnInit {
   restaurants: Array<object>;
   isLoggedIn = this.authService.isLoggedIn();
 
-  constructor(private restaurantsService: RestaurantsService, private authService: AuthService) {}
+  constructor(private restaurantsService: RestaurantsService,private modelService: NgbModal, private authService : AuthService) {}
 
   ngOnInit(): void {
     this.restaurantsService.getRestaurants().subscribe({
@@ -31,4 +33,9 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+  open(){
+    this.modelService.open(SignupComponent)
+  }
+
 }
