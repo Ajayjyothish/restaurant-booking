@@ -1,22 +1,22 @@
 <ng-template #content let-modal>
-  <div class="container">
-    <div class="modal-header">
-      <h4 class="modal-title w-100 text-center" id="modal-basic-title">
-        Sign Up
-      </h4>
-      <button
-        type="button"
-        class="close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <form
-      #userForm="ngForm"
-      (ngSubmit)="onSubmit(userForm.value, userForm.valid)"
+  <div class="modal-header">
+    <h4 class="modal-title w-100 text-center" id="modal-basic-title">
+      Sign Up
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
     >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form
+    #userForm="ngForm"
+    (ngSubmit)="onSubmit(userForm.value, userForm.valid)"
+  >
+    <div class="container">
       <div class="modal-body">
         <div class="form-group">
           <i class="fa fa-user-o fa-lg"></i>
@@ -128,7 +128,9 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer">
+    </div>
+    <div class="modal-footer">
+      <div class="container w-100">
         <button
           type="submit"
           ngbAutofocus
@@ -138,7 +140,7 @@
           Go
         </button>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </ng-template>
 <button class="btn signin-button" (click)="open(content)">Sign Up</button>

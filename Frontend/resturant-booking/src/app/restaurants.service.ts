@@ -15,7 +15,7 @@ export class RestaurantsService {
   }
 
   postUser(body: object): any{
-    return this.http.post<any>('/api/users', body);
+    return this.http.post<any>('/api/users/signup', body);
   }
 
 }

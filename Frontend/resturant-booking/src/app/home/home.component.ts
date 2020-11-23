@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,8 +13,9 @@ interface Restaurant {
 })
 export class HomeComponent implements OnInit {
   restaurants: Array<object>;
+  isLoggedIn = this.authService.isLoggedIn();
 
-  constructor(private restaurantsService: RestaurantsService) {}
+  constructor(private restaurantsService: RestaurantsService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.restaurantsService.getRestaurants().subscribe({

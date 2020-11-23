@@ -1,7 +1,10 @@
 <div id="showcase">
   <app-signup></app-signup>
+  <app-login></app-login>
   <img id="logo" src="assets/images/logo.png" alt="logo" />
   <div class="container">
+    <h2 *ngIf="isLoggedIn">Im logged in bitch</h2>
+    <h2>{{isLoggedIn}}</h2>
     <h2 id="search-heading">
       Find the best restaurants, cafés and bars in Kochi
     </h2>

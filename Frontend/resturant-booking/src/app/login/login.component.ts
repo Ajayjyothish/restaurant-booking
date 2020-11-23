@@ -1,37 +1,32 @@
-import { RestaurantsService } from './../restaurants.service';
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
-interface SignupUser {
-  name: string;
+interface SigninUser {
   email: string;
-  phone: string;
+
   password: string;
-  confirmPassword: string;
 }
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
-export class SignupComponent implements OnInit {
-  user: SignupUser;
+export class LoginComponent implements OnInit {
+  user: SigninUser;
   serverError = '';
+
 
   constructor(
     private modalService: NgbModal,
-    private restaurantService: RestaurantsService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.user = {
-      name: '',
       email: '',
-      phone: '',
       password: '',
-      confirmPassword: '',
     };
   }
 
@@ -39,14 +34,12 @@ export class SignupComponent implements OnInit {
     console.log(x);
   }
 
-  onSubmit(newUser: SignupUser, valid: boolean): void {
-    console.log(newUser, 'valid: ', valid);
+  onSubmit(signinUser: SigninUser, valid: boolean): void {
     this.serverError = '';
-    this.restaurantService.postUser(newUser).subscribe({
-      next: (data) => {
+    this.authService.login(signinUser).subscribe({
+      next: (res) => {
+        this.authService.setSession(res);
         this.resetForm();
-
-        console.log('This is next: ', data);
       },
       error: (error) => {
         console.error('There was an error: ', error.error);
@@ -61,11 +54,8 @@ export class SignupComponent implements OnInit {
     this.modalService.dismissAll();
     setTimeout(() => {
       this.user = {
-        name: '',
         email: '',
-        phone: '',
         password: '',
-        confirmPassword: '',
       };
     }, 1000);
   }
