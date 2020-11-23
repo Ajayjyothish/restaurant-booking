@@ -1,0 +1,56 @@
+<div>
+    <div class="modal-header">
+      <h4 class="modal-title w-100 text-center" id="modal-basic-title">
+        Forgot Password
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form
+      #forgotForm="ngForm"
+      (ngSubmit)="onSubmit(forgotForm.value)"
+    >
+      <div class="container">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <i class="fa fa-mobile-phone fa-lg"></i>
+            <input
+              type="text"
+              class="form-control"
+              name="phone"
+              pattern="[0-9]{10}"
+              #resetPhone="ngModel"
+              [(ngModel)]="phone"
+              placeholder="Phone"
+            />
+            <div class="alert alert-danger" *ngIf="resetPhone.touched && !resetPhone.valid">
+              <div *ngIf="phone.errors.pattern">
+                Enter a valid 10 digit number
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="container w-100">
+          <button
+            type="submit"
+            ngbAutofocus
+            class="btn w-100"
+            [disabled]="!forgotForm.form.valid"
+          >
+            Go
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

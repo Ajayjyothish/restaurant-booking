@@ -1,3 +1,4 @@
+import { ForgotpassComponent } from './../forgotpass/forgotpass.component';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -68,4 +69,10 @@ export class LoginComponent implements OnInit {
     this.modalService.dismissAll();
     this.modalService.open(SignupComponent);
   }
+
+  forgot(): void{
+    this.modalService.dismissAll();
+    this.modalService.open(ForgotpassComponent);
+  }
+
 }

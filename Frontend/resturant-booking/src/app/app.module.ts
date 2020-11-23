@@ -17,6 +17,7 @@ import { ValidateEqualModule } from 'ng-validate-equal';
 import { LoginComponent } from './login/login.component';
 
 import { AuthInterceptor } from './AuthInterceptor';
+import { ForgotpassComponent } from './forgotpass/forgotpass.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthInterceptor } from './AuthInterceptor';
     FooterComponent,
     RestaurantCardsComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotpassComponent
   ],
   imports: [
     BrowserModule,
