@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthInterceptor } from './AuthInterceptor';
 import { ForgotpassComponent } from './forgotpass/forgotpass.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ForgotpassComponent } from './forgotpass/forgotpass.component';
     RestaurantCardsComponent,
     SignupComponent,
     LoginComponent,
-    ForgotpassComponent
+    ForgotpassComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

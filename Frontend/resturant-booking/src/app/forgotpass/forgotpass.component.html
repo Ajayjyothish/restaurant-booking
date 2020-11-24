@@ -20,20 +20,23 @@
         <div class="modal-body">
 
           <div class="form-group">
-            <i class="fa fa-mobile-phone fa-lg"></i>
+            <i class="fa fa-envelope-o fa-lg"></i>
             <input
-              type="text"
+              type="email"
               class="form-control"
-              name="phone"
-              pattern="[0-9]{10}"
-              #resetPhone="ngModel"
-              [(ngModel)]="phone"
-              placeholder="Phone"
+              name="email"
+              #email="ngModel"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+              [(ngModel)]="user.email"
+              placeholder="Email"
+              required
             />
-            <div class="alert alert-danger" *ngIf="resetPhone.touched && !resetPhone.valid">
-              <div *ngIf="phone.errors.pattern">
-                Enter a valid 10 digit number
-              </div>
+            <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.pattern">Enter a valid email</div>
+            </div>
+            <div class="alert alert-danger" *ngIf="serverError !== ''">
+              {{ serverError }}
             </div>
           </div>
 
