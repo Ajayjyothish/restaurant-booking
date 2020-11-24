@@ -39,4 +39,13 @@ export class AuthService {
 
     return moment(expiresAt);
   }
+
+  forgotPassword(body: object): any{
+    return this.http.post('/api/users/forgotpassword', body);
+  }
+
+  newPassword(body: object): any{
+    return this.http.post('/api/users/newpassword', body);
+  }
+
 }

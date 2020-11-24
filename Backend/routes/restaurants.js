@@ -5,7 +5,7 @@ const db = require('../db')
 /* GET users listing. */
 router.route('/')
 .get((request,response,next)=> {
-    db.query('Select * FROM restaurants', [], (err, res)=>{
+    db.query('Select name, location, cuisine, price, time, rating  FROM restaurants', [], (err, res)=>{
         if(err){
             return next(err)
         }
