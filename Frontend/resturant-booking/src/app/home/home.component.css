@@ -1,15 +1,14 @@
+#showcase {
+  background: url(../../assets/images/home-background.png);
 
-#showcase{
-    background: url(../../assets/images/home-background.png);
-  
-    /*background: url(../img/showcase.jpg) no-repeat top center fixed/cover;*/
+  /*background: url(../img/showcase.jpg) no-repeat top center fixed/cover;*/
 
-    min-height: 913px;
-    color: #fff;
-    padding-top: 46px;
+  min-height: 913px;
+  color: #fff;
+  padding-top: 46px;
 }
 
-#categories{
+#categories {
   background: url(../../assets/images/home-background1.png);
 
   /*background: url(../img/showcase.jpg) no-repeat top center fixed/cover;*/
@@ -19,63 +18,90 @@
   padding-top: 2rem;
 }
 
-.category{
+
+.category {
   position: relative;
-  margin: 0px 30px 30px 30px;
+  margin: 35px 30px 30px 30px;
 }
 
-.category-name{
+.category-name {
   position: absolute;
   bottom: 30px;
   left: 75px;
 }
 
-
-#top-restaurants{
+#top-restaurants {
   background-color: rgba(242, 232, 218, 1);
 }
 
-
-
-
-img#logo{
+img#logo {
   margin-top: 7em;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.cards{
-  
-  margin: 40px 20px 30px 20px;
+.cards {
+  margin: 0px 0px 30px 0px;
 }
 
-h2, p{
+h4 {
+  font-size: 26px;
+  color: rgba(202, 163, 112, 1);
+  font-family: "SF UI Display";
+}
+
+h2,
+p {
   text-align: center;
 }
 
-h2#search-heading{
+p {
+  font-size: 24px;
+  font-family: San Francisco;
+  color: rgba(148, 129, 103, 1);
+  margin-bottom: 3rem;
+}
+
+h2#search-heading {
   margin-top: 4em;
   margin-bottom: 1em;
 }
 
-#search-bar input{
-  height: 4em;
-  border-radius: 10em;
+#search-bar input#search {
+  height: 102px;
+  background-color: rgba(255, 255, 255, 1);
+  border-top-right-radius: 51px;
+  border-bottom-right-radius: 51px;
+  font-family: "SF UI Display";
   z-index: 0;
+  width: 30%;
 }
 
-button#search-button{
-  margin-left: -3.5em;
-  margin-top:0.6em;
+#search-bar input#location {
+  height: 102px;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "SF UI Display", FontAwesome;
+  border-top-left-radius: 51px;
+  border-bottom-left-radius: 51px;
+}
+
+input[type="text"]::placeholder {
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(149, 145, 138, 1);
+}
+
+button#search-button {
+  margin-left: -5.5em;
+  margin-top: 0.8em;
   border-radius: 5em;
-  height: 2.8em;
-  width: 2.8em;
+  height: 4.8em;
+  width: 4.8em;
   z-index: 1;
-
 }
 
-button.signin-button{
+button.signin-button {
   float: right;
   margin-right: 2em;
   border-radius: 30px;

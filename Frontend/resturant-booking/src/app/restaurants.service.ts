@@ -11,7 +11,7 @@ export class RestaurantsService {
 
   // tslint:disable-next-line: typedef
   getRestaurants(){
-    return this.http.get('/api/restaurants');
+    return this.http.get('/api/restaurants/top-restaurants');
   }
 
   postUser(body: object): any{

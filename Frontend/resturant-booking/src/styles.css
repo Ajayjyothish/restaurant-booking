@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(//db.onlinewebfonts.com/c/b9f4fba805372d012dc98a3bca4d5237?family=SF+UI+Display);
+
 
 body{
     min-width: 360px;
+    font-family: Copse
+}
+
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }

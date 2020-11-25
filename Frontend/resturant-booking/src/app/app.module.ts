@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './AuthInterceptor';
 import { ForgotpassComponent } from './forgotpass/forgotpass.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     SignupComponent,
     LoginComponent,
     ForgotpassComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

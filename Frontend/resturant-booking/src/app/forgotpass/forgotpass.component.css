@@ -1,54 +1,58 @@
-div.alert{
-    margin-top: 0.5em;
-    border-radius: 2em;
-  }
-  
-  button.btn{
-    background-color: rgba(78, 30, 18, 1);
-    color: white;
-    border-radius: 2em;
-  }
-  
-  
-  .form-control.ng-touched.ng-invalid{
-    border: 2px solid red;
-  }
-  
-  .modal-title{
-    color: rgba(177, 131, 71, 1);
-  }
-  
-  .container, .modal-footer{
-    background-color: rgb(232, 238, 240);
-    
-  }
-  
-  .modal-content{
-    border-radius: 1rem !important;
-  }
-  
-  
-  
-  input{
-    text-indent:30px;
-    background-color: rgb(232, 238, 240);
-    border-radius: 2em;
-    border: 1px solid rgba(112, 98, 80, 1);
-  }
-  
-  input[type= 'text']::placeholder, input[type= 'email']::placeholder, input[type= 'password']::placeholder{
-    text-align: center;
-    color: rgba(112, 98, 80, 1);
-  }
-  
-  div.form-group{
-    position: relative;
-  }
-  
-  i{
-    position: absolute;
-    top: 10px;
-    left: 15px;
-    color: rgba(112, 98, 80, 1) ;
-    height: 2em;
-  }
+div.alert {
+  margin-top: 0.5em;
+  border-radius: 2em;
+}
+
+button.btn {
+  background-color: rgba(78, 30, 18, 1);
+  color: white;
+  border-radius: 2em;
+}
+
+div.modal-body,
+div.modal-footer {
+  font-family: "SF UI Display";
+}
+
+.form-control.ng-touched.ng-invalid {
+  border: 2px solid red;
+}
+
+.modal-title {
+  color: rgba(177, 131, 71, 1);
+}
+
+.container,
+.modal-footer {
+  background-color: rgb(232, 238, 240);
+}
+
+.modal-content {
+  border-radius: 1rem !important;
+}
+
+input {
+  text-indent: 30px;
+  background-color: rgb(232, 238, 240);
+  border-radius: 2em;
+  border: 1px solid rgba(112, 98, 80, 1);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  text-align: center;
+  color: rgba(112, 98, 80, 1);
+}
+
+div.form-group {
+  position: relative;
+}
+
+i {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  color: rgba(112, 98, 80, 1);
+  height: 2em;
+}

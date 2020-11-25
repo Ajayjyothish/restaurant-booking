@@ -24,15 +24,15 @@ export class AuthService {
     localStorage.removeItem('expires_at');
   }
 
-  public isLoggedIn() {
+  public isLoggedIn(): boolean {
     return moment().isBefore(this.getExpiration());
   }
 
-  isLoggedOut() {
+  isLoggedOut(): boolean {
     return !this.isLoggedIn();
   }
 
-  getExpiration() {
+  getExpiration(): any {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
     console.log(expiresAt);
