@@ -10,8 +10,12 @@ export class RestaurantsService {
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line: typedef
-  getRestaurants(){
+  getTopRestaurants(){
     return this.http.get('/api/restaurants/top-restaurants');
+  }
+
+  getAllRestaurants(): any{
+    return this.http.get('/api/restaurants');
   }
 
   postUser(body: object): any{

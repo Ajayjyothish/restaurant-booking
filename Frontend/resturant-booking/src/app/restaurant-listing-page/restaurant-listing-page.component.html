@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p>Restaurant</p>
+    <div class="options ml-auto d-flex">
+      <p class="mr-5">Map View</p>
+      <div ngbDropdown container="body">
+        <p ngbDropdownToggle>Filter</p>
+        <div ngbDropdownMenu>
+          <button ngbDropdownItem>Edit</button>
+          <button ngbDropdownItem>Duplicate</button>
+          <button ngbDropdownItem>Move</button>
+          <div class="dropdown-divider"></div>
+          <button ngbDropdownItem>Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="restaurant-list">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div *ngFor="let restaurant of restaurants" class="cards col-lg-6">
+        <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
+      </div>
+    </div>
+  </div>
+</div>

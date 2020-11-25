@@ -4,9 +4,6 @@ import { RestaurantsService } from './../restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
 
-interface Restaurant {
-  rating: number;
-}
 
 @Component({
   selector: 'app-home',
@@ -24,7 +21,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.restaurantsService.getRestaurants().subscribe({
+    this.restaurantsService.getTopRestaurants().subscribe({
       next: (data: Array<object>) => {
         this.restaurants = data;
         console.log('We got', this.restaurants);

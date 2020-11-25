@@ -7,6 +7,7 @@ interface Restaurant{
   location: string;
   price: number;
   time: string;
+  rating: number;
 }
 
 @Component({
@@ -16,7 +17,7 @@ interface Restaurant{
 })
 export class RestaurantCardsComponent implements OnInit {
 
-  @Input() restaurant;
+  @Input() restaurant: Restaurant;
 
   constructor() { }
 

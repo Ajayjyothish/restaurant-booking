@@ -1,13 +1,14 @@
 <div id="showcase">
-  <!-- <app-navbar></app-navbar> -->
   <!-- <button class="btn signin-button" (click)="open()">Sign Up</button> -->
 
-  <app-login></app-login>
+  <div id="signin-container" >
+    <app-login></app-login>
+  </div>
   <img id="logo" src="assets/images/logo.png" alt="logo" />
   <div class="container">
     <h2 *ngIf="isLoggedIn">Im logged in</h2>
     <h2>{{ isLoggedIn }}</h2>
-    <h2 style="font-size: 40px;" id="search-heading">
+    <h2 style="font-size: 40px" id="search-heading">
       Find the best restaurants, cafés and bars in Kochi
     </h2>
 
@@ -42,13 +43,15 @@
   </div>
 </div>
 <div id="categories">
-  <h2 style="font-size: 34px; color: rgba(182, 154, 147, 1);">Here are 4 ways to think about your next meal</h2>
+  <h2 style="font-size: 34px; color: rgba(182, 154, 147, 1)">
+    Here are 4 ways to think about your next meal
+  </h2>
 
   <div class="container">
     <div class="row justify-content-center">
       <div class="category col-6 col-lg-2 col-md-4">
         <img src="assets/images/breakfast.png" alt="" />
-        <h4 style="margin-left: -15px;" class="category-name">Breakfast</h4>
+        <h4 style="margin-left: -15px" class="category-name">Breakfast</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
         <img src="assets/images/lunch.png" alt="" />
@@ -67,7 +70,7 @@
 </div>
 
 <div id="top-restaurants" class="pt-4">
-  <h2 style="font-size: 46px; color: rgba(81, 69, 53, 1);">Top Restaurants</h2>
+  <h2 style="font-size: 46px; color: rgba(81, 69, 53, 1)">Top Restaurants</h2>
   <p>
     Explore curated lists of top restaurants, cafes & bars in and around Kochi
   </p>
@@ -77,6 +80,7 @@
       <div *ngFor="let restaurant of restaurants" class="cards col-lg-6">
         <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
       </div>
+      <a href="restaurant-list" id="all-res-link">View all restaurant</a>
     </div>
   </div>
 </div>

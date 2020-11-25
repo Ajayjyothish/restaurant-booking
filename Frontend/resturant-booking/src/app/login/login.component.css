@@ -1,6 +1,5 @@
 button.login-button {
   float: right;
-  margin-right: 2em;
   border-radius: 30px;
   background-color: rgba(78, 30, 18, 1);
   color: white;
@@ -16,6 +15,7 @@ button.btn {
   background-color: rgba(78, 30, 18, 1);
   color: rgba(255, 235, 235, 1);
   border-radius: 2em;
+  margin-top: 10px;
 }
 
 .form-control.ng-touched.ng-invalid{
