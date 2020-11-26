@@ -7,11 +7,12 @@
       <div ngbDropdown container="body">
         <p ngbDropdownToggle>Filter</p>
         <div ngbDropdownMenu>
-          <button ngbDropdownItem>Edit</button>
-          <button ngbDropdownItem>Duplicate</button>
-          <button ngbDropdownItem>Move</button>
+          <button (click)="filterByAll()" ngbDropdownItem>All</button>
+          <button (click)="filterByBreakfast()" ngbDropdownItem>Breakfast</button>
+          <button (click)="filterByLunch()" ngbDropdownItem>Lunch</button>
+          <button (click)="filterByDinner()" ngbDropdownItem>Dinner</button>
           <div class="dropdown-divider"></div>
-          <button ngbDropdownItem>Delete</button>
+          <button ngbDropdownItem>Delivery</button>
         </div>
       </div>
     </div>

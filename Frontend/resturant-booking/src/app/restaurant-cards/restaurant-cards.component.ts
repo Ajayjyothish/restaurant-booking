@@ -1,3 +1,4 @@
+import { RestaurantsService } from './../restaurants.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 interface Restaurant{
@@ -6,7 +7,8 @@ interface Restaurant{
   cuisine: string;
   location: string;
   price: number;
-  time: string;
+  start_time: any;
+  close_time: any;
   rating: number;
 }
 
@@ -19,9 +21,13 @@ export class RestaurantCardsComponent implements OnInit {
 
   @Input() restaurant: Restaurant;
 
-  constructor() { }
+  constructor(private restaurantsService: RestaurantsService) { }
 
   ngOnInit(): void {
+  }
+
+  timeConvert(time){
+    return this.restaurantsService.tConvert(time);
   }
 
 }
