@@ -19,6 +19,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './AuthInterceptor';
 import { ForgotpassComponent } from './forgotpass/forgotpass.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
+import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
+import { ProfileButtonComponent } from './profile-button/profile-button.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     SignupComponent,
     LoginComponent,
     ForgotpassComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    NavbarComponent,
+    RestaurantListingPageComponent,
+    RestaurantDetailsComponent,
+    ProfileButtonComponent
   ],
   imports: [
     BrowserModule,

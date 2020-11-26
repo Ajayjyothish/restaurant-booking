@@ -3,6 +3,7 @@ import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from '../signup/signup.component';
+import { Router } from '@angular/router';
 
 interface SigninUser {
   email: string;
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(signinUser).subscribe({
       next: (res) => {
         this.authService.setSession(res);
+        this.router.navigateByUrl(this.router.url).then(() => {
+          window.location.reload();
+        });
         this.resetForm();
       },
       error: (error) => {
@@ -70,9 +75,8 @@ export class LoginComponent implements OnInit {
     this.modalService.open(SignupComponent);
   }
 
-  forgot(): void{
+  forgot(): void {
     this.modalService.dismissAll();
     this.modalService.open(ForgotpassComponent);
   }
-
 }

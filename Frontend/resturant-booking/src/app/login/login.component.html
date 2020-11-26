@@ -71,7 +71,9 @@
         >
           Go
         </button>
-        <p class="mt-3 mb-0 text-center forgot-link" (click)='forgot()'>Forgot Passoword?</p>
+        <p class="mt-3 mb-0 text-center forgot-link" (click)="forgot()">
+          Forgot Passoword?
+        </p>
       </form>
     </div>
   </div>
@@ -81,14 +83,19 @@
         <p class="mr-2">Sign In With</p>
         <a href="#"><i class="fa fa-facebook links mt-1 mr-2"></i></a>
         <a href="#"><i class="fa fa-twitter links mt-1 mr-2"></i></a>
-        <a href="#"><i class="fa fa-google-plus links mt-1 "></i></a>
-
+        <a href="#"><i class="fa fa-google-plus links mt-1"></i></a>
       </div>
       <div class="row justify-content-center">
         <p class="mr-2">Dont have an account?</p>
-        <p (click)='signup()' class="signup-link">Sign Up Now!</p>
+        <p (click)="signup()" class="signup-link">Sign Up Now!</p>
       </div>
     </div>
   </div>
 </ng-template>
-<button class="btn login-button" (click)="open(loginContent)">Sign In</button>
+<button
+  style="font-size: 20px; font-family: SF UI Display ; font-weight: 500"
+  class="btn login-button"
+  (click)="open(loginContent)"
+>
+  Sign In
+</button>

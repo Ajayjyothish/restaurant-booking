@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-md navbar-light bg-faded">
+  <div class="container">
+    <button
+      class="navbar-toggler navbar-toggler-right"
+      type="button"
+      (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="home" class="navbar-brand">
+      <img id="logo" style="margin-right: -1px;" src="assets/images/nav-logo.png" alt="logo" />
+    </a>
+    <div class="d-none d-md-block w-75">
+      <div id="search-bar" class="input-group mb-3 pr-4">
+        <input
+          id="location"
+          type="text"
+          class="form-control"
+          placeholder="&#xf124; Kochi"
+          width="20"
+          aria-label="location-search"
+          aria-describedby="location-search"
+        />
+        <input
+          id="search"
+          type="text"
+          class="form-control"
+          placeholder="Search for restaurants, cuisine or a dish"
+          aria-label="search"
+          aria-describedby="search"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-danger" id="search-button" type="button">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-login *ngIf="!isLoggedIn"></app-login>
+      <app-profile-button *ngIf="isLoggedIn"></app-profile-button>
+    </div>
+    <div
+      [ngbCollapse]="isNavbarCollapsed"
+      class="collapse"
+      id="navbarSupportedContent"
+    >
+      <div id="search-bar" class="input-group mb-3 col-lg-8 mx-auto">
+        <input
+          id="location"
+          type="text"
+          class="form-control"
+          placeholder="&#xf124; Kochi"
+          width="20"
+          aria-label="location-search"
+          aria-describedby="location-search"
+        />
+        <input
+          id="search"
+          type="text"
+          class="form-control"
+          placeholder="Search for restaurants, cuisine or a dish"
+          aria-label="search"
+          aria-describedby="search"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-danger" id="search-button" type="button">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

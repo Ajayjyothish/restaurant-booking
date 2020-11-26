@@ -1,0 +1,20 @@
+<button
+  style="font-size: 20px; font-family: SF UI Display; font-weight: 500"
+  class="btn login-button"
+>
+  <div ngbDropdown>
+    <div class="d-flex justify-content-between">
+
+      <img src="http://localhost:3000/images/ajay.jpg" alt="">
+      <p style="margin-bottom: 0em; padding-top: 4px;" ngbDropdownToggle>{{ profileName }}</p>
+    </div>
+    <div ngbDropdownMenu>
+      <button ngbDropdownItem>Profile</button>
+      <button ngbDropdownItem>Favourites</button>
+      <button ngbDropdownItem>My Restaurants</button>
+      <button ngbDropdownItem>Notifications</button>
+      <div class="dropdown-divider"></div>
+      <button (click)='logout()' ngbDropdownItem>Logout</button>
+    </div>
+  </div>
+</button>

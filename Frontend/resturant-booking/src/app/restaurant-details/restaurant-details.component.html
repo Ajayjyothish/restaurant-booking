@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">Restaurant Details</p>
+  </div>
+</div>
+
+<div class="details">
+  <div class="container carousel" style="padding-top: 2em">
+    <ngb-carousel *ngIf="images">
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img
+            class="carousel-image"
+            [src]="images[0]"
+            alt="Random first slide"
+          />
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img
+            class="carousel-image"
+            [src]="images[1]"
+            alt="Random second slide"
+          />
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img
+            class="carousel-image"
+            [src]="images[2]"
+            alt="Random third slide"
+          />
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+
+  <div class="container">
+    <div *ngIf="restaurant" class="restaurant-card">
+      <div class="pt-3 container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <h4 style="font-size: 30px; font-weight: 600">
+              {{ restaurant.name }}
+            </h4>
+            <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
+
+            <p style="color: rgba(175, 175, 175, 1)" class="mb-0" id="location">
+              {{ restaurant.location }}
+            </p>
+            <ngb-rating [rate]="restaurant.rating" [readonly]="true" [max]="5">
+              <ng-template let-fill="fill" let-index="index">
+                <span
+                  class="star"
+                  [class.filled]="fill === 100"
+                  [class.bad]="index < 3"
+                  >&#9733;</span
+                >
+              </ng-template>
+            </ngb-rating>
+          </div>
+          <div class="col text-sm-right">
+            <p class="card-fields">
+              {{ restaurant.start_time }} to
+              {{ restaurant.close_time }}
+            </p>
+            <p class="card-fields">
+              {{ restaurant.phone }}
+     
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="row">
+          <div class="col-1">
+            <img
+              src="../../assets/icons/dish.png"
+              alt=""
+            />
+          </div>
+          <div class="col-10">
+            <p class="pl-3 pl-md-0 card-fields">
+              {{ restaurant.cuisine }}
+            </p>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-1">
+            <img
+              src="../../assets/icons/price.png"
+              style="width: 33px"
+              class="icon"
+              alt=""
+            />
+          </div>
+          <div class="col-10">
+            <p class="pl-3 pl-md-0 card-fields">
+              {{ restaurant.price }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+      <div class="container">
+        <p style="color: rgba(123, 120, 116, 1);">
+          {{restaurant.address1}}, {{restaurant.address2}}
+        </p>
+        <button class="btn">Map & Directions</button>
+        <button class="btn">View Menu</button>
+        <button class="btn">Photos</button>
+
+      </div>
+    </div>
+  </div>
+</div>

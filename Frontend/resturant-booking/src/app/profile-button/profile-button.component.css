@@ -1,0 +1,18 @@
+button.btn {
+  float: right;
+  background-color: rgba(78, 30, 18, 1);
+  color: rgba(255, 235, 235, 1);
+  border-radius: 2em;
+  margin-top: 10px;
+  min-width: 130px;
+}
+
+.dropdown-menu {
+  background-color: rgba(250, 245, 238, 1);
+}
+
+img {
+  height: 37px;
+  width: 37px;
+  border-radius: 50%;
+}

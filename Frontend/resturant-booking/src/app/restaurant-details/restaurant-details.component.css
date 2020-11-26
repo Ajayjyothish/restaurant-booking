@@ -1,0 +1,69 @@
+#filterbar {
+  background-color: rgba(250, 245, 238, 1);
+  height: 56px;
+}
+
+p#title {
+  color: rgba(177, 131, 71, 1);
+  font-size: 30px;
+}
+
+img.carousel-image {
+  width: 100%;
+  object-fit: cover;
+  height: 417px;
+  border-radius: 10px;
+}
+
+.details {
+  background-color: rgba(242, 232, 218, 1);
+  padding-bottom: 2em;
+}
+
+.restaurant-card {
+  background-color: white;
+  border-radius: 1em;
+  margin-top: 2em;
+  font-family: "SF UI Display";
+}
+
+div.row {
+  margin: 0px 0px 0px;
+}
+
+img.icon{
+  margin-top: 12px;
+}
+
+p {
+  font-size: 24px;
+}
+
+.star {
+  font-size: 2rem;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(243, 163, 67, 1);
+}
+.filled {
+  color: rgba(243, 163, 67, 1);
+}
+
+.filled.bad {
+  color: rgba(243, 163, 67, 1);
+}
+
+.card-fields {
+  padding-top: 5px;
+}
+
+button {
+  background-color: rgba(192, 56, 56, 1);
+  border-radius: 26px;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  color: rgba(255, 235, 235, 1);
+  font-size: 18px;
+  font-weight: 500;
+}

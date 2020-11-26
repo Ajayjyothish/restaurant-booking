@@ -42,7 +42,7 @@ const user_signup = (request, response, next) => {
 
 const user_signin = (request, response, next) => {
   const { email, password } = request.body;
-  db.query("SELECT password FROM USERS WHERE email=$1", [email], (err, result) => {
+  db.query("SELECT password, name FROM USERS WHERE email=$1", [email], (err, result) => {
     if (err) {
       return next(err);
     }
@@ -59,6 +59,7 @@ const user_signin = (request, response, next) => {
             return response.status(200).json({
               idToken: jwtBearerToken,
               expiresIn: "3600",
+              userName: result.rows[0].name
             });
           } else return response.status(403).send("Password is wrong");
         })
