@@ -17,11 +17,13 @@ export class AuthService {
 
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('user_name', authResult.userName);
   }
 
   logout(): void {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('user_name');
   }
 
   public isLoggedIn(): boolean {
@@ -30,6 +32,10 @@ export class AuthService {
 
   isLoggedOut(): boolean {
     return !this.isLoggedIn();
+  }
+
+  getUser(): string{
+    return localStorage.getItem('user_name');
   }
 
   getExpiration(): any {

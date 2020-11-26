@@ -39,10 +39,10 @@
   </div>
 
   <div class="container">
-    <div class="restaurant-card">
+    <div *ngIf="restaurant" class="restaurant-card">
       <div class="pt-3 container">
         <div class="row justify-content-between">
-          <div>
+          <div class="col">
             <h4 style="font-size: 30px; font-weight: 600">
               {{ restaurant.name }}
             </h4>
@@ -62,12 +62,12 @@
               </ng-template>
             </ngb-rating>
           </div>
-          <div>
+          <div class="col text-sm-right">
             <p class="card-fields">
               {{ restaurant.start_time }} to
               {{ restaurant.close_time }}
             </p>
-            <p class="card-fields" style="float: right;">
+            <p class="card-fields">
               {{ restaurant.phone }}
      
             </p>
@@ -80,12 +80,11 @@
           <div class="col-1">
             <img
               src="../../assets/icons/dish.png"
-              class="icon"
               alt=""
             />
           </div>
           <div class="col-10">
-            <p class="card-fields">
+            <p class="pl-3 pl-md-0 card-fields">
               {{ restaurant.cuisine }}
             </p>
           </div>
@@ -95,12 +94,12 @@
             <img
               src="../../assets/icons/price.png"
               style="width: 33px"
-              class="mt-1 icon"
+              class="icon"
               alt=""
             />
           </div>
           <div class="col-10">
-            <p class="card-fields">
+            <p class="pl-3 pl-md-0 card-fields">
               {{ restaurant.price }}
             </p>
           </div>
@@ -108,7 +107,7 @@
       </div>
 
       <hr />
-      <div class="container pb-3">
+      <div class="container">
         <p style="color: rgba(123, 120, 116, 1);">
           {{restaurant.address1}}, {{restaurant.address2}}
         </p>

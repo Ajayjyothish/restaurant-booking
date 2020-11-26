@@ -22,6 +22,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
+import { ProfileButtonComponent } from './profile-button/profile-button.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RestaurantDetailsComponent } from './restaurant-details/restaurant-deta
     PasswordResetComponent,
     NavbarComponent,
     RestaurantListingPageComponent,
-    RestaurantDetailsComponent
+    RestaurantDetailsComponent,
+    ProfileButtonComponent
   ],
   imports: [
     BrowserModule,

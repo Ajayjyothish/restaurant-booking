@@ -36,5 +36,5 @@ div.options p {
 }
 
 div#restaurant-list {
-  min-height: calc(100vh - 276px);
+  min-height: calc(100vh - 265px);
 }

@@ -27,19 +27,7 @@ export class RestaurantDetailsComponent implements OnInit {
     (n) => `http://localhost:3000/images/${n}`
   );
 
-  restaurant: Restaurant = {
-    id: '',
-    name: '',
-    location: '',
-    cuisine: '',
-    price: '',
-    start_time: '',
-    close_time: '',
-    rating: '',
-    phone: '',
-    address1: '',
-    address2: ''
-  };
+  restaurant: Restaurant = null;
 
   constructor(
     private route: ActivatedRoute,
