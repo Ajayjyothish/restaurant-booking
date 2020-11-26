@@ -1,13 +1,17 @@
 <div class="restaurant-card">
   <div class="container pt-3">
     <div class="row justify-content-between">
-      <h4 style="font-size: 30px; font-weight: 600;">
-        {{ restaurant.name }}
-      </h4>
+      <a
+        style="text-decoration: none; color: rgba(57, 51, 44, 1)"
+        href="restaurant-details/{{ restaurant.id }}"
+        ><h4 style="font-size: 30px; font-weight: 600">
+          {{ restaurant.name }}
+        </h4></a
+      >
       <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
     </div>
 
-    <p style="color: rgba(175, 175, 175, 1);" class="mb-0" id="location">
+    <p style="color: rgba(175, 175, 175, 1)" class="mb-0" id="location">
       {{ restaurant.location }}
     </p>
     <ngb-rating [rate]="restaurant.rating" [readonly]="true" [max]="5">
@@ -31,7 +35,7 @@
       </div>
       <div class="col-10">
         <p class="card-fields">
-          {{ restaurant.cuisine }}
+          {{  stringTrim(restaurant.cuisine) }}
         </p>
       </div>
     </div>
@@ -61,7 +65,8 @@
       </div>
       <div class="col-10">
         <p class="mcard-fields">
-          {{ timeConvert(restaurant.start_time) }} to {{timeConvert(restaurant.close_time)}}
+          {{ timeConvert(restaurant.start_time) }} to
+          {{ timeConvert(restaurant.close_time) }}
         </p>
       </div>
     </div>

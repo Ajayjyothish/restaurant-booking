@@ -1,3 +1,4 @@
+import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,6 +9,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'response-reset-password/:token', component: PasswordResetComponent},
   {path: 'restaurant-list', component: RestaurantListingPageComponent},
+  {path: 'restaurant-details/:restaurantId', component: RestaurantDetailsComponent},
   {path: '**', redirectTo: 'home'}
 ];
 

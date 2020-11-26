@@ -1,7 +1,7 @@
 import { RestaurantsService } from './../restaurants.service';
 import { Component, Input, OnInit } from '@angular/core';
 
-interface Restaurant{
+interface Restaurant {
   id: number;
   name: string;
   cuisine: string;
@@ -15,19 +15,23 @@ interface Restaurant{
 @Component({
   selector: 'app-restaurant-cards',
   templateUrl: './restaurant-cards.component.html',
-  styleUrls: ['./restaurant-cards.component.css']
+  styleUrls: ['./restaurant-cards.component.css'],
 })
 export class RestaurantCardsComponent implements OnInit {
-
   @Input() restaurant: Restaurant;
 
-  constructor(private restaurantsService: RestaurantsService) { }
+  constructor(private restaurantsService: RestaurantsService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  timeConvert(time){
+  timeConvert(time) {
     return this.restaurantsService.tConvert(time);
   }
 
+  stringTrim(text) {
+    if (text.length > 24) {
+      return text.slice(0, 24) + '...';
+    }
+    return text;
+  }
 }

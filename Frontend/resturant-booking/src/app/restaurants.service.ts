@@ -20,6 +20,10 @@ export class RestaurantsService {
     return this.http.post<any>('/api/users/signup', body);
   }
 
+  getRestaurant(id): any {
+    return this.http.get('/api/restaurants/restaurant/' + id);
+  }
+
   tConvert(time): string {
     // Check correct time format and split into components
     time = time
