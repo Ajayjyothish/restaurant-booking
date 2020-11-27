@@ -43,7 +43,7 @@ const getRestaurant = (request, response, next) => {
 const getReviews = (request, response, next) => {
   const { restaurantId } = request.params;
   db.query(
-    "Select reviews.rating, review, users.name, (reviewed_at + interval '1 day') as reviewed_at from reviews inner join users on reviews.user_id = users.id where reviews.restaurant_id = $1",
+    "Select reviews.rating, review, users.name, users.profile_img, reviewed_at from reviews inner join users on reviews.user_id = users.id where reviews.restaurant_id = $1 order by reviews.id desc",
     [restaurantId],
     (err, res) => {
       if (err) {
@@ -54,9 +54,23 @@ const getReviews = (request, response, next) => {
   );
 };
 
+const postReview = (request, response, next) => {
+  const userId = request.user.id;
+  const { rating, review, restaurantId } = request.body;
+  db.query(
+    "INSERT INTO reviews(rating, review, restaurant_id, user_id) VALUES ($1, $2, $3, $4)",
+    [rating, review, restaurantId, userId],
+    (err, res) => {
+      if (err) return err;
+      response.status(201).json("Review has been posted");
+    }
+  );
+};
+
 module.exports = {
   getTopRestaurants,
   getAllRestaurants,
   getRestaurant,
   getReviews,
+  postReview,
 };

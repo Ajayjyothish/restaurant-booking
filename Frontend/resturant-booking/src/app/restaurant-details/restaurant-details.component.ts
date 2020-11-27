@@ -31,15 +31,16 @@ export class RestaurantDetailsComponent implements OnInit {
 
   restaurant: Restaurant = null;
   reviews = null;
-  isLoggedIn = this.authService.isLoggedIn()
+  isLoggedIn = this.authService.isLoggedIn();
 
   newReview = {
     rating: 0,
-    review: ''
-  }
+    review: '',
+  };
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private restaurantService: RestaurantsService,
     private authService: AuthService
   ) {
@@ -58,6 +59,10 @@ export class RestaurantDetailsComponent implements OnInit {
       },
     });
 
+    this.fetchReviews();
+  }
+
+  fetchReviews(): void {
     this.restaurantService.getReviews(this.restaurantId).subscribe({
       next: (data) => {
         this.reviews = data;
@@ -70,10 +75,28 @@ export class RestaurantDetailsComponent implements OnInit {
   }
 
   momentify(date): string {
-    return moment(date, 'YYYY-MM-DD HH:mm:ss').fromNow();
+    return moment.utc(date, 'YYYY-MM-DD HH:mm:ss').fromNow();
   }
 
   timeConvert(time): string {
     return this.restaurantService.tConvert(time);
+  }
+
+  onSubmit(formValue: object): void {
+    const review = {
+      rating: this.newReview.rating,
+      review: this.newReview.review,
+      restaurantId: this.restaurantId,
+    };
+    this.restaurantService.postReviews(review).subscribe({
+      next: (res) => {
+        console.log('Review posted');
+        this.fetchReviews();
+      },
+      error: (error) => {
+        console.error('There was an error', error);
+        this.router.navigate(['home']);
+      },
+    });
   }
 }

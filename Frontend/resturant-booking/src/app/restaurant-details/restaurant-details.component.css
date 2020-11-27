@@ -74,3 +74,12 @@ button#submit {
 
   margin-top: 0em;
 }
+
+div.alert {
+  margin-top: 0.5em;
+  border-radius: 2em;
+}
+
+.form-control.ng-touched.ng-invalid{
+  border: 2px solid red;
+}

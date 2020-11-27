@@ -28,6 +28,10 @@ export class RestaurantsService {
     return this.http.get('/api/restaurants/' + restaurantId + '/reviews');
   }
 
+  postReviews(body: object): any {
+    return this.http.post<any>('/api/restaurants/review', body);
+  }
+
   tConvert(time): string {
     // Check correct time format and split into components
     time = time
