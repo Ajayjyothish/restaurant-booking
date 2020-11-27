@@ -7,7 +7,9 @@ router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
 router.get("/", restaurantContoller.getAllRestaurants),
 
-router.get('/restaurant/:restaurantId', restaurantContoller.getRestaurant)
+router.get('/:restaurantId', restaurantContoller.getRestaurant)
+
+router.get('/:restaurantId/reviews', restaurantContoller.getReviews)
 
 
 module.exports = router;

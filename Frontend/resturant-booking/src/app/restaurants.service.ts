@@ -20,8 +20,12 @@ export class RestaurantsService {
     return this.http.post<any>('/api/users/signup', body);
   }
 
-  getRestaurant(id): any {
-    return this.http.get('/api/restaurants/restaurant/' + id);
+  getRestaurant(restaurantId): any {
+    return this.http.get('/api/restaurants/' + restaurantId);
+  }
+
+  getReviews(restaurantId): any {
+    return this.http.get('/api/restaurants/' + restaurantId + '/reviews');
   }
 
   tConvert(time): string {

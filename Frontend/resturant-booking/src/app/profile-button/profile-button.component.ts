@@ -9,11 +9,13 @@ import { Router } from '@angular/router';
 })
 export class ProfileButtonComponent implements OnInit {
   profileName;
+  profileImage;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.profileName = this.authService.getUser().split(' ')[0];
+    this.profileImage = this.authService.getProfileImage();
   }
   logout(): void {
     this.authService.logout();

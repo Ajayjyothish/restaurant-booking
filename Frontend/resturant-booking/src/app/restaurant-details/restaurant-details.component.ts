@@ -1,6 +1,8 @@
+import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 interface Restaurant {
   id: string;
@@ -28,10 +30,18 @@ export class RestaurantDetailsComponent implements OnInit {
   );
 
   restaurant: Restaurant = null;
+  reviews = null;
+  isLoggedIn = this.authService.isLoggedIn()
+
+  newReview = {
+    rating: 0,
+    review: ''
+  }
 
   constructor(
     private route: ActivatedRoute,
-    private restaurantService: RestaurantsService
+    private restaurantService: RestaurantsService,
+    private authService: AuthService
   ) {
     this.route.params.subscribe((params) => {
       this.restaurantId = params.restaurantId;
@@ -47,5 +57,23 @@ export class RestaurantDetailsComponent implements OnInit {
         console.error('There was an error: ', error);
       },
     });
+
+    this.restaurantService.getReviews(this.restaurantId).subscribe({
+      next: (data) => {
+        this.reviews = data;
+        console.log('Reviews: ', data);
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
+  }
+
+  momentify(date): string {
+    return moment(date, 'YYYY-MM-DD HH:mm:ss').fromNow();
+  }
+
+  timeConvert(time): string {
+    return this.restaurantService.tConvert(time);
   }
 }

@@ -18,12 +18,14 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('user_name', authResult.userName);
+    localStorage.setItem('profile_image', authResult.profileImage);
   }
 
   logout(): void {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user_name');
+    localStorage.removeItem('profile_image');
   }
 
   public isLoggedIn(): boolean {
@@ -34,6 +36,10 @@ export class AuthService {
     return !this.isLoggedIn();
   }
 
+  getProfileImage(): string{
+    return localStorage.getItem('profile_image');
+  }
+
   getUser(): string{
     return localStorage.getItem('user_name');
   }
@@ -41,8 +47,6 @@ export class AuthService {
   getExpiration(): any {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);
-    console.log(expiresAt);
-
     return moment(expiresAt);
   }
 

@@ -64,12 +64,11 @@
           </div>
           <div class="col text-sm-right">
             <p class="card-fields">
-              {{ restaurant.start_time }} to
-              {{ restaurant.close_time }}
+              {{ timeConvert(restaurant.start_time) }} to
+              {{ timeConvert(restaurant.close_time) }}
             </p>
             <p class="card-fields">
               {{ restaurant.phone }}
-     
             </p>
           </div>
         </div>
@@ -78,10 +77,7 @@
       <div class="container">
         <div class="row">
           <div class="col-1">
-            <img
-              src="../../assets/icons/dish.png"
-              alt=""
-            />
+            <img src="../../assets/icons/dish.png" alt="" />
           </div>
           <div class="col-10">
             <p class="pl-3 pl-md-0 card-fields">
@@ -107,14 +103,127 @@
       </div>
 
       <hr />
-      <div class="container">
-        <p style="color: rgba(123, 120, 116, 1);">
-          {{restaurant.address1}}, {{restaurant.address2}}
+      <div class="container" style="padding-left: 2em">
+        <p style="color: rgba(123, 120, 116, 1)">
+          {{ restaurant.address1 }}, {{ restaurant.address2 }}
         </p>
         <button class="btn">Map & Directions</button>
         <button class="btn">View Menu</button>
         <button class="btn">Photos</button>
+      </div>
+    </div>
+  </div>
 
+  <div class="container">
+    <div *ngIf="restaurant" class="restaurant-card">
+      <div class="pt-3 container">
+        <h4
+          class="col"
+          style="
+            font-family: 'Copse';
+            font-size: 28px;
+            color: rgba(57, 51, 44, 1);
+          "
+        >
+          Review
+        </h4>
+        <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
+      </div>
+      <hr />
+      <div *ngFor="let review of reviews">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-1">
+              <img
+                src="http://localhost:3000/images/ajay.jpg"
+                style="height: 70px; width: 70px; border-radius: 50%"
+                alt=""
+              />
+            </div>
+            <div class="col-12 col-md-11">
+              <div class="row justify-content-between">
+                <div>
+                  <p
+                    style="
+                      margin-bottom: -5px;
+                      font-size: 22px;
+                      color: rgba(58, 58, 58, 1);
+                    "
+                  >
+                    {{ review.name }}
+                  </p>
+                  <ngb-rating
+                    [rate]="review.rating"
+                    [readonly]="true"
+                    [max]="5"
+                  >
+                    <ng-template let-fill="fill" let-index="index">
+                      <span
+                        class="star"
+                        [class.filled]="fill === 100"
+                        [class.bad]="index < 3"
+                        >&#9733;</span
+                      >
+                    </ng-template>
+                  </ngb-rating>
+                </div>
+                <p style="font-size: 16px; color: rgba(180, 180, 180, 1)">
+                  {{ momentify(review.reviewed_at) }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col"
+            style="
+              font-size: 16px;
+              font-weight: 300;
+              color: rgba(78, 78, 78, 1);
+            "
+          >
+            <p>
+              {{ review.review }}
+            </p>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoggedIn" class="container">
+    <div *ngIf="restaurant" class="restaurant-card">
+      <div class="pt-3 container">
+        <h4
+          class="col"
+          style="
+            font-family: 'Copse';
+            font-size: 28px;
+            color: rgba(57, 51, 44, 1);
+          "
+        >
+          Write Review
+        </h4>
+        <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
+      </div>
+      <hr />
+      <div class="container">
+        <div class="col">
+          <ngb-rating [(rate)]="newReview.rating" [readonly]="false" [max]="5">
+            <ng-template let-fill="fill" let-index="index">
+              <span
+                class="star"
+                [class.filled]="fill === 100"
+                [class.bad]="index < 3"
+                >&#9733;</span
+              >
+            </ng-template>
+          </ngb-rating>
+          <div class="form-group">
+            <textarea class="form-control" rows="3" [(ngModel)]="newReview.review" placeholder="Write review here"></textarea>
+          </div>
+          <button id="submit" class="btn">Submit</button>
+        </div>
       </div>
     </div>
   </div>
