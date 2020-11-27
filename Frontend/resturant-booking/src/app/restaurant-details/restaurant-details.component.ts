@@ -1,6 +1,8 @@
+import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 interface Restaurant {
   id: string;
@@ -28,10 +30,19 @@ export class RestaurantDetailsComponent implements OnInit {
   );
 
   restaurant: Restaurant = null;
+  reviews = null;
+  isLoggedIn = this.authService.isLoggedIn();
+
+  newReview = {
+    rating: 0,
+    review: '',
+  };
 
   constructor(
     private route: ActivatedRoute,
-    private restaurantService: RestaurantsService
+    private router: Router,
+    private restaurantService: RestaurantsService,
+    private authService: AuthService
   ) {
     this.route.params.subscribe((params) => {
       this.restaurantId = params.restaurantId;
@@ -45,6 +56,46 @@ export class RestaurantDetailsComponent implements OnInit {
       },
       error: (error) => {
         console.error('There was an error: ', error);
+      },
+    });
+
+    this.fetchReviews();
+  }
+
+  fetchReviews(): void {
+    this.restaurantService.getReviews(this.restaurantId).subscribe({
+      next: (data) => {
+        this.reviews = data;
+        console.log('Reviews: ', data);
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
+  }
+
+  momentify(date): string {
+    return moment.utc(date, 'YYYY-MM-DD HH:mm:ss').fromNow();
+  }
+
+  timeConvert(time): string {
+    return this.restaurantService.tConvert(time);
+  }
+
+  onSubmit(formValue: object): void {
+    const review = {
+      rating: this.newReview.rating,
+      review: this.newReview.review,
+      restaurantId: this.restaurantId,
+    };
+    this.restaurantService.postReviews(review).subscribe({
+      next: (res) => {
+        console.log('Review posted');
+        this.fetchReviews();
+      },
+      error: (error) => {
+        console.error('There was an error', error);
+        this.router.navigate(['home']);
       },
     });
   }
