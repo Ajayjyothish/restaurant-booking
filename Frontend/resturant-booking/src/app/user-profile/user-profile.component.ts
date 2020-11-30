@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class UserProfileComponent implements OnInit {
   profileDetails = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
@@ -23,6 +24,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   onClick(): void {
-    console.log('Edit clicked');
+    this.router.navigate(['edit-profile']);
   }
 }

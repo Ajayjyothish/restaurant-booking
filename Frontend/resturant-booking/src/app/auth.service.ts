@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
@@ -60,6 +61,10 @@ export class AuthService {
 
   getProfile(): any{
     return this.http.get('api/users/profile');
+  }
+
+  updateProfile(body: object): Observable<any>{
+    return this.http.post('/api/users/updateprofile', body);
   }
 
 }

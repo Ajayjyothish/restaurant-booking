@@ -64,7 +64,7 @@ export class RestaurantDetailsComponent implements OnInit {
     this.fetchReviews();
   }
 
-  loadMoreReviews() {
+  loadMoreReviews(): void {
     this.reviewGroups.push(
       ...this.reviews.slice(this.reviewPage, this.reviewPage + 2)
     );

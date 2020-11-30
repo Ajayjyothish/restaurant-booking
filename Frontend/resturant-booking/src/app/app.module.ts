@@ -24,6 +24,7 @@ import { RestaurantListingPageComponent } from './restaurant-listing-page/restau
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { ProfileButtonComponent } from './profile-button/profile-button.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     RestaurantListingPageComponent,
     RestaurantDetailsComponent,
     ProfileButtonComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

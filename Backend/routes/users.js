@@ -14,4 +14,6 @@ router.post("/newpassword", userController.user_newPassword )
 
 router.get("/profile", auth, userController.user_getProfile), 
 
+router.post("/updateprofile", auth, userController.users_updateProfile)
+
 module.exports = router;
