@@ -10,29 +10,17 @@
     <ngb-carousel *ngIf="images">
       <ng-template ngbSlide>
         <div class="picsum-img-wrapper">
-          <img
-            class="carousel-image"
-            [src]="images[0]"
-            alt="Random first slide"
-          />
+          <img class="carousel-image" [src]="images[0]" alt="first slide" />
         </div>
       </ng-template>
       <ng-template ngbSlide>
         <div class="picsum-img-wrapper">
-          <img
-            class="carousel-image"
-            [src]="images[1]"
-            alt="Random second slide"
-          />
+          <img class="carousel-image" [src]="images[1]" alt="second slide" />
         </div>
       </ng-template>
       <ng-template ngbSlide>
         <div class="picsum-img-wrapper">
-          <img
-            class="carousel-image"
-            [src]="images[2]"
-            alt="Random third slide"
-          />
+          <img class="carousel-image" [src]="images[2]" alt="third slide" />
         </div>
       </ng-template>
     </ngb-carousel>
@@ -130,64 +118,85 @@
         <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
       </div>
       <hr />
-      <div *ngFor="let review of reviews">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-md-1">
-              <img
-                src="{{ review.profile_img }}"
-                style="height: 70px; width: 70px; border-radius: 50%"
-                alt=""
-              />
-            </div>
-            <div class="col-12 col-md-11">
-              <div class="row justify-content-between">
-                <div>
-                  <p
-                    style="
-                      margin-bottom: -5px;
-                      font-size: 22px;
-                      color: rgba(58, 58, 58, 1);
-                    "
-                  >
-                    {{ review.name }}
+      <div *ngIf="reviews !== null && reviews.length > 0; else noReview">
+        <div *ngFor="let review of reviewGroups">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-1">
+                <img
+                  src="{{ review.profile_img }}"
+                  style="height: 70px; width: 70px; border-radius: 50%"
+                  alt=""
+                />
+              </div>
+              <div class="col-12 col-md-11">
+                <div class="row justify-content-between">
+                  <div>
+                    <p
+                      style="
+                        margin-bottom: -5px;
+                        font-size: 22px;
+                        color: rgba(58, 58, 58, 1);
+                      "
+                    >
+                      {{ review.name }}
+                    </p>
+                    <ngb-rating
+                      [rate]="review.rating"
+                      [readonly]="true"
+                      [max]="5"
+                    >
+                      <ng-template let-fill="fill" let-index="index">
+                        <span
+                          class="star"
+                          [class.filled]="fill === 100"
+                          [class.bad]="index < 3"
+                          >&#9733;</span
+                        >
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                  <p style="font-size: 16px; color: rgba(180, 180, 180, 1)">
+                    {{ momentify(review.reviewed_at) }}
                   </p>
-                  <ngb-rating
-                    [rate]="review.rating"
-                    [readonly]="true"
-                    [max]="5"
-                  >
-                    <ng-template let-fill="fill" let-index="index">
-                      <span
-                        class="star"
-                        [class.filled]="fill === 100"
-                        [class.bad]="index < 3"
-                        >&#9733;</span
-                      >
-                    </ng-template>
-                  </ngb-rating>
                 </div>
-                <p style="font-size: 16px; color: rgba(180, 180, 180, 1)">
-                  {{ momentify(review.reviewed_at) }}
-                </p>
               </div>
             </div>
+            <div
+              class="col"
+              style="
+                font-size: 16px;
+                font-weight: 300;
+                color: rgba(78, 78, 78, 1);
+              "
+            >
+              <p>
+                {{ review.review }}
+              </p>
+            </div>
           </div>
-          <div
-            class="col"
-            style="
-              font-size: 16px;
-              font-weight: 300;
-              color: rgba(78, 78, 78, 1);
-            "
-          >
-            <p>
-              {{ review.review }}
-            </p>
-          </div>
+          <hr />
         </div>
-        <hr />
+        <div *ngIf="reviewPage < reviews.length">
+          <p
+            style="
+              cursor: pointer;
+              text-align: center;
+              text-decoration: underline;
+              padding-bottom: 0.5em;
+              color: rgba(192, 56, 56, 1);
+            "
+            (click)="loadMoreReviews()"
+          >
+            Load more
+          </p>
+        </div>
       </div>
+      <ng-template #noReview>
+        <div class="container">
+          <p class="pb-3 col">No reviews at the moment</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 
@@ -230,11 +239,19 @@
                 [(ngModel)]="newReview.review"
                 placeholder="Write review here"
               ></textarea>
-              <div class="alert alert-danger" *ngIf="review.touched && !review.valid">
+              <div
+                class="alert alert-danger"
+                *ngIf="review.touched && !review.valid"
+              >
                 <div *ngIf="review.errors.required">Please enter a review</div>
               </div>
             </div>
-            <button id="submit" type="submit" [disabled]='!reviewForm.form.valid' class="btn">
+            <button
+              id="submit"
+              type="submit"
+              [disabled]="!reviewForm.form.valid"
+              class="btn"
+            >
               Submit
             </button>
           </form>

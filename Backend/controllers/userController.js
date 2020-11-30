@@ -166,9 +166,22 @@ const user_newPassword = (request, response, next) => {
   );
 };
 
+const user_getProfile = (request, response, next) =>{
+  const userId = request.user.id
+  db.query(
+    "SELECT id, name, profile_img, email, phone from users where id= $1",[userId], (err,result) =>{
+      if (err){
+        return response.status(400).json(err)
+      }
+      return response.send(result.rows)
+    }
+  )
+}
+
 module.exports = {
   user_signup,
   user_signin,
   user_forgotPassword,
-  user_newPassword
+  user_newPassword,
+  user_getProfile
 };

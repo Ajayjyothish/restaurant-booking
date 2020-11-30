@@ -58,4 +58,8 @@ export class AuthService {
     return this.http.post('/api/users/newpassword', body);
   }
 
+  getProfile(): any{
+    return this.http.get('api/users/profile');
+  }
+
 }
