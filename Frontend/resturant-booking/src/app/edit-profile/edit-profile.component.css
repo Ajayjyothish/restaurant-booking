@@ -55,7 +55,7 @@ img#profile-image {
   position: relative;
 }
 
-#edit {
+.edit {
   position: absolute;
   right: 5px;
   top: 75px;

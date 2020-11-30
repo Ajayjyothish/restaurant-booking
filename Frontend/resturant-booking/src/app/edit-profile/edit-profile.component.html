@@ -8,28 +8,40 @@
 <div class="profile" style="padding-top: 2em">
   <div class="container">
     <div *ngIf="profileDetails" class="profile-card">
-      <div class="img-wrapper d-flex justify-content-center">
-        <div class="edit-wrapper">
-          <div class="clip m-4">
-            <img
-              id="profile-image"
-              class=""
-              src="{{ profileDetails.profile_img }}"
-              alt=""
-            />
-          </div>
-          <img
-            id="edit"
-            src="assets/icons/edit-pen.png"
-            style="height: 43px; width: 43px"
-            alt=""
-          />
-        </div>
-      </div>
       <form
         #profileUpdateForm="ngForm"
         (ngSubmit)="onSubmit(profileUpdateForm.value)"
       >
+        <div class="img-wrapper d-flex justify-content-center">
+          <div class="edit-wrapper">
+            <div class="clip m-4">
+              <img id="profile-image" class="" [src]="url" alt="" />
+            </div>
+            <input
+              type="file"
+              class="edit"
+              style="
+                width: 47px;
+                height: 44px;
+                z-index: 1;
+                opacity: 0%;
+                cursor: pointer;
+              "
+              id="customFile"
+              name="uploadedImage"
+              (change)="onFileSelect($event)"
+              (ngModel)="newImage"
+              #UploadFileInput
+            />
+            <img
+              class="edit"
+              src="assets/icons/edit-pen.png"
+              style="height: 43px; width: 43px"
+              alt=""
+            />
+          </div>
+        </div>
+
         <div class="container" style="padding: 30px 50px">
           <div class="row">
             <div class="col-12 col-lg-6">
@@ -138,9 +150,6 @@
                   [(ngModel)]="editPassword.newPassword"
                   placeholder="New Password"
                   minlength="8"
-             
-
-        
                 />
                 <div
                   class="alert alert-danger"
@@ -184,15 +193,15 @@
               </div>
             </div>
 
-              <button
-                id="submit"
-                type="submit"
-                [disabled]="!profileUpdateForm.form.valid"
-                class="btn w-100 mx-auto"
-                style="max-width: 553px;"
-              >
-                Save
-              </button>
+            <button
+              id="submit"
+              type="submit"
+              [disabled]="!profileUpdateForm.form.valid"
+              class="btn w-100 mx-auto"
+              style="max-width: 553px"
+            >
+              Save
+            </button>
           </div>
         </div>
       </form>

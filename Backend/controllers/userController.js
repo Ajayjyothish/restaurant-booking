@@ -185,7 +185,7 @@ const user_getProfile = (request, response, next) => {
 
 const users_updateProfile = (request, response, next) => {
   const userId = request.user.id;
-  const { name, email, phone, password} = request.body;
+  const { name, email, phone, password, uploadedImage} = request.body;
 
   db.query("SELECT id FROM USERS WHERE email=$1", [email], (err, result) => {
     if (err) {
@@ -198,8 +198,8 @@ const users_updateProfile = (request, response, next) => {
         bcrypt.genSalt(10).then((salt) => {
           bcrypt.hash(password, salt).then((hashPassword) => {
             db.query(
-              "UPDATE users SET name = $1, email = $2, phone=$3, password=$4 WHERE id=$5",
-              [name, email, phone, hashPassword, userId],
+              "UPDATE users SET name = $1, email = $2, phone=$3, password=$4, profile_img=$5 WHERE id=$6",
+              [name, email, phone, hashPassword, uploadedImage, userId],
               (err, result) => {
                 if (err) {
                   return response.status(400).json(err);
@@ -212,8 +212,8 @@ const users_updateProfile = (request, response, next) => {
         });
       } else {
         db.query(
-          "UPDATE users SET name = $1, email = $2, phone=$3 where id=$4",
-          [name, email, phone, userId],
+          "UPDATE users SET name = $1, email = $2, phone=$3, profile_img=$4 where id=$5",
+          [name, email, phone,uploadedImage, userId],
           (err, result) => {
             if (err) {
               return response.status(400).json(err);
@@ -227,12 +227,29 @@ const users_updateProfile = (request, response, next) => {
   });
 };
 
+const uploadImage = (req, res, next) => {
+  const file = req.file
+  console.log(req);
+  if (!file) {
+      const error = new Error('Please upload a file')
+      error.httpStatusCode = 400
+      return res.json(error)
+  }
+  res.status(200).send({
+      statusCode: 200,
+      status: 'success',
+      uploadedFile: file
+  })
+
+}
+
 module.exports = {
   user_signup,
   user_signin,
   user_forgotPassword,
   user_newPassword,
   user_getProfile,
-  users_updateProfile
+  users_updateProfile,
+  uploadImage
 
 };
