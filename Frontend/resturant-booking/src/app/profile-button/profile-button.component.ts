@@ -14,8 +14,15 @@ export class ProfileButtonComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.profileName = this.authService.getUser().split(' ')[0];
-    this.profileImage = this.authService.getProfileImage();
+    this.authService.getProfile().subscribe({
+      next: (data: Array<any>) => {
+        this.profileName = data[0].name.split(' ')[0];
+        this.profileImage = data[0].profile_img;
+      },
+      eror: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
   }
   logout(): void {
     this.authService.logout();

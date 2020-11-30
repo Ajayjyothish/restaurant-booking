@@ -31,6 +31,8 @@ export class RestaurantDetailsComponent implements OnInit {
 
   restaurant: Restaurant = null;
   reviews = null;
+  reviewPage = 2;
+  reviewGroups: Array<Restaurant> = null;
   isLoggedIn = this.authService.isLoggedIn();
 
   newReview = {
@@ -62,10 +64,19 @@ export class RestaurantDetailsComponent implements OnInit {
     this.fetchReviews();
   }
 
+  loadMoreReviews(): void {
+    this.reviewGroups.push(
+      ...this.reviews.slice(this.reviewPage, this.reviewPage + 2)
+    );
+    this.reviewPage += 2;
+    console.log(this.reviewPage);
+  }
+
   fetchReviews(): void {
     this.restaurantService.getReviews(this.restaurantId).subscribe({
       next: (data) => {
         this.reviews = data;
+        this.reviewGroups = data.slice(0, 2);
         console.log('Reviews: ', data);
       },
       error: (error) => {

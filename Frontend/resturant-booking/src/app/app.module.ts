@@ -23,6 +23,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { ProfileButtonComponent } from './profile-button/profile-button.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProfileButtonComponent } from './profile-button/profile-button.componen
     NavbarComponent,
     RestaurantListingPageComponent,
     RestaurantDetailsComponent,
-    ProfileButtonComponent
+    ProfileButtonComponent,
+    UserProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

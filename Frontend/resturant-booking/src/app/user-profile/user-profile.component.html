@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">My Profile</p>
+  </div>
+</div>
+<div class="profile" style="padding-top: 2em">
+  <div class="container">
+    <div *ngIf="profileDetails" class="profile-card">
+      <div class="img-wrapper d-flex justify-content-center">
+        <div class="clip m-4">
+          <img
+            id="profile-image"
+            class=""
+            src="{{ profileDetails.profile_img }}"
+            alt=""
+          />
+        </div>
+        <img
+          (click)="onClick()"
+          id="edit"
+          src="../../assets/images/profile-edit.png"
+          style="height: 31px; width: 31px; cursor: pointer"
+          alt=""
+        />
+      </div>
+      <p
+        style="
+          font-family: 'SF UI Display';
+          font-size: 30px;
+          font-weight: 500;
+          color: rgba(57, 51, 44, 1);
+        "
+        class="text-center"
+      >
+        {{ profileDetails.name }}
+      </p>
+      <div style="background-color: rgba(249, 248, 246, 1); min-height: 68px">
+        <div class="row justify-content-center" style="padding-top: 20px">
+          <div class=" col-12 col-md-4 d-flex justify-content-center">
+            <img
+              src="../../assets/images/mail.png"
+              style="height: 22px; width: 32px; margin-top: 7px"
+              class="details-icon"
+              alt=""
+            />
+            <p class="details" style="margin-right: 2em">
+              {{ profileDetails.email }}
+            </p>
+          </div>
+          <div class="col-12 col-md-4 d-flex justify-content-center">
+            <img
+              src="assets/icons/phone.png"
+              style="height: 33px; width: 23px"
+              class="details-icon"
+              alt=""
+            />
+            <p *ngIf="profileDetails.phone; else noPhone" class="details">
+              {{ profileDetails.phone }}
+            </p>
+          </div>
+          <ng-template #noPhone>
+            <p class="details">....</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

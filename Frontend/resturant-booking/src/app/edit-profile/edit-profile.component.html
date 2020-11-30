@@ -1,0 +1,210 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">Edit Profile</p>
+  </div>
+</div>
+
+<div class="profile" style="padding-top: 2em">
+  <div class="container">
+    <div *ngIf="profileDetails" class="profile-card">
+      <form
+        #profileUpdateForm="ngForm"
+        (ngSubmit)="onSubmit(profileUpdateForm.value)"
+      >
+        <div class="img-wrapper d-flex justify-content-center">
+          <div class="edit-wrapper">
+            <div class="clip m-4">
+              <img id="profile-image" class="" [src]="url" alt="" />
+            </div>
+            <input
+              type="file"
+              class="edit"
+              style="
+                width: 47px;
+                height: 44px;
+                z-index: 1;
+                opacity: 0%;
+                cursor: pointer;
+              "
+              id="customFile"
+              name="uploadedImage"
+              (change)="onFileSelect($event)"
+              (ngModel)="newImage"
+              #UploadFileInput
+            />
+            <img
+              class="edit"
+              src="assets/icons/edit-pen.png"
+              style="height: 43px; width: 43px"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div class="container" style="padding: 30px 50px">
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <i class="fa fa-user-o fa-lg"></i>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  minlength="3"
+                  pattern="[A-Za-z]{3,}[A-Za-z ]*"
+                  #name="ngModel"
+                  required
+                  [(ngModel)]="profileDetails.name"
+                  placeholder="Name"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="name.touched && !name.valid"
+                >
+                  <div *ngIf="name.errors.required">First name is required</div>
+                  <div *ngIf="name.errors.minlength">
+                    Minimum
+                    {{ name.errors.minlength.requiredLength }} characters
+                    required
+                  </div>
+                  <div *ngIf="name.errors.pattern">
+                    Only alphabets permitted
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <i class="fa fa-envelope-o fa-lg"></i>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  #email="ngModel"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  [(ngModel)]="profileDetails.email"
+                  placeholder="Email"
+                  required
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="email.touched && !email.valid"
+                >
+                  <div *ngIf="email.errors.required">Email is required</div>
+                  <div *ngIf="email.errors.pattern">Enter a valid email</div>
+                </div>
+                <div class="alert alert-danger" *ngIf="serverError !== ''">
+                  {{ serverError }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <i class="fa fa-mobile-phone fa-lg"></i>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  pattern="[0-9]{10}"
+                  #phone="ngModel"
+                  [(ngModel)]="profileDetails.phone"
+                  placeholder="Phone"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="phone.touched && !phone.valid"
+                >
+                  <div *ngIf="phone.errors.pattern">
+                    Enter a valid 10 digit number
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <i class="fa fa-unlock-alt fa-lg"></i>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  placeholder="Password"
+                  disabled
+                  value="thisisafakepassword"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <i class="fa fa-unlock-alt fa-lg"></i>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  #password="ngModel"
+                  [(ngModel)]="editPassword.newPassword"
+                  placeholder="New Password"
+                  minlength="8"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="password.touched && !password.valid"
+                >
+                  <div *ngIf="password.errors.required">
+                    Password is required
+                  </div>
+                  <div *ngIf="password.errors.minlength">
+                    Minimum
+                    {{ password.errors.minlength.requiredLength }} characters
+                    required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <i class="fa fa-lock fa-lg"></i>
+                <input
+                  type="password"
+                  ngValidateEqual="password"
+                  class="form-control"
+                  name="confirmPassword"
+                  #confirmPassword="ngModel"
+                  [(ngModel)]="editPassword.confirmPassword"
+                  placeholder="Confirm Password"
+                  [required]="editPassword.newPassword !== ''"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="confirmPassword.touched && !confirmPassword.valid"
+                >
+                  <div *ngIf="confirmPassword.errors.required">
+                    Please confirm password
+                  </div>
+                  <div *ngIf="confirmPassword.hasError('notEqual')">
+                    The passwords do not match
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              id="submit"
+              type="submit"
+              [disabled]="!profileUpdateForm.form.valid"
+              class="btn w-100 mx-auto"
+              style="max-width: 553px"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
