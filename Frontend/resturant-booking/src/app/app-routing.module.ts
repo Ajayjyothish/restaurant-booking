@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'response-reset-password/:token', component: PasswordResetComponent },
   { path: 'restaurant-list', component: RestaurantListingPageComponent },
   {
@@ -26,6 +26,7 @@ const routes: Routes = [
     component: EditProfileComponent,
     canActivate: [AuthGuardService],
   },
+  { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: '**', redirectTo: 'home' },
 ];
 

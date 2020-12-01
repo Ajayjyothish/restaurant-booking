@@ -12,8 +12,13 @@ export class RestaurantsService {
     return this.http.get('/api/restaurants/top-restaurants');
   }
 
-  getAllRestaurants(): any {
-    return this.http.get('/api/restaurants');
+  getAllRestaurants(pageNo): any {
+    return this.http.get('/api/restaurants/' + pageNo);
+  }
+  getFilteredRestaurants(category, pageNo): any {
+    return this.http.get(
+      '/api/restaurants/category/' + category + '/' + pageNo
+    );
   }
 
   postUser(body: object): any {
@@ -21,11 +26,13 @@ export class RestaurantsService {
   }
 
   getRestaurant(restaurantId): any {
-    return this.http.get('/api/restaurants/' + restaurantId);
+    return this.http.get('/api/restaurants/restaurant/' + restaurantId);
   }
 
-  getReviews(restaurantId): any {
-    return this.http.get('/api/restaurants/' + restaurantId + '/reviews');
+  getReviews(restaurantId, pageNo): any {
+    return this.http.get(
+      '/api/restaurants/restaurant/' + restaurantId + '/reviews/' + pageNo
+    );
   }
 
   postReviews(body: object): any {

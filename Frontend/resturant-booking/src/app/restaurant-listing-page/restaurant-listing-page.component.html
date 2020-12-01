@@ -8,7 +8,9 @@
         <p ngbDropdownToggle>Filter</p>
         <div ngbDropdownMenu>
           <button (click)="filterByAll()" ngbDropdownItem>All</button>
-          <button (click)="filterByBreakfast()" ngbDropdownItem>Breakfast</button>
+          <button (click)="filterByBreakfast()" ngbDropdownItem>
+            Breakfast
+          </button>
           <button (click)="filterByLunch()" ngbDropdownItem>Lunch</button>
           <button (click)="filterByDinner()" ngbDropdownItem>Dinner</button>
           <div class="dropdown-divider"></div>
@@ -20,7 +22,13 @@
 </div>
 <div id="restaurant-list">
   <div class="container">
-    <div class="row justify-content-center">
+    <div infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+      
+      class="row justify-content-center"
+    >
       <div *ngFor="let restaurant of restaurants" class="cards col-lg-6">
         <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
       </div>

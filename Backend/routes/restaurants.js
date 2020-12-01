@@ -7,11 +7,18 @@ const auth = require('../controllers/authContoller')
 /* GET users listing. */
 router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
-router.get("/", restaurantContoller.getAllRestaurants),
+router.get("/:pageno", restaurantContoller.getAllRestaurants),
 
-router.get('/:restaurantId', restaurantContoller.getRestaurant)
+router.get("/category/breakfast/:pageno", restaurantContoller.getBreakfastRestaurants),
 
-router.get('/:restaurantId/reviews', restaurantContoller.getReviews)
+router.get("/category/lunch/:pageno", restaurantContoller.getLunchRestaurants),
+
+router.get("/category/dinner/:pageno", restaurantContoller.getDinnerRestaurants),
+
+
+router.get('/restaurant/:restaurantId', restaurantContoller.getRestaurant)
+
+router.get('/restaurant/:restaurantId/reviews/:pageno', restaurantContoller.getReviews)
 
 router.post('/review', auth , restaurantContoller.postReview )
 
