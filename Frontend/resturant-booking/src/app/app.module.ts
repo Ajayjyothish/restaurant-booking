@@ -1,3 +1,4 @@
+import { HomepageModule } from './homepage/homepage.module';
 import { AuthService } from './auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,8 +10,9 @@ import { FooterComponent } from './footer/footer.component';
 
 import { RestaurantsService } from './restaurants.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ValidateEqualModule } from 'ng-validate-equal';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AuthInterceptor } from './AuthInterceptor';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
@@ -31,7 +33,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     RestaurantDetailsComponent,
     ProfileButtonComponent,
     UserProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,13 +41,19 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    ValidateEqualModule
+    ValidateEqualModule,
+    InfiniteScrollModule,
+    HomepageModule
   ],
-  providers: [RestaurantsService, AuthService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+  providers: [
+    RestaurantsService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

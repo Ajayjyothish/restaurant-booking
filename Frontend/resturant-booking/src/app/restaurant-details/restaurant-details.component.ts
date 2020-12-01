@@ -31,9 +31,10 @@ export class RestaurantDetailsComponent implements OnInit {
 
   restaurant: Restaurant = null;
   reviews = null;
-  reviewPage = 2;
-  reviewGroups: Array<Restaurant> = null;
   isLoggedIn = this.authService.isLoggedIn();
+
+  pageNo = 0;
+  shouldLoad = true;
 
   newReview = {
     rating: 0,
@@ -65,24 +66,35 @@ export class RestaurantDetailsComponent implements OnInit {
   }
 
   loadMoreReviews(): void {
-    this.reviewGroups.push(
-      ...this.reviews.slice(this.reviewPage, this.reviewPage + 2)
-    );
-    this.reviewPage += 2;
-    console.log(this.reviewPage);
+    this.pageNo++;
+    this.restaurantService
+      .getReviews(this.restaurantId, this.pageNo)
+      .subscribe({
+        next: (data) => {
+          this.reviews.push(...data);
+          console.log('Reviews: ', data);
+          if (data.length <= 1) {
+            this.shouldLoad = false;
+          }
+        },
+        error: (error) => {
+          console.error('There was an error: ', error);
+        },
+      });
   }
 
   fetchReviews(): void {
-    this.restaurantService.getReviews(this.restaurantId).subscribe({
-      next: (data) => {
-        this.reviews = data;
-        this.reviewGroups = data.slice(0, 2);
-        console.log('Reviews: ', data);
-      },
-      error: (error) => {
-        console.error('There was an error: ', error);
-      },
-    });
+    this.restaurantService
+      .getReviews(this.restaurantId, this.pageNo)
+      .subscribe({
+        next: (data) => {
+          this.reviews = data;
+          console.log('Reviews: ', data);
+        },
+        error: (error) => {
+          console.error('There was an error: ', error);
+        },
+      });
   }
 
   momentify(date): string {

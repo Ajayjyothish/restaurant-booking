@@ -13,17 +13,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { RestaurantCardsComponent } from '../restaurant-cards/restaurant-cards.component';
 
-
 @NgModule({
-  declarations: [HomepageComponent,
+  declarations: [
+    HomepageComponent,
     HomeComponent,
     SignupComponent,
     LoginComponent,
     ForgotpassComponent,
     RestaurantCardsComponent,
-
-
-
   ],
   imports: [
     CommonModule,
@@ -31,9 +28,8 @@ import { RestaurantCardsComponent } from '../restaurant-cards/restaurant-cards.c
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ValidateEqualModule
-
-
-  ]
+    ValidateEqualModule,
+  ],
+  exports: [RestaurantCardsComponent, LoginComponent],
 })
-export class HomepageModule { }
+export class HomepageModule {}

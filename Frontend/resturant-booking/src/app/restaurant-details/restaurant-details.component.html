@@ -119,17 +119,17 @@
       </div>
       <hr />
       <div *ngIf="reviews !== null && reviews.length > 0; else noReview">
-        <div *ngFor="let review of reviewGroups">
+        <div *ngFor="let review of reviews">
           <div class="container">
             <div class="row">
-              <div class="col-12 col-md-1">
+              <div class="col-12 col-lg-1">
                 <img
                   src="{{ review.profile_img }}"
                   style="height: 70px; width: 70px; border-radius: 50%"
                   alt=""
                 />
               </div>
-              <div class="col-12 col-md-11">
+              <div class="col-12 col-lg-11">
                 <div class="row justify-content-between">
                   <div>
                     <p
@@ -177,8 +177,8 @@
           </div>
           <hr />
         </div>
-        <div *ngIf="reviewPage < reviews.length">
-          <p
+        <div>
+          <p *ngIf="shouldLoad"
             style="
               cursor: pointer;
               text-align: center;

@@ -14,9 +14,10 @@ const getTopRestaurants = (request, response, next) => {
 };
 
 const getAllRestaurants = (request, response, next) => {
+  const pageNo = request.params.pageno
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants",
-    [],
+    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants  OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    [pageNo],
     (err, res) => {
       if (err) {
         return next(err);
@@ -25,6 +26,50 @@ const getAllRestaurants = (request, response, next) => {
     }
   );
 };
+
+const getBreakfastRestaurants = (request, response, next) => {
+  const pageNo = request.params.pageno
+  db.query(
+    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where start_time < '12:00:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    [pageNo],
+    (err, res) => {
+      if (err) {
+        return next(err);
+      }
+      response.send(res.rows);
+    }
+  );
+};
+
+const getLunchRestaurants = (request, response, next) => {
+  const pageNo = request.params.pageno
+  db.query(
+    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where close_time >= '15:00' and start_time <='12:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    [pageNo],
+    (err, res) => {
+      if (err) {
+        return next(err);
+      }
+      response.send(res.rows);
+    }
+  );
+};
+
+
+const getDinnerRestaurants = (request, response, next) => {
+  const pageNo = request.params.pageno
+  db.query(
+    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where close_time > '18:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    [pageNo],
+    (err, res) => {
+      if (err) {
+        return next(err);
+      }
+      response.send(res.rows);
+    }
+  );
+};
+
 
 const getRestaurant = (request, response, next) => {
   const { restaurantId } = request.params;
@@ -41,10 +86,11 @@ const getRestaurant = (request, response, next) => {
 };
 
 const getReviews = (request, response, next) => {
-  const { restaurantId } = request.params;
+  console.log(request.params);
+  const { restaurantId, pageno } = request.params;
   db.query(
-    "Select reviews.rating, review, users.name, users.profile_img, reviewed_at from reviews inner join users on reviews.user_id = users.id where reviews.restaurant_id = $1 order by reviews.id desc",
-    [restaurantId],
+    "Select reviews.rating, review, users.name, users.profile_img, reviewed_at from reviews inner join users on reviews.user_id = users.id where reviews.restaurant_id = $1 order by reviews.id desc OFFSET ($2 * 2) ROWS  FETCH FIRST 2 ROW ONLY",
+    [restaurantId, pageno],
     (err, res) => {
       if (err) {
         next(err);
@@ -70,6 +116,9 @@ const postReview = (request, response, next) => {
 module.exports = {
   getTopRestaurants,
   getAllRestaurants,
+  getLunchRestaurants,
+  getBreakfastRestaurants,
+  getDinnerRestaurants,
   getRestaurant,
   getReviews,
   postReview,
