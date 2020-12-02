@@ -5,7 +5,6 @@ import { RestaurantDetailsComponent } from './restaurant-details/restaurant-deta
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
 
 const routes: Routes = [
@@ -26,7 +25,6 @@ const routes: Routes = [
     component: EditProfileComponent,
     canActivate: [AuthGuardService],
   },
-  { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: '**', redirectTo: 'home' },
 ];
 

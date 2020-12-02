@@ -25,8 +25,22 @@ export class RestaurantsService {
     return this.http.post<any>('/api/users/signup', body);
   }
 
+  getCities(): any {
+    return this.http.get('/api/restaurants/cities');
+  }
+
   getRestaurant(restaurantId): any {
     return this.http.get('/api/restaurants/restaurant/' + restaurantId);
+  }
+
+  searchRestaurant(searchString, citySearch): any {
+    return this.http.get(
+      '/api/restaurants/search/' + citySearch + '/' + searchString
+    );
+  }
+
+  getCityRestaurants(cityString): any {
+    return this.http.get('/api/restaurants/city-restaurants/' + cityString);
   }
 
   getReviews(restaurantId, pageNo): any {

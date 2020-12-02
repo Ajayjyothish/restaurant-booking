@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
+    "angular-ng-autocomplete": "^2.0.1",
     "bootstrap": "^4.5.0",
     "moment": "^2.29.1",
     "ng-validate-equal": "^1.0.4",

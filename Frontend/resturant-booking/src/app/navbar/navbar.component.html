@@ -13,33 +13,60 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a href="home" class="navbar-brand">
-      <img id="logo" style="margin-right: -1px;" src="assets/images/nav-logo.png" alt="logo" />
+      <img
+        id="logo"
+        style="margin-right: -1px"
+        src="assets/images/nav-logo.png"
+        alt="logo"
+      />
     </a>
     <div class="d-none d-md-block w-75">
-      <div id="search-bar" class="input-group mb-3 pr-4">
-        <input
-          id="location"
-          type="text"
-          class="form-control"
-          placeholder="&#xf124; Kochi"
-          width="20"
-          aria-label="location-search"
-          aria-describedby="location-search"
-        />
-        <input
-          id="search"
-          type="text"
-          class="form-control"
-          placeholder="Search for restaurants, cuisine or a dish"
-          aria-label="search"
-          aria-describedby="search"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-danger" id="search-button" type="button">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
+      <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm.value)">
+        <div id="search-bar" class="input-group mb-3 pr-4">
+          <select
+            id="location"
+            class="form-control"
+            width="20"
+            (change)="onCityChange()"
+            aria-label="location-search"
+            aria-describedby="location-search"
+            [(ngModel)]="citySearch"
+            name="citySearch"
+          >
+            <option *ngFor="let city of cities" [value]="city.city">
+              {{ city.city }}
+            </option>
+          </select>
+          <div class="ng-autocomplete w-75" style="margin-top: 1.6em">
+            <ng-autocomplete
+              [data]="restaurants"
+              placeHolder="Search Restaurants"
+              [searchKeyword]="keyword"
+              name="restaurantSearch"
+              [(ngModel)]="restaurantSearch"
+              (selected)="selectEvent($event)"
+              (inputChanged)="onChangeSearch($event)"
+              (inputFocused)="onFocused($event)"
+              [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate"
+            >
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-danger" id="search-button" type="submit">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
     <div>
       <app-login *ngIf="!isLoggedIn"></app-login>
@@ -47,33 +74,57 @@
     </div>
     <div
       [ngbCollapse]="isNavbarCollapsed"
-      class="collapse"
+      class="collapse w-100"
       id="navbarSupportedContent"
     >
-      <div id="search-bar" class="input-group mb-3 col-lg-8 mx-auto">
-        <input
-          id="location"
-          type="text"
-          class="form-control"
-          placeholder="&#xf124; Kochi"
-          width="20"
-          aria-label="location-search"
-          aria-describedby="location-search"
-        />
-        <input
-          id="search"
-          type="text"
-          class="form-control"
-          placeholder="Search for restaurants, cuisine or a dish"
-          aria-label="search"
-          aria-describedby="search"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-danger" id="search-button" type="button">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
+      <form
+        #secondSearchForm="ngForm"
+        (ngSubmit)="onSubmit(secondSearchForm.value)"
+      >
+        <div id="search-bar" class="input-group mb-3">
+          <select
+            id="location"
+            (change)="onCityChange()"
+            class="form-control"
+            aria-label="location-search"
+            aria-describedby="location-search"
+            [(ngModel)]="citySearch"
+            name="citySearch"
+          >
+            <option *ngFor="let city of cities" [value]="city.city">
+              {{ city.city }}
+            </option>
+          </select>
+          <div class="ng-autocomplete w-75" style="margin-top: 1.6em">
+            <ng-autocomplete
+              [data]="restaurants"
+              placeHolder="Search Restaurants"
+              [searchKeyword]="keyword"
+              name="restaurantSearch"
+              [(ngModel)]="restaurantSearch"
+              (selected)="selectEvent($event)"
+              (inputChanged)="onChangeSearch($event)"
+              (inputFocused)="onFocused($event)"
+              [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate"
+            >
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-danger" id="search-button" type="submit">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </nav>

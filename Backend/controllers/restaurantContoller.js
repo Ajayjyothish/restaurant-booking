@@ -6,9 +6,9 @@ const getTopRestaurants = (request, response, next) => {
     [],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
@@ -20,9 +20,9 @@ const getAllRestaurants = (request, response, next) => {
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
@@ -34,9 +34,9 @@ const getBreakfastRestaurants = (request, response, next) => {
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
@@ -48,9 +48,9 @@ const getLunchRestaurants = (request, response, next) => {
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
@@ -63,12 +63,40 @@ const getDinnerRestaurants = (request, response, next) => {
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
+
+const getCityRestaurants = (request, response, next)=>{
+  let {cityString} = request.params
+  db.query(
+    "SELECT id, name from restaurants where city=$1 order by name ",
+    [cityString],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  ) 
+}
+
+const searchRestaurant = (request, response, next)=>{
+  let {cityString , searchString} = request.params
+  db.query(
+    "SELECT id, name from restaurants where city=$1 and name ilike $2 order by name ",
+    [cityString, '%' + searchString + '%'],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  ) 
+}
 
 
 const getRestaurant = (request, response, next) => {
@@ -78,12 +106,25 @@ const getRestaurant = (request, response, next) => {
     [restaurantId],
     (err, res) => {
       if (err) {
-        next(err);
+        response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
+
+const getCities = (request, response, next) =>{
+  db.query(
+    "SELECT distinct city from restaurants",
+    [],
+    (err, res) => {
+      if (err) {
+        response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  )
+}
 
 const getReviews = (request, response, next) => {
   console.log(request.params);
@@ -93,9 +134,9 @@ const getReviews = (request, response, next) => {
     [restaurantId, pageno],
     (err, res) => {
       if (err) {
-        next(err);
+        response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
@@ -122,4 +163,7 @@ module.exports = {
   getRestaurant,
   getReviews,
   postReview,
+  searchRestaurant,
+  getCities,
+  getCityRestaurants
 };

@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 import { AuthInterceptor } from './AuthInterceptor';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
@@ -43,7 +44,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     HttpClientModule,
     ValidateEqualModule,
     InfiniteScrollModule,
-    HomepageModule
+    HomepageModule,
+    AutocompleteLibModule
+
   ],
   providers: [
     RestaurantsService,

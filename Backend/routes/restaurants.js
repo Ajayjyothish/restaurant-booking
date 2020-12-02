@@ -7,6 +7,10 @@ const auth = require('../controllers/authContoller')
 /* GET users listing. */
 router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
+router.get('/cities', restaurantContoller.getCities),
+
+router.get('/city-restaurants/:cityString', restaurantContoller.getCityRestaurants )
+
 router.get("/:pageno", restaurantContoller.getAllRestaurants),
 
 router.get("/category/breakfast/:pageno", restaurantContoller.getBreakfastRestaurants),
@@ -21,6 +25,9 @@ router.get('/restaurant/:restaurantId', restaurantContoller.getRestaurant)
 router.get('/restaurant/:restaurantId/reviews/:pageno', restaurantContoller.getReviews)
 
 router.post('/review', auth , restaurantContoller.postReview )
+
+router.get('/search/:cityString/:searchString', restaurantContoller.searchRestaurant)
+
 
 
 module.exports = router;
