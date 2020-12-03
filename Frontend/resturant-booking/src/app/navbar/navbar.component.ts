@@ -11,6 +11,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   isLoggedIn = this.authService.isLoggedIn();
+  loggedInUserId = null;
 
   keyword = 'name';
   restaurants = null;
@@ -29,6 +30,20 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getCities();
     this.getCityRestaurants();
+    this.getLoggedinUserId();
+  }
+
+  getLoggedinUserId(): void {
+    if (this.isLoggedIn) {
+      this.authService.getProfile().subscribe({
+        next: (data: Array<any>) => {
+          this.loggedInUserId = data[0].id;
+        },
+        eror: (error) => {
+          console.error('There was an error: ', error);
+        },
+      });
+    }
   }
 
   getCities(): void {
@@ -83,9 +98,7 @@ export class NavbarComponent implements OnInit {
     // do something when input is focused
   }
 
-  selectEvent(item): void {
-    console.log(item);
-  }
+  selectEvent(item): void {}
 
   onSubmit(value): any {
     console.log(value);
@@ -96,7 +109,20 @@ export class NavbarComponent implements OnInit {
       return;
     } else {
       console.log('routing');
-
+      if (this.isLoggedIn) {
+        const recentSearch = {
+          restaurantId: this.restaurantSearch.id,
+          userId: this.loggedInUserId,
+        };
+        this.restaurantsService.postRecentSearches(recentSearch).subscribe({
+          next: (data: Array<any>) => {
+            console.log(data);
+          },
+          error: (error) => {
+            console.error('There was an error: ', error);
+          },
+        });
+      }
       this.router
         .navigateByUrl('restaurant-details/' + this.restaurantSearch.id)
         .then(() => {

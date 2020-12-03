@@ -4,17 +4,35 @@
 >
   <div ngbDropdown>
     <div class="d-flex justify-content-between">
-
-      <img src="{{profileImage}}" alt="">
-      <p style="margin-bottom: 0em; margin-left:10px; padding-top: 4px;" ngbDropdownToggle>{{ profileName }}</p>
+      <img id="profile-img" src="{{ profileImage }}" alt="" />
+      <p
+        style="margin-bottom: 0em; margin-left: 10px; padding-top: 4px"
+        ngbDropdownToggle
+      >
+        {{ profileName }}
+      </p>
     </div>
     <div ngbDropdownMenu>
-      <a href="profile" ngbDropdownItem>Profile</a>
-      <button ngbDropdownItem>Favourites</button>
-      <button ngbDropdownItem>My Restaurants</button>
-      <button ngbDropdownItem>Notifications</button>
+      <a href="profile" ngbDropdownItem>
+        <img src="assets/icons/profile.png" class="dropdown-icons" />
+        Profile</a
+      >
+      <button ngbDropdownItem>
+        <img src="assets/icons/favourite.png" class="dropdown-icons" alt="" />
+        Favourites
+      </button>
+      <button ngbDropdownItem>
+        <img src="assets/icons/myrestaurants.png" class="dropdown-icons" alt="" />
+        My Restaurants
+      </button>
+      <button ngbDropdownItem>
+        <img src="assets/icons/notifications.png" class="dropdown-icons" alt="" />
+        Notifications
+      </button>
       <div class="dropdown-divider"></div>
-      <button (click)='logout()' ngbDropdownItem>Logout</button>
+      <button (click)="logout()" ngbDropdownItem>
+        <img src="assets/icons/logout.png" class="dropdown-icons" alt="" />
+        Logout</button>
     </div>
   </div>
 </button>

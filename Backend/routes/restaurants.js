@@ -11,7 +11,9 @@ router.get('/cities', restaurantContoller.getCities),
 
 router.get('/city-restaurants/:cityString', restaurantContoller.getCityRestaurants )
 
-router.get("/:pageno", restaurantContoller.getAllRestaurants),
+router.post('/recentSearches', restaurantContoller.postSearches)
+
+router.get('/recentSearches/:userId', restaurantContoller.getRecentSearches)
 
 router.get("/category/breakfast/:pageno", restaurantContoller.getBreakfastRestaurants),
 
@@ -28,6 +30,8 @@ router.post('/review', auth , restaurantContoller.postReview )
 
 router.get('/search/:cityString/:searchString', restaurantContoller.searchRestaurant)
 
+
+router.get("/:pageno", restaurantContoller.getAllRestaurants),
 
 
 module.exports = router;

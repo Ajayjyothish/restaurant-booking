@@ -53,6 +53,14 @@ export class RestaurantsService {
     return this.http.post<any>('/api/restaurants/review', body);
   }
 
+  postRecentSearches(body: object): any {
+    return this.http.post<any>('/api/restaurants/recentSearches', body);
+  }
+
+  getRecentSearches(userId): any {
+    return this.http.get('/api/restaurants/recentSearches/' + userId);
+  }
+
   tConvert(time): string {
     // Check correct time format and split into components
     time = time

@@ -67,36 +67,44 @@ h2#search-heading {
   margin-bottom: 1em;
 }
 
-#search-bar input#search {
+.ng-autocomplete{
+  color: black;
+}
+
+.ng-autocomplete ::ng-deep .input-container input {
   height: 102px;
+  position: relative;
+  z-index: 1;
   background-color: rgba(255, 255, 255, 1);
   border-top-right-radius: 51px;
   border-bottom-right-radius: 51px;
   font-family: "SF UI Display";
-  z-index: 0;
-  width: 30%;
+}
+.ng-autocomplete ::ng-deep .autocomplete-container {
+  box-shadow: none;
 }
 
-div#signin-container{
+div#signin-container {
   margin-right: 5em;
 }
 
 @media screen and (max-width: 600px) {
-  div#signin-container{
+  div#signin-container {
     margin-right: 10px;
   }
 }
 
-
-#search-bar input#location {
+select#location {
+  margin-right: -10px;
   height: 102px;
   background-color: rgba(255, 255, 255, 1);
   font-family: "SF UI Display", FontAwesome;
   border-top-left-radius: 51px;
+  z-index: 0;
   border-bottom-left-radius: 51px;
 }
 
-input[type="text"]::placeholder {
+.ng-autocomplete ::ng-deep .input-container input[type="text"]::placeholder {
   font-size: 28px;
   font-weight: 300;
   color: rgba(149, 145, 138, 1);

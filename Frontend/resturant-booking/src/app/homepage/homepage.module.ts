@@ -7,11 +7,13 @@ import { HomeComponent } from '../home/home.component';
 import { ForgotpassComponent } from '../forgotpass/forgotpass.component';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { RestaurantCardsComponent } from '../restaurant-cards/restaurant-cards.component';
+import { ProfileButtonComponent } from '../profile-button/profile-button.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { RestaurantCardsComponent } from '../restaurant-cards/restaurant-cards.c
     LoginComponent,
     ForgotpassComponent,
     RestaurantCardsComponent,
+    ProfileButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -28,8 +31,14 @@ import { RestaurantCardsComponent } from '../restaurant-cards/restaurant-cards.c
     FormsModule,
     HttpClientModule,
     NgbModule,
+    AutocompleteLibModule,
     ValidateEqualModule,
   ],
-  exports: [RestaurantCardsComponent, LoginComponent],
+  exports: [
+    RestaurantCardsComponent,
+    AutocompleteLibModule,
+    LoginComponent,
+    ProfileButtonComponent,
+  ],
 })
 export class HomepageModule {}
