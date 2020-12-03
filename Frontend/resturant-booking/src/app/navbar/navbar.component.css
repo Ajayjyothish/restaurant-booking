@@ -3,8 +3,26 @@ nav {
   min-height: 110px;
 }
 
-#search-bar input {
+#search-bar input, #search-bar select {
   margin-top: 1.6em;
+}
+
+.ng-autocomplete ::ng-deep .input-container input {
+  height: 49px;
+  background-color: rgba(255, 255, 255, 1);
+  border-top-right-radius: 51px;
+  border-bottom-right-radius: 51px;
+  font-family: "SF UI Display";
+}
+
+.ng-autocomplete ::ng-deep .input-container input[type="text"]::placeholder {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(149, 145, 138, 1);
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container{
+  box-shadow: none;
 }
 
 button#search-button {
@@ -13,10 +31,10 @@ button#search-button {
   border-radius: 5em;
   height: 2.4em;
   width: 2.4em;
-  z-index: 1;
+  z-index: 0;
 }
 
-#search-bar input#search {
+/* #search-bar input#search {
   height: 49px;
   background-color: rgba(255, 255, 255, 1);
   border-top-right-radius: 51px;
@@ -24,19 +42,22 @@ button#search-button {
   font-family: "SF UI Display";
   z-index: 0;
   width: 30%;
-}
+} */
 
-#search-bar input#location {
+select#location {
+  margin-right: -10px;
   height: 49px;
   background-color: rgba(255, 255, 255, 1);
   font-family: "SF UI Display", FontAwesome;
   border-top-left-radius: 51px;
   border-bottom-left-radius: 51px;
+  z-index: 0;
+  
 }
 
 input[type="text"]::placeholder {
   font-size: 18px;
-font-weight: 300;
+  font-weight: 300;
   color: rgba(149, 145, 138, 1);
 }
 

@@ -6,70 +6,96 @@ const getTopRestaurants = (request, response, next) => {
     [],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
 
 const getAllRestaurants = (request, response, next) => {
-  const pageNo = request.params.pageno
+  const pageNo = request.params.pageno;
   db.query(
     "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants  OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
 
 const getBreakfastRestaurants = (request, response, next) => {
-  const pageNo = request.params.pageno
+  const pageNo = request.params.pageno;
   db.query(
     "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where start_time < '12:00:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
 
 const getLunchRestaurants = (request, response, next) => {
-  const pageNo = request.params.pageno
+  const pageNo = request.params.pageno;
   db.query(
     "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where close_time >= '15:00' and start_time <='12:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
 
-
 const getDinnerRestaurants = (request, response, next) => {
-  const pageNo = request.params.pageno
+  const pageNo = request.params.pageno;
   db.query(
     "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where close_time > '18:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
-        return next(err);
+        return response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
 
+const getCityRestaurants = (request, response, next) => {
+  let { cityString } = request.params;
+  db.query(
+    "SELECT id, name from restaurants where city=$1 order by name ",
+    [cityString],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  );
+};
+
+const searchRestaurant = (request, response, next) => {
+  let { cityString, searchString } = request.params;
+  db.query(
+    "SELECT id, name from restaurants where city=$1 and name ilike $2 order by name ",
+    [cityString, "%" + searchString + "%"],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  );
+};
 
 const getRestaurant = (request, response, next) => {
   const { restaurantId } = request.params;
@@ -78,11 +104,20 @@ const getRestaurant = (request, response, next) => {
     [restaurantId],
     (err, res) => {
       if (err) {
-        next(err);
+        response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
+};
+
+const getCities = (request, response, next) => {
+  db.query("SELECT distinct city from restaurants", [], (err, res) => {
+    if (err) {
+      response.status(400).json(err);
+    }
+    response.send(res?.rows);
+  });
 };
 
 const getReviews = (request, response, next) => {
@@ -93,9 +128,9 @@ const getReviews = (request, response, next) => {
     [restaurantId, pageno],
     (err, res) => {
       if (err) {
-        next(err);
+        response.status(400).json(err);
       }
-      response.send(res.rows);
+      response.send(res?.rows);
     }
   );
 };
@@ -113,6 +148,80 @@ const postReview = (request, response, next) => {
   );
 };
 
+const postSearches = (request, response) => {
+  const { restaurantId, userId } = request.body;
+  db.query(
+    "Select id from searches where restaurant_id = $1 and searched_by = $2",
+    [restaurantId, userId],
+    (err, res) => {
+      if (err) {
+        response.status(400).json(err);
+      }
+      console.log(res.rows);
+      if (res?.rows.length > 0) {
+        db.query(
+          "UPDATE searches set restaurant_id=$1 where restaurant_id = $1 and searched_by=$2 ",
+          [restaurantId, userId],
+          (err, res) => {
+            if (err) {
+              return response.status(400).json(err);
+            }
+            response.status(201).json("Recent searches updated");
+          }
+        );
+      } else {
+        db.query(
+          "INSERT into searches (restaurant_id, searched_by) values ($1, $2)",
+          [restaurantId, userId],
+          (err, res) => {
+            if (err) {
+              return response.status(400).json(err);
+            }
+            db.query(
+              "Select id from searches where searched_by = $1",
+              [userId],
+              (err, res) => {
+                if (err) {
+                  return response.status(400).json(err);
+                }
+                if (res?.rows.length > 4){
+                  db.query(
+                    "Delete from searches where id= (select id from searches where searched_by = $1 order by searched_at limit 1 )",
+                    [userId],
+                    (err, res) => {
+                      if (err) {
+                        return response.status(400).json(err);
+                      }
+                      return response.status(201).json("Recent searches posted");
+                      
+                    }
+                  );
+                }
+
+              }
+            );
+            return response.status(201).json("Recent searches posted");
+          }
+        );
+      }
+    }
+  );
+};
+
+const getRecentSearches = (request, response, next) => {
+  const { userId } = request.params;
+  db.query(
+    "Select restaurants.id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants inner join searches on restaurants.id = searches.restaurant_id where searches.searched_by = $1 order by searches.searched_at desc",
+    [userId],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  );
+};
+
 module.exports = {
   getTopRestaurants,
   getAllRestaurants,
@@ -122,4 +231,9 @@ module.exports = {
   getRestaurant,
   getReviews,
   postReview,
+  searchRestaurant,
+  getCities,
+  getCityRestaurants,
+  postSearches,
+  getRecentSearches,
 };

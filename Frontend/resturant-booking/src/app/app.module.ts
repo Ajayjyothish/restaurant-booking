@@ -19,7 +19,6 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
-import { ProfileButtonComponent } from './profile-button/profile-button.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
@@ -31,7 +30,6 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     NavbarComponent,
     RestaurantListingPageComponent,
     RestaurantDetailsComponent,
-    ProfileButtonComponent,
     UserProfileComponent,
     EditProfileComponent,
   ],
@@ -43,7 +41,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     HttpClientModule,
     ValidateEqualModule,
     InfiniteScrollModule,
-    HomepageModule
+    HomepageModule,
+
   ],
   providers: [
     RestaurantsService,
