@@ -61,7 +61,7 @@
                 {{ timeConvert(restaurant.close_time) }}
               </p>
             </div>
-            <p class="card-fields">
+            <p class="card-fields" style="color: rgba(78, 30, 18, 1)">
               <img
                 src="assets/icons/phone-details.png"
                 style="height: 29px; width: 29px"
@@ -73,19 +73,19 @@
         </div>
       </div>
       <hr />
-      <div class="container">
-        <div class="row">
-          <div class="col-1">
+      <div class="container" style="padding-left: 2em">
+        <div class="d-flex">
+          <div>
             <img src="../../assets/icons/dish.png" alt="" />
           </div>
-          <div class="col-10">
-            <p class="pl-3 pl-md-0 card-fields">
+          <div>
+            <p class="pl-2 card-fields">
               {{ restaurant.cuisine }}
             </p>
           </div>
         </div>
         <div class="row mt-1">
-          <div class="col-1">
+          <div>
             <img
               src="../../assets/icons/price.png"
               style="width: 33px"
@@ -93,10 +93,8 @@
               alt=""
             />
           </div>
-          <div class="col-10">
-            <p class="pl-3 pl-md-0 card-fields">
-              &#8377; {{ restaurant.price }}
-            </p>
+          <div>
+            <p class="pl-3 card-fields">&#8377; {{ restaurant.price }}</p>
           </div>
         </div>
       </div>
@@ -225,15 +223,14 @@
                 </div>
               </div>
             </div>
-            <div
-              class="col"
-              style="
-                font-size: 16px;
-                font-weight: 300;
-                color: rgba(78, 78, 78, 1);
-              "
-            >
-              <p>
+            <div class="col">
+              <p class="pt-1"
+                style="
+                  font-size: 16px;
+                  font-weight: 300;
+                  color: rgba(78, 78, 78, 1);
+                "
+              >
                 {{ review.review }}
               </p>
             </div>

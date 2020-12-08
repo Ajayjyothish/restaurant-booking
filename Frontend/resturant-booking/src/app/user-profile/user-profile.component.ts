@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getRecentSearches(): void {
-    this.restaurantsService.getRecentSearches(this.userId).subscribe({
+    this.restaurantsService.getRecentSearches().subscribe({
       next: (data: Array<object>) => {
         this.recentRestaurants = data;
         console.log('We got', this.recentRestaurants);

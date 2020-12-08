@@ -57,8 +57,8 @@ export class RestaurantsService {
     return this.http.post<any>('/api/restaurants/recentSearches', body);
   }
 
-  getRecentSearches(userId): any {
-    return this.http.get('/api/restaurants/recentSearches/' + userId);
+  getRecentSearches(): any {
+    return this.http.get('/api/restaurants/recentSearches');
   }
 
   getPhotos(restaurantId): any {

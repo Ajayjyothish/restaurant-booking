@@ -149,7 +149,8 @@ const postReview = (request, response, next) => {
 };
 
 const postSearches = (request, response) => {
-  const { restaurantId, userId } = request.body;
+  const userId = request.user.id;
+  const { restaurantId} = request.body;
   db.query(
     "Select id from searches where restaurant_id = $1 and searched_by = $2",
     [restaurantId, userId],
@@ -209,7 +210,7 @@ const postSearches = (request, response) => {
 };
 
 const getRecentSearches = (request, response, next) => {
-  const { userId } = request.params;
+  const userId = request.user.id;
   db.query(
     "Select restaurants.id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants inner join searches on restaurants.id = searches.restaurant_id where searches.searched_by = $1 order by searches.searched_at desc",
     [userId],

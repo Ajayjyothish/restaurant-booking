@@ -11,7 +11,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   isLoggedIn = this.authService.isLoggedIn();
-  loggedInUserId = null;
 
   keyword = 'name';
   restaurants = null;
@@ -30,20 +29,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getCities();
     this.getCityRestaurants();
-    this.getLoggedinUserId();
-  }
-
-  getLoggedinUserId(): void {
-    if (this.isLoggedIn) {
-      this.authService.getProfile().subscribe({
-        next: (data: Array<any>) => {
-          this.loggedInUserId = data[0].id;
-        },
-        eror: (error) => {
-          console.error('There was an error: ', error);
-        },
-      });
-    }
   }
 
   getCities(): void {
@@ -112,7 +97,6 @@ export class NavbarComponent implements OnInit {
       if (this.isLoggedIn) {
         const recentSearch = {
           restaurantId: this.restaurantSearch.id,
-          userId: this.loggedInUserId,
         };
         this.restaurantsService.postRecentSearches(recentSearch).subscribe({
           next: (data: Array<any>) => {
@@ -123,9 +107,11 @@ export class NavbarComponent implements OnInit {
           },
         });
       }
-      this.router.navigateByUrl(
-        'restaurant-details/' + this.restaurantSearch.id
-      );
+      this.router
+        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id)
+        .then(() => {
+          window.location.reload();
+        });
     }
   }
 }

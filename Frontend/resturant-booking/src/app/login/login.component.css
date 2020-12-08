@@ -4,6 +4,7 @@ button.login-button {
   background-color: rgba(78, 30, 18, 1);
   color: white;
   width: 100px;
+  height: 49px;
 }
 
 div.alert {
@@ -11,66 +12,74 @@ div.alert {
   border-radius: 2em;
 }
 
-button.btn {
+button.login {
   background-color: rgba(78, 30, 18, 1);
   color: rgba(255, 235, 235, 1);
   border-radius: 2em;
   margin-top: 10px;
+  height: 63px;
 }
 
-.form-control.ng-touched.ng-invalid{
+.form-control.ng-touched.ng-invalid {
   border: 2px solid red;
 }
 
-.modal-title{
+.modal-title {
   color: rgba(177, 131, 71, 1);
+  font-size: 30px;
 }
 
-.container, .modal-footer{
+.container,
+.modal-footer {
   background-color: rgb(232, 238, 240);
-  
 }
 
-div.modal-body, div.modal-footer{
+div.modal-body,
+div.modal-footer {
   font-family: "SF UI Display";
 }
 
-
-input{
-  text-indent:30px;
+input {
+  height: 63px;
+  font-size: 22px;
+  text-indent: 40px;
   background-color: rgb(232, 238, 240);
   border-radius: 2em;
   border: 1px solid rgba(112, 98, 80, 1);
 }
 
-
-
-input[type= 'text']::placeholder, input[type= 'email']::placeholder, input[type= 'password']::placeholder{
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
   text-align: center;
   color: rgba(112, 98, 80, 1);
 }
 
-div.form-group{
+div.form-group {
   position: relative;
 }
 
-i.form{
+img.form {
   position: absolute;
-  top: 10px;
   left: 15px;
-  color: rgba(112, 98, 80, 1) ;
-  height: 2em;
-}
-
-p.forgot-link, p.signup-link{
-  color : rgba(168, 106, 27, 1);
-  cursor: pointer;
-}
-
-p{
   color: rgba(112, 98, 80, 1);
 }
+p.forgot-link,
+p.signup-link {
+  color: rgba(168, 106, 27, 1);
+  cursor: pointer;
+  font-size: 22px;
+}
 
-i{
-  color : rgba(168, 106, 27, 1);
+p {
+  color: rgba(112, 98, 80, 1);
+  font-size: 22px;
+}
+
+i {
+  color: rgba(168, 106, 27, 1);
+}
+
+a img {
+  margin-right: 10px;
 }

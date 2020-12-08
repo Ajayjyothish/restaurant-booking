@@ -14,6 +14,7 @@
     <div class="row justify-content-md-center">
       <form
         #searchForm="ngForm"
+        style="position: relative;"
         class="w-100 d-flex"
         (ngSubmit)="onSubmit(searchForm.value)"
       >
@@ -30,6 +31,11 @@
             {{ city.city }}
           </option>
         </select>
+        <img
+          id="location"
+          src="../../assets/icons/location.png"
+          alt=""
+        />
         <div
           class="ng-autocomplete w-100"
           style="
@@ -48,7 +54,6 @@
             (inputChanged)="onChangeSearch($event)"
             (inputFocused)="onFocused($event)"
             [itemTemplate]="itemTemplate"
-            [notFoundTemplate]="notFound"
           >
           </ng-autocomplete>
 
@@ -62,7 +67,7 @@
         </div>
         <div class="input-group-append">
           <button class="btn btn-danger" id="search-button" type="submit">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <i class="fa fa-search" style="font-size: 35px;" aria-hidden="true"></i>
           </button>
         </div>
       </form>
@@ -77,19 +82,27 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="category col-6 col-lg-2 col-md-4">
-        <a href="restaurant-list/breakfast"><img src="assets/images/breakfast.png" alt="" /></a>
+        <a href="restaurant-list/breakfast"
+          ><img src="assets/images/breakfast.png" alt=""
+        /></a>
         <h4 style="margin-left: -15px" class="category-name">Breakfast</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
-        <a href="restaurant-list/lunch"><img src="assets/images/lunch.png" alt="" /></a>
+        <a href="restaurant-list/lunch"
+          ><img src="assets/images/lunch.png" alt=""
+        /></a>
         <h4 class="category-name">Lunch</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
-        <a href="restaurant-list/dinner"><img src="assets/images/dinner.png" alt="" /></a>
+        <a href="restaurant-list/dinner"
+          ><img src="assets/images/dinner.png" alt=""
+        /></a>
         <h4 class="category-name">Dinner</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
-        <a href="restaurant-list/delivery"><img src="assets/images/delivery.png" alt="" /></a>
+        <a href="restaurant-list/delivery"
+          ><img src="assets/images/delivery.png" alt=""
+        /></a>
         <h4 class="category-name">Delivery</h4>
       </div>
     </div>

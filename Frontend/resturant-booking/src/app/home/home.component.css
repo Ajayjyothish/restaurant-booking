@@ -55,6 +55,12 @@ p {
   text-align: center;
 }
 
+img#location {
+  position: absolute;
+  left: 40px;
+  top: 36px;
+}
+
 p {
   font-size: 24px;
   font-family: San Francisco;
@@ -67,7 +73,7 @@ h2#search-heading {
   margin-bottom: 1em;
 }
 
-.ng-autocomplete{
+.ng-autocomplete {
   color: black;
 }
 
@@ -79,9 +85,15 @@ h2#search-heading {
   border-top-right-radius: 51px;
   border-bottom-right-radius: 51px;
   font-family: "SF UI Display";
+  font-size: 28px;
 }
 .ng-autocomplete ::ng-deep .autocomplete-container {
   box-shadow: none;
+  margin-right: 94px;
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .not-found {
+  display: none;
 }
 
 div#signin-container {
@@ -101,6 +113,8 @@ select#location {
   font-family: "SF UI Display", FontAwesome;
   border-top-left-radius: 51px;
   z-index: 0;
+  font-size: 28px;
+  text-indent: 35px;
   border-bottom-left-radius: 51px;
 }
 
@@ -111,6 +125,7 @@ select#location {
 }
 
 button#search-button {
+  position: absolute;
   margin-left: -5.5em;
   margin-top: 0.8em;
   border-radius: 5em;

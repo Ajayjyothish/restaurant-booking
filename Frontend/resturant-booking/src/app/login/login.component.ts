@@ -67,16 +67,16 @@ export class LoginComponent implements OnInit {
   }
 
   open(content: any): any {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modalService.open(content, { windowClass: 'my-class' });
   }
 
   signup(): void {
     this.modalService.dismissAll();
-    this.modalService.open(SignupComponent);
+    this.modalService.open(SignupComponent, { windowClass: 'my-class' });
   }
 
   forgot(): void {
     this.modalService.dismissAll();
-    this.modalService.open(ForgotpassComponent);
+    this.modalService.open(ForgotpassComponent, { windowClass: 'my-class' });
   }
 }

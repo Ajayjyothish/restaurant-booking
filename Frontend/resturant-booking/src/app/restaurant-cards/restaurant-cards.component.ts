@@ -10,6 +10,7 @@ interface Restaurant {
   start_time: any;
   close_time: any;
   rating: number;
+  photos: Array<object>;
 }
 
 @Component({
@@ -22,13 +23,26 @@ export class RestaurantCardsComponent implements OnInit {
 
   constructor(private restaurantsService: RestaurantsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPhotos();
+  }
 
-  timeConvert(time) {
+  getPhotos(): void {
+    this.restaurantsService.getPhotos(this.restaurant.id).subscribe({
+      next: (data: Array<any>) => {
+        this.restaurant.photos = data;
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
+  }
+
+  timeConvert(time): string {
     return this.restaurantsService.tConvert(time);
   }
 
-  stringTrim(text) {
+  stringTrim(text): string {
     if (text.length > 24) {
       return text.slice(0, 24) + '...';
     }

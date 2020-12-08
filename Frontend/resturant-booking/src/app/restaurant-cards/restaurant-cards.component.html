@@ -35,23 +35,21 @@
       </div>
       <div class="col-10">
         <p class="card-fields">
-          {{  stringTrim(restaurant.cuisine) }}
+          {{ stringTrim(restaurant.cuisine) }}
         </p>
       </div>
     </div>
-    <div class="row mt-1">
+    <div class="row">
       <div class="col-1">
         <img
           src="../../assets/icons/price.png"
-          style="width: 33px"
-          class="mt-1 icon"
+          style="width: 33px; padding-top:10px"
+          class="icon"
           alt=""
         />
       </div>
       <div class="col-10">
-        <p class="card-fields">
-          &#8377; {{ restaurant.price }}
-        </p>
+        <p class="card-fields">&#8377; {{ restaurant.price }}</p>
       </div>
     </div>
     <div class="row">
@@ -71,8 +69,19 @@
       </div>
     </div>
   </div>
-  <hr />
-  <div class="container pb-3">
-    <h5>Photos !!!</h5>
+
+  <div
+    class="container py-3 d-flex justify-content-between"
+  >
+    <div>
+      <img
+        class="photos"
+        *ngFor="let photo of restaurant.photos"
+        src="{{ photo.url }}"
+      />
+    </div>
+    <div>
+      <button class="btn">View Menu</button>
+    </div>
   </div>
 </div>

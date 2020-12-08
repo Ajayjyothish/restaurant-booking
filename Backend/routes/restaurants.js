@@ -11,9 +11,9 @@ router.get('/cities', restaurantContoller.getCities),
 
 router.get('/city-restaurants/:cityString', restaurantContoller.getCityRestaurants )
 
-router.post('/recentSearches', restaurantContoller.postSearches)
+router.post('/recentSearches', auth, restaurantContoller.postSearches)
 
-router.get('/recentSearches/:userId', restaurantContoller.getRecentSearches)
+router.get('/recentSearches', auth, restaurantContoller.getRecentSearches)
 
 router.get("/category/breakfast/:pageno", restaurantContoller.getBreakfastRestaurants),
 
