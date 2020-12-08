@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RestaurantsService } from '../restaurants.service';
 
 interface Restaurant {
@@ -20,18 +21,17 @@ export class RestaurantListingPageComponent implements OnInit {
   shouldLoad = true;
   filterCategory = 'all';
 
-  constructor(private restaurantsService: RestaurantsService) {}
+  constructor(
+    private restaurantsService: RestaurantsService,
+    private route: ActivatedRoute
+  ) {
+    route.params.subscribe((params) => {
+      this.filterCategory = params.filterCategory;
+    });
+  }
 
   ngOnInit(): void {
-    this.restaurantsService.getAllRestaurants(this.pageNo).subscribe({
-      next: (data: Array<any>) => {
-        this.restaurants = data;
-        console.log('We got', this.restaurants);
-      },
-      error: (error) => {
-        console.error('There was an error: ', error);
-      },
-    });
+    this.getRequiredRestaurants();
   }
 
   resetLoadValues(): void {
@@ -42,57 +42,39 @@ export class RestaurantListingPageComponent implements OnInit {
   filterByAll(): void {
     this.filterCategory = 'all';
     this.resetLoadValues();
-    this.ngOnInit();
+    this.getRequiredRestaurants()
   }
 
   filterByLunch(): void {
     this.resetLoadValues();
     this.filterCategory = 'lunch';
-    this.restaurantsService
-      .getFilteredRestaurants(this.filterCategory, this.pageNo)
-      .subscribe({
-        next: (data: Array<any>) => {
-          this.restaurants = data;
-          console.log('We got', this.restaurants);
-        },
-        error: (error) => {
-          console.error('There was an error: ', error);
-        },
-      });
+    this.getRequiredRestaurants();
   }
 
   filterByDinner(): void {
     this.resetLoadValues();
     this.filterCategory = 'dinner';
 
-    this.restaurantsService
-      .getFilteredRestaurants(this.filterCategory, this.pageNo)
-      .subscribe({
-        next: (data: Array<any>) => {
-          this.restaurants = data;
-          console.log('We got', this.restaurants);
-        },
-        error: (error) => {
-          console.error('There was an error: ', error);
-        },
-      });
+    this.getRequiredRestaurants();
   }
 
   filterByBreakfast(): void {
     this.resetLoadValues();
     this.filterCategory = 'breakfast';
 
-    this.restaurantsService
-      .getFilteredRestaurants(this.filterCategory, this.pageNo)
-      .subscribe({
-        next: (data: Array<any>) => {
-          this.restaurants = data;
-          console.log('We got', this.restaurants);
-        },
-        error: (error) => {
-          console.error('There was an error: ', error);
-        },
-      });
+    this.getRequiredRestaurants();
+  }
+
+  getRequiredRestaurants(): any {
+    this.chooseFunction(this.pageNo).subscribe({
+      next: (data: Array<any>) => {
+        this.restaurants = data;
+        console.log('We got', this.restaurants);
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
   }
 
   chooseFunction(pageNo): any {

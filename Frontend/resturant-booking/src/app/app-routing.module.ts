@@ -10,7 +10,7 @@ import { RestaurantListingPageComponent } from './restaurant-listing-page/restau
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'response-reset-password/:token', component: PasswordResetComponent },
-  { path: 'restaurant-list', component: RestaurantListingPageComponent },
+  { path: 'restaurant-list/:filterCategory', component: RestaurantListingPageComponent },
   {
     path: 'restaurant-details/:restaurantId',
     component: RestaurantDetailsComponent,

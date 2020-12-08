@@ -17,32 +17,6 @@
         class="w-100 d-flex"
         (ngSubmit)="onSubmit(searchForm.value)"
       >
-        <!-- <div class="col col-lg-12">
-        <div id="search-bar" class="input-group mb-3">
-          <input
-            id="location"
-            type="text"
-            class="form-control"
-            placeholder="&#xf124; Kochi"
-            width="20"
-            aria-label="location-search"
-            aria-describedby="location-search"
-          />
-          <input
-            id="search"
-            type="text"
-            class="form-control"
-            placeholder="Search for restaurants, cuisine or a dish"
-            aria-label="search"
-            aria-describedby="search"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-danger" id="search-button" type="button">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-      </div> -->
         <select
           id="location"
           class="form-control w-50"
@@ -103,19 +77,19 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="category col-6 col-lg-2 col-md-4">
-        <img src="assets/images/breakfast.png" alt="" />
+        <a href="restaurant-list/breakfast"><img src="assets/images/breakfast.png" alt="" /></a>
         <h4 style="margin-left: -15px" class="category-name">Breakfast</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
-        <img src="assets/images/lunch.png" alt="" />
+        <a href="restaurant-list/lunch"><img src="assets/images/lunch.png" alt="" /></a>
         <h4 class="category-name">Lunch</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
-        <img src="assets/images/dinner.png" alt="" />
+        <a href="restaurant-list/dinner"><img src="assets/images/dinner.png" alt="" /></a>
         <h4 class="category-name">Dinner</h4>
       </div>
       <div class="category col-6 col-md-4 col-lg-2">
-        <img src="assets/images/delivery.png" alt="" />
+        <a href="restaurant-list/delivery"><img src="assets/images/delivery.png" alt="" /></a>
         <h4 class="category-name">Delivery</h4>
       </div>
     </div>
@@ -133,7 +107,7 @@
       <div *ngFor="let restaurant of restaurants" class="cards col-lg-6">
         <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
       </div>
-      <a href="restaurant-list" id="all-res-link">View all restaurants</a>
+      <a href="restaurant-list/all" id="all-res-link">View all restaurants</a>
     </div>
   </div>
 </div>
