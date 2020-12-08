@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { AgmCoreModule } from '@agm/core';
 
 import { AuthInterceptor } from './AuthInterceptor';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
@@ -42,7 +44,10 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     ValidateEqualModule,
     InfiniteScrollModule,
     HomepageModule,
-
+    NgxGalleryModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD1pTe0e5PhkfAA6DsOz2rL0Qq8etBGaxc',
+    }),
   ],
   providers: [
     RestaurantsService,

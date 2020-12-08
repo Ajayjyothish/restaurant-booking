@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +15,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn = this.authService.isLoggedIn();
   keyword = 'name';
   searchedRestaurants = null;
+  loggedInUserId = null;
 
   restaurantSearch = null;
   citySearch = null;
@@ -27,16 +27,29 @@ export class HomeComponent implements OnInit {
     private modelService: NgbModal,
     private authService: AuthService,
     private router: Router
-
   ) {}
 
   ngOnInit(): void {
     this.getTopRestaurants();
     this.getCities();
     this.getCityRestaurants();
+    this.getLoggedinUserId();
   }
 
-  getTopRestaurants(): void{
+  getLoggedinUserId(): void {
+    if (this.isLoggedIn) {
+      this.authService.getProfile().subscribe({
+        next: (data: Array<any>) => {
+          this.loggedInUserId = data[0].id;
+        },
+        eror: (error) => {
+          console.error('There was an error: ', error);
+        },
+      });
+    }
+  }
+
+  getTopRestaurants(): void {
     this.restaurantsService.getTopRestaurants().subscribe({
       next: (data: Array<object>) => {
         this.restaurants = data;
@@ -107,11 +120,23 @@ export class HomeComponent implements OnInit {
       return;
     } else {
       console.log('routing');
-      this.router
-        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id)
-        .then(() => {
-          window.location.reload();
+      if (this.isLoggedIn) {
+        const recentSearch = {
+          restaurantId: this.restaurantSearch.id,
+          userId: this.loggedInUserId,
+        };
+        this.restaurantsService.postRecentSearches(recentSearch).subscribe({
+          next: (data: Array<any>) => {
+            console.log(data);
+          },
+          error: (error) => {
+            console.error('There was an error: ', error);
+          },
         });
+      }
+      this.router.navigateByUrl(
+        'restaurant-details/' + this.restaurantSearch.id
+      );
     }
   }
 

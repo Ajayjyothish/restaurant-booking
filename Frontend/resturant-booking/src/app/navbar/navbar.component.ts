@@ -123,11 +123,9 @@ export class NavbarComponent implements OnInit {
           },
         });
       }
-      this.router
-        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id)
-        .then(() => {
-          window.location.reload();
-        });
+      this.router.navigateByUrl(
+        'restaurant-details/' + this.restaurantSearch.id
+      );
     }
   }
 }

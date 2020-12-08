@@ -61,6 +61,10 @@ export class RestaurantsService {
     return this.http.get('/api/restaurants/recentSearches/' + userId);
   }
 
+  getPhotos(restaurantId): any {
+    return this.http.get('/api/restaurants/photos/' + restaurantId);
+  }
+
   tConvert(time): string {
     // Check correct time format and split into components
     time = time
@@ -73,6 +77,8 @@ export class RestaurantsService {
       time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
       time[0] = +time[0] % 12 || 12; // Adjust hours
     }
+    time.splice(1, 3);
+
     return time.join(''); // return adjusted time or original string
   }
 }
