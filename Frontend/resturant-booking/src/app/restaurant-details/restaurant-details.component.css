@@ -57,7 +57,43 @@ p {
   padding-top: 5px;
 }
 
-button {
+div.modal-content {
+  width: 640px;
+}
+
+div.modal-body {
+  padding: 0px;
+}
+
+ngx-gallery ::ng-deep ngx-gallery-thumbnails {
+  margin-left: 60px;
+  width: calc(100% - 120px);
+}
+
+::ng-deep .ngx-gallery-thumbnail {
+  border-radius: 20px;
+}
+
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow i.fa-angle-left {
+  margin-left: -43px;
+  color: black;
+}
+
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow i.fa-angle-right {
+  position: relative;
+  right: -43px;
+  color: black;
+}
+
+agm-map {
+  height: 817px;
+}
+
+.modal-title {
+  color: rgba(177, 131, 71, 1);
+}
+
+button.btn {
   background-color: rgba(192, 56, 56, 1);
   border-radius: 26px;
   margin-right: 1.5em;
@@ -80,6 +116,11 @@ div.alert {
   border-radius: 2em;
 }
 
-.form-control.ng-touched.ng-invalid{
+.form-control.ng-touched.ng-invalid {
   border: 2px solid red;
+}
+
+.ngx-gallery {
+  display: inline-block;
+  margin-bottom: 20px;
 }

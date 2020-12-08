@@ -30,6 +30,7 @@ export class ForgotpassComponent implements OnInit {
     this.authService.forgotPassword(phone).subscribe({
       next: (data) => {
         console.log('Data:', data.message);
+        alert(data.message);
         this.activeModal.close();
       },
       error: (error) => {

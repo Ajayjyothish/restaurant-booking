@@ -30,6 +30,7 @@ router.post('/review', auth , restaurantContoller.postReview )
 
 router.get('/search/:cityString/:searchString', restaurantContoller.searchRestaurant)
 
+router.get('/photos/:restaurantId', restaurantContoller.getPhotos)
 
 router.get("/:pageno", restaurantContoller.getAllRestaurants),
 

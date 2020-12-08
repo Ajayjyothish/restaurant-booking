@@ -100,7 +100,7 @@ const searchRestaurant = (request, response, next) => {
 const getRestaurant = (request, response, next) => {
   const { restaurantId } = request.params;
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating, phone, address1, address2 FROM restaurants where id = $1",
+    "Select id, name, location, cuisine, price, start_time, close_time, rating, phone, address1, latitude, longitude, address2 FROM restaurants where id = $1",
     [restaurantId],
     (err, res) => {
       if (err) {
@@ -222,6 +222,19 @@ const getRecentSearches = (request, response, next) => {
   );
 };
 
+const getPhotos = (request, response) => {
+  const {restaurantId} = request.params
+  db.query(
+    "Select url from photos where restaurant_id = $1", [restaurantId],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  )
+}
+
 module.exports = {
   getTopRestaurants,
   getAllRestaurants,
@@ -236,4 +249,5 @@ module.exports = {
   getCityRestaurants,
   postSearches,
   getRecentSearches,
+  getPhotos
 };

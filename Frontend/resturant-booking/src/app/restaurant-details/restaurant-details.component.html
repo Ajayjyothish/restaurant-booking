@@ -51,11 +51,22 @@
             </ngb-rating>
           </div>
           <div class="col text-sm-right">
+            <div class="card-fields d-flex justify-content-sm-end">
+              <p style="color: green" *ngIf="isOpen(); else closed">Open</p>
+              <ng-template #closed>
+                <p>Closed</p>
+              </ng-template>
+              <p class="ml-1">
+                - {{ timeConvert(restaurant.start_time) }} to
+                {{ timeConvert(restaurant.close_time) }}
+              </p>
+            </div>
             <p class="card-fields">
-              {{ timeConvert(restaurant.start_time) }} to
-              {{ timeConvert(restaurant.close_time) }}
-            </p>
-            <p class="card-fields">
+              <img
+                src="assets/icons/phone-details.png"
+                style="height: 29px; width: 29px"
+                alt=""
+              />
               {{ restaurant.phone }}
             </p>
           </div>
@@ -84,7 +95,7 @@
           </div>
           <div class="col-10">
             <p class="pl-3 pl-md-0 card-fields">
-              {{ restaurant.price }}
+              &#8377; {{ restaurant.price }}
             </p>
           </div>
         </div>
@@ -95,9 +106,61 @@
         <p style="color: rgba(123, 120, 116, 1)">
           {{ restaurant.address1 }}, {{ restaurant.address2 }}
         </p>
-        <button class="btn">Map & Directions</button>
+
+        <ng-template #mapContent let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title w-100 text-center" id="modal-basic-title">
+              Map & Directions
+            </h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div *ngIf="restaurant" class="modal-body">
+            <agm-map
+              [latitude]="restaurant.latitude / 1"
+              [longitude]="restaurant.longitude / 1"
+              [zoom]="18"
+            >
+              <agm-marker
+                [latitude]="restaurant.latitude / 1"
+                [longitude]="restaurant.longitude / 1"
+              ></agm-marker>
+            </agm-map>
+          </div>
+        </ng-template>
+        <button class="btn" (click)="open(mapContent)">Map & Directions</button>
         <button class="btn">View Menu</button>
-        <button class="btn">Photos</button>
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title w-100 text-center" id="modal-basic-title">
+              Photos
+            </h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ngx-gallery
+              [options]="galleryOptions"
+              [images]="galleryImages"
+              class="ngx-gallery"
+            ></ngx-gallery>
+          </div>
+        </ng-template>
+
+        <button class="btn" (click)="openPhotosModal(content)">Photos</button>
       </div>
     </div>
   </div>
@@ -178,7 +241,8 @@
           <hr />
         </div>
         <div>
-          <p *ngIf="shouldLoad"
+          <p
+            *ngIf="shouldLoad"
             style="
               cursor: pointer;
               text-align: center;
