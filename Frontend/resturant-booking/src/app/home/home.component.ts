@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCityRestaurants(): void {
-    this.restaurantsService.getCityRestaurants(this.citySearch).subscribe({
+    this.restaurantsService.getCityRestaurants(this.citySearch, 0).subscribe({
       next: (data: Array<any>) => {
         this.searchedRestaurants = data;
         console.log('City res', data);
@@ -98,8 +98,19 @@ export class HomeComponent implements OnInit {
 
   onSubmit(value): any {
     console.log(value);
-    if (this.restaurantSearch === null || this.restaurantSearch.id === undefined) {
-      this.router.navigate(['restaurant-list/all']);
+    if (
+      this.restaurantSearch === null ||
+      this.restaurantSearch.id === undefined
+    ) {
+      if (this.restaurantSearch === null || this.restaurantSearch === '') {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/all'
+        );
+      } else {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/' + value.restaurantSearch
+        );
+      }
     } else {
       console.log('routing');
       if (this.isLoggedIn) {

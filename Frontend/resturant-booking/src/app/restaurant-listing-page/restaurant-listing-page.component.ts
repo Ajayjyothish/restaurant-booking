@@ -16,6 +16,7 @@ interface Restaurant {
 export class RestaurantListingPageComponent implements OnInit {
   restaurants = null;
   allRestaurants: Array<object>;
+  city = null;
 
   pageNo = 0;
   shouldLoad = true;
@@ -27,6 +28,7 @@ export class RestaurantListingPageComponent implements OnInit {
   ) {
     route.params.subscribe((params) => {
       this.filterCategory = params.filterCategory;
+      this.city = params.city;
     });
   }
 
@@ -36,13 +38,14 @@ export class RestaurantListingPageComponent implements OnInit {
 
   resetLoadValues(): void {
     this.pageNo = 0;
+    this.city = 'all';
     this.shouldLoad = true;
   }
 
   filterByAll(): void {
     this.filterCategory = 'all';
     this.resetLoadValues();
-    this.getRequiredRestaurants()
+    this.getRequiredRestaurants();
   }
 
   filterByLunch(): void {
@@ -78,13 +81,27 @@ export class RestaurantListingPageComponent implements OnInit {
   }
 
   chooseFunction(pageNo): any {
-    if (this.filterCategory !== 'all') {
-      return this.restaurantsService.getFilteredRestaurants(
-        this.filterCategory,
-        pageNo
-      );
+    if (this.city === 'all') {
+      if (this.filterCategory !== 'all') {
+        return this.restaurantsService.getFilteredRestaurants(
+          this.filterCategory,
+          pageNo
+        );
+      } else {
+        return this.restaurantsService.getAllRestaurants(pageNo);
+      }
     } else {
-      return this.restaurantsService.getAllRestaurants(pageNo);
+      if (this.filterCategory === 'all') {
+        console.log(this.city);
+
+        return this.restaurantsService.getCityRestaurants(this.city, pageNo);
+      } else {
+        return this.restaurantsService.searchKeyword(
+          this.filterCategory,
+          this.city,
+          pageNo
+        );
+      }
     }
   }
 

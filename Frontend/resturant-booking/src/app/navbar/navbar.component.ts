@@ -24,7 +24,12 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private restaurantsService: RestaurantsService,
     private router: Router
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.router.onSameUrlNavigation = 'reload';
+  }
 
   ngOnInit(): void {
     this.getCities();
@@ -45,7 +50,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getCityRestaurants(): void {
-    this.restaurantsService.getCityRestaurants(this.citySearch).subscribe({
+    this.restaurantsService.getCityRestaurants(this.citySearch, 0).subscribe({
       next: (data: Array<any>) => {
         this.restaurants = data;
         console.log('We got', this.restaurants);
@@ -91,7 +96,15 @@ export class NavbarComponent implements OnInit {
       this.restaurantSearch === null ||
       this.restaurantSearch.id === undefined
     ) {
-      return;
+      if (this.restaurantSearch === null || this.restaurantSearch === '') {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/all'
+        );
+      } else {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/' + value.restaurantSearch
+        );
+      }
     } else {
       console.log('routing');
       if (this.isLoggedIn) {
@@ -108,10 +121,7 @@ export class NavbarComponent implements OnInit {
         });
       }
       this.router
-        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id)
-        .then(() => {
-          window.location.reload();
-        });
+        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id);
     }
   }
 }
