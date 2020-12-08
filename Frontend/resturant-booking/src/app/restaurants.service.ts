@@ -39,8 +39,16 @@ export class RestaurantsService {
     );
   }
 
-  getCityRestaurants(cityString): any {
-    return this.http.get('/api/restaurants/city-restaurants/' + cityString);
+  searchKeyword(searchString, citySearch, pageNo): any {
+    return this.http.get(
+      '/api/restaurants/' + citySearch + '/' + searchString + '/' + pageNo
+    );
+  }
+
+  getCityRestaurants(cityString, pageNo): any {
+    return this.http.get(
+      '/api/restaurants/city-restaurants/' + cityString + '/' + pageNo
+    );
   }
 
   getReviews(restaurantId, pageNo): any {
@@ -57,8 +65,8 @@ export class RestaurantsService {
     return this.http.post<any>('/api/restaurants/recentSearches', body);
   }
 
-  getRecentSearches(userId): any {
-    return this.http.get('/api/restaurants/recentSearches/' + userId);
+  getRecentSearches(): any {
+    return this.http.get('/api/restaurants/recentSearches');
   }
 
   getPhotos(restaurantId): any {

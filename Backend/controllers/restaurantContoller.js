@@ -70,10 +70,10 @@ const getDinnerRestaurants = (request, response, next) => {
 };
 
 const getCityRestaurants = (request, response, next) => {
-  let { cityString } = request.params;
+  let { cityString, pageNo } = request.params;
   db.query(
-    "SELECT id, name from restaurants where city=$1 order by name ",
-    [cityString],
+    "SELECT id, name, location, cuisine, price, start_time, close_time, rating, phone, address1, latitude, longitude, address2 from restaurants where city=$1 order by name OFFSET ($2 * 4) ROWS  FETCH FIRST 4 ROW ONLY ",
+    [cityString, pageNo],
     (err, res) => {
       if (err) {
         return response.status(400).json(err);
@@ -84,7 +84,7 @@ const getCityRestaurants = (request, response, next) => {
 };
 
 const searchRestaurant = (request, response, next) => {
-  let { cityString, searchString } = request.params;
+  let { cityString, searchString, } = request.params;
   db.query(
     "SELECT id, name from restaurants where city=$1 and name ilike $2 order by name ",
     [cityString, "%" + searchString + "%"],
@@ -96,6 +96,21 @@ const searchRestaurant = (request, response, next) => {
     }
   );
 };
+
+const searchKeyword = (request, response) =>{
+  let { cityString, searchString, pageNo } = request.params;
+  db.query(
+    "SELECT id, name, location, cuisine, price, start_time, close_time, rating, phone, address1, latitude, longitude, address2 from restaurants where (name ilike $2 or cuisine ilike $2) and city=$1 OFFSET ($3 * 4) ROWS  FETCH FIRST 4 ROW ONLY",
+    [cityString, "%" + searchString + "%", pageNo],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  )
+
+}
 
 const getRestaurant = (request, response, next) => {
   const { restaurantId } = request.params;
@@ -149,7 +164,8 @@ const postReview = (request, response, next) => {
 };
 
 const postSearches = (request, response) => {
-  const { restaurantId, userId } = request.body;
+  const userId = request.user.id;
+  const { restaurantId} = request.body;
   db.query(
     "Select id from searches where restaurant_id = $1 and searched_by = $2",
     [restaurantId, userId],
@@ -209,7 +225,7 @@ const postSearches = (request, response) => {
 };
 
 const getRecentSearches = (request, response, next) => {
-  const { userId } = request.params;
+  const userId = request.user.id;
   db.query(
     "Select restaurants.id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants inner join searches on restaurants.id = searches.restaurant_id where searches.searched_by = $1 order by searches.searched_at desc",
     [userId],
@@ -249,5 +265,6 @@ module.exports = {
   getCityRestaurants,
   postSearches,
   getRecentSearches,
-  getPhotos
+  getPhotos,
+  searchKeyword
 };

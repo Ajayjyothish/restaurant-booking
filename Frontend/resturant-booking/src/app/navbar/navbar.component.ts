@@ -11,7 +11,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   isLoggedIn = this.authService.isLoggedIn();
-  loggedInUserId = null;
 
   keyword = 'name';
   restaurants = null;
@@ -25,25 +24,16 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private restaurantsService: RestaurantsService,
     private router: Router
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.router.onSameUrlNavigation = 'reload';
+  }
 
   ngOnInit(): void {
     this.getCities();
     this.getCityRestaurants();
-    this.getLoggedinUserId();
-  }
-
-  getLoggedinUserId(): void {
-    if (this.isLoggedIn) {
-      this.authService.getProfile().subscribe({
-        next: (data: Array<any>) => {
-          this.loggedInUserId = data[0].id;
-        },
-        eror: (error) => {
-          console.error('There was an error: ', error);
-        },
-      });
-    }
   }
 
   getCities(): void {
@@ -60,7 +50,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getCityRestaurants(): void {
-    this.restaurantsService.getCityRestaurants(this.citySearch).subscribe({
+    this.restaurantsService.getCityRestaurants(this.citySearch, 0).subscribe({
       next: (data: Array<any>) => {
         this.restaurants = data;
         console.log('We got', this.restaurants);
@@ -106,13 +96,20 @@ export class NavbarComponent implements OnInit {
       this.restaurantSearch === null ||
       this.restaurantSearch.id === undefined
     ) {
-      return;
+      if (this.restaurantSearch === null || this.restaurantSearch === '') {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/all'
+        );
+      } else {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/' + value.restaurantSearch
+        );
+      }
     } else {
       console.log('routing');
       if (this.isLoggedIn) {
         const recentSearch = {
           restaurantId: this.restaurantSearch.id,
-          userId: this.loggedInUserId,
         };
         this.restaurantsService.postRecentSearches(recentSearch).subscribe({
           next: (data: Array<any>) => {
@@ -123,9 +120,8 @@ export class NavbarComponent implements OnInit {
           },
         });
       }
-      this.router.navigateByUrl(
-        'restaurant-details/' + this.restaurantSearch.id
-      );
+      this.router
+        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id);
     }
   }
 }

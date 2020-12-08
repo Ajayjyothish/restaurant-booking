@@ -72,6 +72,6 @@ export class SignupComponent implements OnInit {
   }
 
   open(content: any): any {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modalService.open(content, { windowClass: 'my-class', size: 'xl'});
   }
 }

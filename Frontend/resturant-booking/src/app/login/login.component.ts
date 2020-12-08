@@ -24,7 +24,12 @@ export class LoginComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.router.onSameUrlNavigation = 'reload';
+  }
 
   ngOnInit(): void {
     this.user = {
@@ -42,9 +47,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(signinUser).subscribe({
       next: (res) => {
         this.authService.setSession(res);
-        this.router.navigateByUrl(this.router.url).then(() => {
-          window.location.reload();
-        });
+        this.router.navigateByUrl(this.router.url);
         this.resetForm();
       },
       error: (error) => {
@@ -67,16 +70,16 @@ export class LoginComponent implements OnInit {
   }
 
   open(content: any): any {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modalService.open(content, { windowClass: 'my-class' });
   }
 
   signup(): void {
     this.modalService.dismissAll();
-    this.modalService.open(SignupComponent);
+    this.modalService.open(SignupComponent, { windowClass: 'my-class' });
   }
 
   forgot(): void {
     this.modalService.dismissAll();
-    this.modalService.open(ForgotpassComponent);
+    this.modalService.open(ForgotpassComponent, { windowClass: 'my-class' });
   }
 }

@@ -11,7 +11,12 @@ export class ProfileButtonComponent implements OnInit {
   profileName;
   profileImage;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.router.onSameUrlNavigation = 'reload';
+  }
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
@@ -26,8 +31,6 @@ export class ProfileButtonComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
-    this.router.navigateByUrl(this.router.url).then(() => {
-      window.location.reload();
-    });
+    this.router.navigateByUrl(this.router.url);
   }
 }

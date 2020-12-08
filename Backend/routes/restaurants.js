@@ -9,11 +9,11 @@ router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
 router.get('/cities', restaurantContoller.getCities),
 
-router.get('/city-restaurants/:cityString', restaurantContoller.getCityRestaurants )
+router.get('/city-restaurants/:cityString/:pageNo', restaurantContoller.getCityRestaurants )
 
-router.post('/recentSearches', restaurantContoller.postSearches)
+router.post('/recentSearches', auth, restaurantContoller.postSearches)
 
-router.get('/recentSearches/:userId', restaurantContoller.getRecentSearches)
+router.get('/recentSearches', auth, restaurantContoller.getRecentSearches)
 
 router.get("/category/breakfast/:pageno", restaurantContoller.getBreakfastRestaurants),
 
@@ -30,7 +30,11 @@ router.post('/review', auth , restaurantContoller.postReview )
 
 router.get('/search/:cityString/:searchString', restaurantContoller.searchRestaurant)
 
+
 router.get('/photos/:restaurantId', restaurantContoller.getPhotos)
+
+router.get('/:cityString/:searchString/:pageNo', restaurantContoller.searchKeyword)
+
 
 router.get("/:pageno", restaurantContoller.getAllRestaurants),
 

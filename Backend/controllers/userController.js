@@ -62,8 +62,6 @@ const user_signin = (request, response, next) => {
               return response.status(200).json({
                 idToken: jwtBearerToken,
                 expiresIn: "3600",
-                userName: result.rows[0].name,
-                profileImage: result.rows[0].profile_img,
               });
             } else return response.status(403).send("Password is wrong");
           })

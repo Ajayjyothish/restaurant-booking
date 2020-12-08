@@ -18,15 +18,10 @@ export class AuthService {
 
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-    localStorage.setItem('user_name', authResult.userName);
-    localStorage.setItem('profile_image', authResult.profileImage);
   }
 
   logout(): void {
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('user_name');
-    localStorage.removeItem('profile_image');
+    localStorage.clear();
   }
 
   public isLoggedIn(): boolean {

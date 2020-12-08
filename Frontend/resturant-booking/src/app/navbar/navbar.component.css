@@ -7,8 +7,17 @@ nav {
   margin-top: 1.6em;
 }
 
+img#location {
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  height: 20px;
+}
+
 .ng-autocomplete ::ng-deep .input-container input {
   height: 49px;
+  position: relative;
+  z-index: 1;
   background-color: rgba(255, 255, 255, 1);
   border-top-right-radius: 51px;
   border-bottom-right-radius: 51px;
@@ -23,6 +32,11 @@ nav {
 
 .ng-autocomplete ::ng-deep .autocomplete-container{
   box-shadow: none;
+  margin-right: 45px;
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .not-found {
+  display: none;
 }
 
 button#search-button {
@@ -51,6 +65,7 @@ select#location {
   font-family: "SF UI Display", FontAwesome;
   border-top-left-radius: 51px;
   border-bottom-left-radius: 51px;
+  text-indent: 16px;
   z-index: 0;
   
 }

@@ -54,6 +54,10 @@ export class RestaurantDetailsComponent implements OnInit {
     this.getRestaurant();
     this.fetchReviews();
     this.setGalleryOptions();
+    this.getPhotos();
+  }
+
+  getPhotos(): void{
     this.restaurantService.getPhotos(this.restaurantId).subscribe({
       next: (data: Array<any>) => {
         data.map((item) => {

@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   isLoggedIn = this.authService.isLoggedIn();
   keyword = 'name';
   searchedRestaurants = null;
-  loggedInUserId = null;
 
   restaurantSearch = null;
   citySearch = null;
@@ -32,28 +31,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getTopRestaurants();
     this.getCities();
-    this.getCityRestaurants();
-    this.getLoggedinUserId();
-  }
-
-  getLoggedinUserId(): void {
-    if (this.isLoggedIn) {
-      this.authService.getProfile().subscribe({
-        next: (data: Array<any>) => {
-          this.loggedInUserId = data[0].id;
-        },
-        eror: (error) => {
-          console.error('There was an error: ', error);
-        },
-      });
-    }
   }
 
   getTopRestaurants(): void {
     this.restaurantsService.getTopRestaurants().subscribe({
       next: (data: Array<object>) => {
         this.restaurants = data;
-        console.log('We got', this.restaurants);
+        console.log('Top res', this.restaurants);
       },
       error: (error) => {
         console.error('There was an error: ', error);
@@ -67,6 +51,7 @@ export class HomeComponent implements OnInit {
         this.cities = data;
         this.citySearch = data[0].city;
         console.log('Cities', this.cities);
+        this.getCityRestaurants();
       },
       error: (error) => {
         console.error('There was an error: ', error);
@@ -75,10 +60,10 @@ export class HomeComponent implements OnInit {
   }
 
   getCityRestaurants(): void {
-    this.restaurantsService.getCityRestaurants(this.citySearch).subscribe({
+    this.restaurantsService.getCityRestaurants(this.citySearch, 0).subscribe({
       next: (data: Array<any>) => {
         this.searchedRestaurants = data;
-        console.log('We got', data);
+        console.log('City res', data);
       },
       error: (error) => {
         console.error('There was an error: ', error);
@@ -97,7 +82,7 @@ export class HomeComponent implements OnInit {
       this.restaurantsService.searchRestaurant(val, this.citySearch).subscribe({
         next: (data: Array<any>) => {
           this.searchedRestaurants = data;
-          console.log('We got', data);
+          console.log('Search Result', data);
         },
         error: (error) => {
           console.error('There was an error: ', error);
@@ -117,13 +102,20 @@ export class HomeComponent implements OnInit {
       this.restaurantSearch === null ||
       this.restaurantSearch.id === undefined
     ) {
-      return;
+      if (this.restaurantSearch === null || this.restaurantSearch === '') {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/all'
+        );
+      } else {
+        this.router.navigateByUrl(
+          'restaurant-list/' + value.citySearch + '/' + value.restaurantSearch
+        );
+      }
     } else {
       console.log('routing');
       if (this.isLoggedIn) {
         const recentSearch = {
           restaurantId: this.restaurantSearch.id,
-          userId: this.loggedInUserId,
         };
         this.restaurantsService.postRecentSearches(recentSearch).subscribe({
           next: (data: Array<any>) => {
