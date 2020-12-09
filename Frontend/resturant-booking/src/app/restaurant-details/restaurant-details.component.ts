@@ -27,6 +27,7 @@ export class RestaurantDetailsComponent implements OnInit {
   restaurant = null;
   reviews = null;
   isLoggedIn = this.authService.isLoggedIn();
+  isFavorite = null;
 
   pageNo = 0;
   shouldLoad = true;
@@ -52,12 +53,57 @@ export class RestaurantDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRestaurant();
+    if (this.isLoggedIn) {
+      this.getIsFavourite();
+    }
     this.fetchReviews();
     this.setGalleryOptions();
     this.getPhotos();
   }
 
-  getPhotos(): void{
+  getIsFavourite(): void {
+    this.restaurantService.getIsFavorite(this.restaurantId).subscribe({
+      next: (data: Array<object>) => {
+        if (data.length > 0) {
+          this.isFavorite = true;
+        } else {
+          this.isFavorite = false;
+        }
+        console.log('isfav: ', this.isFavorite);
+      },
+      error: (error) => {
+        console.error('getIsFavourite: ', error);
+      },
+    });
+  }
+
+  favorite(): void {
+    if (this.isFavorite === true) {
+      this.restaurantService.deleteFavorite(this.restaurantId).subscribe({
+        next: (data: Array<object>) => {
+          console.log('deleteFavorite: ', data);
+          this.getIsFavourite();
+        },
+        error: (error) => {
+          console.error('deleFavorite: ', error);
+        },
+      });
+    } else {
+      this.restaurantService
+        .postFavorite({ restaurantId: this.restaurantId })
+        .subscribe({
+          next: (data: Array<object>) => {
+            console.log('postFavorite: ', data);
+            this.getIsFavourite();
+          },
+          error: (error) => {
+            console.error('postFavourite: ', error);
+          },
+        });
+    }
+  }
+
+  getPhotos(): void {
     this.restaurantService.getPhotos(this.restaurantId).subscribe({
       next: (data: Array<any>) => {
         data.map((item) => {

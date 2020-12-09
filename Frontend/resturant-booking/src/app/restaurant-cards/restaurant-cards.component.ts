@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -20,11 +21,35 @@ interface Restaurant {
 })
 export class RestaurantCardsComponent implements OnInit {
   @Input() restaurant: Restaurant;
+  isLoggedIn = this.authService.isLoggedIn();
+  isFavorite = null;
 
-  constructor(private restaurantsService: RestaurantsService) {}
+  constructor(
+    private restaurantsService: RestaurantsService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getPhotos();
+    if (this.isLoggedIn) {
+      this.getIsFavourite();
+    }
+  }
+
+  getIsFavourite(): void {
+    this.restaurantsService.getIsFavorite(this.restaurant.id).subscribe({
+      next: (data: Array<object>) => {
+        if (data.length > 0) {
+          this.isFavorite = true;
+        } else {
+          this.isFavorite = false;
+        }
+        console.log('isfav: ', this.isFavorite);
+      },
+      error: (error) => {
+        console.error('getIsFavourite: ', error);
+      },
+    });
   }
 
   getPhotos(): void {
