@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class UserProfileComponent implements OnInit {
   profileDetails = null;
   recentRestaurants = null;
+  favoriteRestaurants = null;
 
   userId = null;
 
@@ -28,8 +29,8 @@ export class UserProfileComponent implements OnInit {
     this.authService.getProfile().subscribe({
       next: (data: Array<any>) => {
         this.profileDetails = data[0];
-        this.userId = data[0].id;
         this.getRecentSearches();
+        this.getFavoriteRestaurants();
       },
       eror: (error) => {
         console.error('There was an error: ', error);
@@ -41,7 +42,19 @@ export class UserProfileComponent implements OnInit {
     this.restaurantsService.getRecentSearches().subscribe({
       next: (data: Array<object>) => {
         this.recentRestaurants = data;
-        console.log('We got', this.recentRestaurants);
+        console.log('Recent Searches: ', this.recentRestaurants);
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
+  }
+
+  getFavoriteRestaurants(): void {
+    this.restaurantsService.getFavorites().subscribe({
+      next: (data: Array<object>) => {
+        this.favoriteRestaurants = data;
+        console.log('Favorite Restaurants: ', this.favoriteRestaurants);
       },
       error: (error) => {
         console.error('There was an error: ', error);

@@ -29,14 +29,12 @@ button.login {
   font-size: 30px;
 }
 
-.container,
-.modal-footer {
-  background-color: rgb(232, 238, 240);
-}
+
 
 div.modal-body,
 div.modal-footer {
   font-family: "SF UI Display";
+  background-color: rgb(232, 238, 240);
 }
 
 input {

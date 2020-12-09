@@ -6,7 +6,7 @@
 </div>
 
 <div class="details">
-  <div class="container carousel" style="padding-top: 2em">
+  <div class="container carousel" style="padding-top: 2em; position: relative">
     <ngb-carousel *ngIf="images">
       <ng-template ngbSlide>
         <div class="picsum-img-wrapper">
@@ -24,6 +24,11 @@
         </div>
       </ng-template>
     </ngb-carousel>
+    <div *ngIf="isLoggedIn" style="position: absolute; bottom: 25px; right: 45px; z-index: 1">
+      <img (click)='favorite()' style="cursor: pointer;" *ngIf="isFavorite" src="../../assets/icons/fav-true.png" alt="">
+      <img (click)='favorite()' style="cursor: pointer;" *ngIf="!isFavorite" src="../../assets/icons/fav-false.png" alt="">
+      <img class="ml-4" src="../../assets//icons/share.png" alt="">
+    </div>
   </div>
 
   <div class="container">

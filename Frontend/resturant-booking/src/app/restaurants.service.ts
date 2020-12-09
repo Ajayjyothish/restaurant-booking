@@ -39,6 +39,26 @@ export class RestaurantsService {
     );
   }
 
+  getIsFavorite(restaurantId): any {
+    return this.http.get(
+      '/api/restaurants/restaurant/' + restaurantId + '/favorite'
+    );
+  }
+
+  getFavorites(): any {
+    return this.http.get('/api/restaurants/favorites');
+  }
+
+  postFavorite(body): any {
+    return this.http.post('/api/restaurants/restaurant/favorite', body);
+  }
+
+  deleteFavorite(restaurantId): any {
+    return this.http.delete(
+      '/api/restaurants/restaurant/' + restaurantId + '/favorite'
+    );
+  }
+
   searchKeyword(searchString, citySearch, pageNo): any {
     return this.http.get(
       '/api/restaurants/' + citySearch + '/' + searchString + '/' + pageNo

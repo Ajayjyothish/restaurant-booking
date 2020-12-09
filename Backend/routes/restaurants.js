@@ -4,7 +4,6 @@ const restaurantContoller = require('../controllers/restaurantContoller')
 const auth = require('../controllers/authContoller')
 
 
-/* GET users listing. */
 router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
 router.get('/cities', restaurantContoller.getCities),
@@ -21,17 +20,27 @@ router.get("/category/lunch/:pageno", restaurantContoller.getLunchRestaurants),
 
 router.get("/category/dinner/:pageno", restaurantContoller.getDinnerRestaurants),
 
+router.post('/restaurant/favorite', auth, restaurantContoller.postFavorite )
 
 router.get('/restaurant/:restaurantId', restaurantContoller.getRestaurant)
 
+
 router.get('/restaurant/:restaurantId/reviews/:pageno', restaurantContoller.getReviews)
+
+router.get('/restaurant/:restaurantId/favorite', auth, restaurantContoller.getIsFavorite)
+
+router.delete('/restaurant/:restaurantId/favorite', auth, restaurantContoller.deleteFavorite)
+
 
 router.post('/review', auth , restaurantContoller.postReview )
 
 router.get('/search/:cityString/:searchString', restaurantContoller.searchRestaurant)
 
 
+
 router.get('/photos/:restaurantId', restaurantContoller.getPhotos)
+
+router.get('/favorites', auth,  restaurantContoller.getFavouriteRestaurants)
 
 router.get('/:cityString/:searchString/:pageNo', restaurantContoller.searchKeyword)
 

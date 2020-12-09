@@ -1,6 +1,7 @@
 div.modal-body,
 div.modal-footer {
   font-family: "SF UI Display";
+  background-color: rgb(232, 238, 240);
 }
 
 div.alert {
@@ -25,10 +26,6 @@ button.btn {
   font-size: 30px;
 }
 
-.container,
-.modal-footer {
-  background-color: rgb(232, 238, 240);
-}
 
 .modal-content {
   border-radius: 1rem !important;

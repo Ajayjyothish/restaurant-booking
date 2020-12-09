@@ -77,10 +77,29 @@
     >
       Recent Searches
     </p>
-    <div class="row justify-content-center">
+    <div class="row">
       <div *ngFor="let restaurant of recentRestaurants" class="cards col-lg-6">
         <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
       </div>
     </div>
   </div>
+
+  <div class="container">
+    <p
+      style="
+        font-family: 'Copse';
+        font-size: 28px;
+        color: rgba(57, 51, 44, 1);
+        margin-top: 1em;
+      "
+    >
+      Favourites
+    </p>
+    <div class="row">
+      <div *ngFor="let restaurant of favoriteRestaurants" class="cards col-lg-6">
+        <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
+      </div>
+    </div>
+  </div>
+
 </div>
