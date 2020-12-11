@@ -31,7 +31,7 @@ export class AuthService {
   isLoggedOut(): boolean {
     return !this.isLoggedIn();
   }
-  
+
   getExpiration(): any {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = JSON.parse(expiration);

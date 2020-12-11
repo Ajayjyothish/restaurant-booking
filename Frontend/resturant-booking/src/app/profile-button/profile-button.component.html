@@ -21,18 +21,23 @@
         <img src="assets/icons/favourite.png" class="dropdown-icons" alt="" />
         Favourites
       </button>
-      <button ngbDropdownItem>
-        <img src="assets/icons/myrestaurants.png" class="dropdown-icons" alt="" />
+      <a ngbDropdownItem href="my-restaurants"
+        ><img src="assets/icons/myrestaurants.png" class="dropdown-icons" />
         My Restaurants
-      </button>
+      </a>
       <button ngbDropdownItem>
-        <img src="assets/icons/notifications.png" class="dropdown-icons" alt="" />
+        <img
+          src="assets/icons/notifications.png"
+          class="dropdown-icons"
+          alt=""
+        />
         Notifications
       </button>
       <div class="dropdown-divider"></div>
       <button (click)="logout()" ngbDropdownItem>
         <img src="assets/icons/logout.png" class="dropdown-icons" alt="" />
-        Logout</button>
+        Logout
+      </button>
     </div>
   </div>
 </button>
