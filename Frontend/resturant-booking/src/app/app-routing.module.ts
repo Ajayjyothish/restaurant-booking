@@ -1,3 +1,4 @@
+import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AuthGuardService } from './auth-guard.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -24,6 +25,11 @@ const routes: Routes = [
     path: 'edit-profile',
     component: EditProfileComponent,
     canActivate: [AuthGuardService],
+  },
+  {
+    path: 'my-restaurants',
+    component: MyRestaurantsComponent,
+    canActivate: [AuthGuardService]
   },
   { path: '**', redirectTo: 'home' },
 ];

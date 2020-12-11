@@ -279,6 +279,22 @@ const getFavouriteRestaurants = (request, response) => {
   );
 };
 
+const deleteUserRestaurant = (request, response) => {
+  const userId = request.user.id
+  const restaurantId = request.params.restaurantId
+  db.query(
+    "Delete from restaurants where id=$1 and user_id = $2",
+    [restaurantId, userId],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("Restaurant deleted");
+    }
+  )
+
+}
+
 const postFavorite = (request, response) => {
   const userId = request.user.id;
   const {restaurantId}  = request.body
@@ -309,6 +325,21 @@ const deleteFavorite = (request, response) => {
   );
 };
 
+const getUserRestaurants = (request, response) => {
+  const pageNo = request.params.pageNo
+  const userId = request.user.id
+  db.query(
+    "Select id, name, location, cuisine, price, start_time, close_time, rating from restaurants where user_id = $1 OFFSET ($2 * 4) ROWS  FETCH FIRST 4 ROW ONLY",
+    [userId, pageNo],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  )
+}
+
 module.exports = {
   getTopRestaurants,
   getAllRestaurants,
@@ -328,5 +359,7 @@ module.exports = {
   getFavouriteRestaurants,
   getIsFavorite,
   postFavorite,
-  deleteFavorite
+  deleteFavorite,
+  getUserRestaurants,
+  deleteUserRestaurant
 };

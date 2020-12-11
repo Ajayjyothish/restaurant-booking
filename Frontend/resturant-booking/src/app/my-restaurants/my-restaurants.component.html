@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p>My Restaurant</p>
+    <div class="ml-auto">
+      <button class="btn">Add Restaurant</button>
+    </div>
+  </div>
+</div>
+
+<div class="my-restaurants">
+  <div
+    class="container"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+  >
+    <div class="row">
+      <div *ngFor="let restaurant of userRestaurants" class="mt-4 col-lg-6">
+        <app-restaurant-cards
+          [restaurant]="restaurant"
+          (deleteButtonClicked)="handleDelete($event)"
+          [menu]="false"
+          [photos]="false"
+        ></app-restaurant-cards>
+      </div>
+    </div>
+  </div>
+</div>

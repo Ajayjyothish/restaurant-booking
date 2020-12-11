@@ -31,6 +31,6 @@ export class ProfileButtonComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
-    this.router.navigateByUrl(this.router.url);
+    this.router.navigateByUrl('home');
   }
 }

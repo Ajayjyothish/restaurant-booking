@@ -78,28 +78,32 @@ export class RestaurantDetailsComponent implements OnInit {
   }
 
   favorite(): void {
-    if (this.isFavorite === true) {
-      this.restaurantService.deleteFavorite(this.restaurantId).subscribe({
-        next: (data: Array<object>) => {
-          console.log('deleteFavorite: ', data);
-          this.getIsFavourite();
-        },
-        error: (error) => {
-          console.error('deleFavorite: ', error);
-        },
-      });
-    } else {
-      this.restaurantService
-        .postFavorite({ restaurantId: this.restaurantId })
-        .subscribe({
+    if (this.isLoggedIn === true) {
+      if (this.isFavorite === true) {
+        this.restaurantService.deleteFavorite(this.restaurantId).subscribe({
           next: (data: Array<object>) => {
-            console.log('postFavorite: ', data);
+            console.log('deleteFavorite: ', data);
             this.getIsFavourite();
           },
           error: (error) => {
-            console.error('postFavourite: ', error);
+            console.error('deleFavorite: ', error);
           },
         });
+      } else {
+        this.restaurantService
+          .postFavorite({ restaurantId: this.restaurantId })
+          .subscribe({
+            next: (data: Array<object>) => {
+              console.log('postFavorite: ', data);
+              this.getIsFavourite();
+            },
+            error: (error) => {
+              console.error('postFavourite: ', error);
+            },
+          });
+      }
+    } else {
+      this.router.navigate(['home']);
     }
   }
 
@@ -234,20 +238,23 @@ export class RestaurantDetailsComponent implements OnInit {
   }
 
   onSubmit(formValue: object): void {
-    const review = {
-      rating: this.newReview.rating,
-      review: this.newReview.review,
-      restaurantId: this.restaurantId,
-    };
-    this.restaurantService.postReviews(review).subscribe({
-      next: (res) => {
-        console.log('Review posted');
-        this.fetchReviews();
-      },
-      error: (error) => {
-        console.error('There was an error', error);
-        this.router.navigate(['home']);
-      },
-    });
+    if (this.isLoggedIn === true) {
+      const review = {
+        rating: this.newReview.rating,
+        review: this.newReview.review,
+        restaurantId: this.restaurantId,
+      };
+      this.restaurantService.postReviews(review).subscribe({
+        next: (res) => {
+          console.log('Review posted');
+          this.fetchReviews();
+        },
+        error: (error) => {
+          console.error('There was an error', error);
+        },
+      });
+    } else {
+      this.router.navigate(['home']);
+    }
   }
 }

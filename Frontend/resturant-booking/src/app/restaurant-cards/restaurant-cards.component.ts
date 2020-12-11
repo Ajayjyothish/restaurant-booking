@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 interface Restaurant {
   id: number;
@@ -21,12 +22,17 @@ interface Restaurant {
 })
 export class RestaurantCardsComponent implements OnInit {
   @Input() restaurant: Restaurant;
+  @Input() photos = true;
+  @Input() menu = true;
+  @Output()
+  deleteButtonClicked: EventEmitter<string> = new EventEmitter<string>();
   isLoggedIn = this.authService.isLoggedIn();
   isFavorite = null;
 
   constructor(
     private restaurantsService: RestaurantsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +67,24 @@ export class RestaurantCardsComponent implements OnInit {
         console.error('There was an error: ', error);
       },
     });
+  }
+
+  deleteClick(): void {
+    if (this.isLoggedIn === true) {
+      this.restaurantsService
+        .deleteUserRestaurant(this.restaurant.id)
+        .subscribe({
+          next: (data: Array<any>) => {
+            console.log('Delete response: ', data);
+            this.deleteButtonClicked.emit('Delete button clicked');
+          },
+          error: (error) => {
+            console.error('There was an error: ', error);
+          },
+        });
+    } else {
+      this.router.navigate(['home']);
+    }
   }
 
   timeConvert(time): string {

@@ -59,6 +59,14 @@ export class RestaurantsService {
     );
   }
 
+  getUserRestaurants(pageNo): any {
+    return this.http.get('/api/restaurants/userRestaurants/' + pageNo);
+  }
+
+  deleteUserRestaurant(restaurantId): any {
+    return this.http.delete('/api/restaurants/restaurant/' + restaurantId);
+  }
+
   searchKeyword(searchString, citySearch, pageNo): any {
     return this.http.get(
       '/api/restaurants/' + citySearch + '/' + searchString + '/' + pageNo

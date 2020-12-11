@@ -41,6 +41,11 @@ button.btn {
   font-weight: 500;
 }
 
+.option-btn {
+  min-width: 146px;
+  height: 49px;
+}
+
 .star {
   font-size: 2rem;
   color: white;

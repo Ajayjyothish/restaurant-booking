@@ -24,6 +24,7 @@ router.post('/restaurant/favorite', auth, restaurantContoller.postFavorite )
 
 router.get('/restaurant/:restaurantId', restaurantContoller.getRestaurant)
 
+router.delete('/restaurant/:restaurantId', auth,  restaurantContoller.deleteUserRestaurant)
 
 router.get('/restaurant/:restaurantId/reviews/:pageno', restaurantContoller.getReviews)
 
@@ -41,6 +42,8 @@ router.get('/search/:cityString/:searchString', restaurantContoller.searchRestau
 router.get('/photos/:restaurantId', restaurantContoller.getPhotos)
 
 router.get('/favorites', auth,  restaurantContoller.getFavouriteRestaurants)
+
+router.get('/userRestaurants/:pageNo', auth, restaurantContoller.getUserRestaurants)
 
 router.get('/:cityString/:searchString/:pageNo', restaurantContoller.searchKeyword)
 

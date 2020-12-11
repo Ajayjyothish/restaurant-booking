@@ -1,0 +1,27 @@
+#filterbar {
+  background-color: rgba(250, 245, 238, 1);
+  height: 56px;
+}
+
+p {
+  color: rgba(177, 131, 71, 1);
+  font-size: 30px;
+  margin-top: 3px;
+}
+
+button {
+  background-color: rgba(192, 56, 56, 1);
+  border-radius: 21px;
+  color: rgba(255, 235, 235, 1);
+  font-size: 18px;
+  font-weight: 500;
+  min-width: 155px;
+  min-height: 42px;
+  margin-top: 5px;
+}
+
+.my-restaurants {
+  background-color: rgba(242, 232, 218, 1);
+  padding-bottom: 2em;
+  min-height: calc(100vh - 265px);
+}

@@ -74,15 +74,21 @@
   <div
     class="container py-3 d-flex justify-content-between"
   >
-    <div>
+    <div *ngIf="photos">
       <img
         class="photos"
         *ngFor="let photo of restaurant.photos"
         src="{{ photo.url }}"
       />
     </div>
-    <div>
+    <div *ngIf="menu;else optionButtons">
       <button class="btn">View Menu</button>
     </div>
+    <ng-template #optionButtons>
+      <div class="ml-auto">
+        <button class="btn option-btn mr-3">Edit</button>
+        <button (click)='deleteClick()' class="btn option-btn" style="background-color: black;">Delete</button>
+      </div>
+    </ng-template>
   </div>
 </div>
