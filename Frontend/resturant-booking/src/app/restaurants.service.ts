@@ -21,6 +21,10 @@ export class RestaurantsService {
     );
   }
 
+  postRestaurant(body): any {
+    return this.http.post('/api/restaurants/new-restaurant', body);
+  }
+
   postUser(body: object): any {
     return this.http.post<any>('/api/users/signup', body);
   }

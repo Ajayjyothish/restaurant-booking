@@ -71,17 +71,22 @@ export class RestaurantCardsComponent implements OnInit {
 
   deleteClick(): void {
     if (this.isLoggedIn === true) {
-      this.restaurantsService
-        .deleteUserRestaurant(this.restaurant.id)
-        .subscribe({
-          next: (data: Array<any>) => {
-            console.log('Delete response: ', data);
-            this.deleteButtonClicked.emit('Delete button clicked');
-          },
-          error: (error) => {
-            console.error('There was an error: ', error);
-          },
-        });
+      const result = confirm('Are you sure you want to delete the item?');
+      if (result) {
+        this.restaurantsService
+          .deleteUserRestaurant(this.restaurant.id)
+          .subscribe({
+            next: (data: Array<any>) => {
+              console.log('Delete response: ', data);
+              this.deleteButtonClicked.emit('Delete button clicked');
+            },
+            error: (error) => {
+              console.error('There was an error: ', error);
+            },
+          });
+      } else {
+        console.log('Not deleted');
+      }
     } else {
       this.router.navigate(['home']);
     }

@@ -280,8 +280,8 @@ const getFavouriteRestaurants = (request, response) => {
 };
 
 const deleteUserRestaurant = (request, response) => {
-  const userId = request.user.id
-  const restaurantId = request.params.restaurantId
+  const userId = request.user.id;
+  const restaurantId = request.params.restaurantId;
   db.query(
     "Delete from restaurants where id=$1 and user_id = $2",
     [restaurantId, userId],
@@ -291,16 +291,15 @@ const deleteUserRestaurant = (request, response) => {
       }
       response.json("Restaurant deleted");
     }
-  )
-
-}
+  );
+};
 
 const postFavorite = (request, response) => {
   const userId = request.user.id;
-  const {restaurantId}  = request.body
+  const { restaurantId } = request.body;
   db.query(
     "INSERT into favorites (restaurant_id, favorited_by) values ($1, $2)",
-    [restaurantId , userId],
+    [restaurantId, userId],
     (err, res) => {
       if (err) {
         return response.status(400).json(err);
@@ -312,22 +311,22 @@ const postFavorite = (request, response) => {
 
 const deleteFavorite = (request, response) => {
   const userId = request.user.id;
-  const {restaurantId}  = request.params
+  const { restaurantId } = request.params;
   db.query(
     "DELETE from favorites where restaurant_id = $1 and favorited_by= $2",
-    [restaurantId , userId],
+    [restaurantId, userId],
     (err, res) => {
       if (err) {
         return response.status(400).json(err);
       }
-       return response.status(201).json("Deleted");
+      return response.status(201).json("Deleted");
     }
   );
 };
 
 const getUserRestaurants = (request, response) => {
-  const pageNo = request.params.pageNo
-  const userId = request.user.id
+  const pageNo = request.params.pageNo;
+  const userId = request.user.id;
   db.query(
     "Select id, name, location, cuisine, price, start_time, close_time, rating from restaurants where user_id = $1 OFFSET ($2 * 4) ROWS  FETCH FIRST 4 ROW ONLY",
     [userId, pageNo],
@@ -337,8 +336,37 @@ const getUserRestaurants = (request, response) => {
       }
       response.send(res?.rows);
     }
+  );
+};
+
+const postRestaurant = (request, response) => {
+  const userId = request.user.id;
+  const {
+    name,
+    location,
+    startTime,
+    closeTime,
+    cuisine,
+    price,
+    phone,
+    address1,
+    address2,
+    rating,
+    city,
+    state,
+    pin,
+  } = request.body
+  db.query(
+    "Insert into restaurants (name,location,start_Time,close_Time,user_id,cuisine,price,phone,address1,address2,rating,city,state,pin) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
+    [name, location, startTime, closeTime, userId, cuisine, price, phone, address1, address2, rating, city, state, pin],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("New Restaurant Added");
+    }
   )
-}
+};
 
 module.exports = {
   getTopRestaurants,
@@ -361,5 +389,6 @@ module.exports = {
   postFavorite,
   deleteFavorite,
   getUserRestaurants,
-  deleteUserRestaurant
+  deleteUserRestaurant,
+  postRestaurant
 };

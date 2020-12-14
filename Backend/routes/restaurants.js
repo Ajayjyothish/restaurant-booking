@@ -6,6 +6,8 @@ const auth = require('../controllers/authContoller')
 
 router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
+router.post('/new-restaurant', auth, restaurantContoller.postRestaurant)
+
 router.get('/cities', restaurantContoller.getCities),
 
 router.get('/city-restaurants/:cityString/:pageNo', restaurantContoller.getCityRestaurants )
