@@ -22,7 +22,7 @@ router.get("/profile", auth, userController.user_getProfile),
 router.post("/updateprofile", auth, userController.users_updateProfile)
 
 
-router.post('/uploadfile/:type/:filename', upload.single('uploadedImage'), userController.uploadImage )
+router.post('/uploadfile/:type/:id/:filename', upload.single('uploadedImage'), userController.uploadImage )
  
 
 

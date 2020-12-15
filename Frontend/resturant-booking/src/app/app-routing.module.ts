@@ -1,3 +1,4 @@
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AuthGuardService } from './auth-guard.service';
@@ -30,15 +31,17 @@ const routes: Routes = [
     path: 'my-restaurants',
     component: MyRestaurantsComponent,
     canActivate: [AuthGuardService]
+  },{
+    path: 'add-restaurant',
+    component: AddRestaurantComponent,
+    canActivate: [AuthGuardService]
   },
   { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      onSameUrlNavigation: 'reload',
-    }),
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
 })
