@@ -86,8 +86,8 @@
     </div>
     <ng-template #optionButtons>
       <div class="ml-auto">
-        <button class="btn option-btn mr-3">Edit</button>
-        <button (click)='deleteClick()' class="btn option-btn" style="background-color: black;">Delete</button>
+        <a href="edit-restaurant/{{restaurant.id}}" class="btn option-btn mr-3">Edit</a>
+        <a (click)='deleteClick()' class="btn option-btn" style="background-color: black;">Delete</a>
       </div>
     </ng-template>
   </div>

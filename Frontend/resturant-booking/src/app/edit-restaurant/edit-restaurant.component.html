@@ -1,0 +1,383 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">Edit Restaurant</p>
+  </div>
+</div>
+
+<div class="edit-restaurant" style="padding-top: 2em">
+  <div class="container">
+    <div *ngIf="restaurantDetails" class="edit-restaurant-card">
+      <form #editRestaurantForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="container" style="padding: 30px 50px">
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img
+                  src="../../assets/icons/name.png"
+                  style="top: 16px"
+                  alt=""
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  minlength="3"
+                  pattern="[A-Za-z]{3,}[A-Za-z ]*"
+                  #name="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.name"
+                  placeholder="Name"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="name.touched && !name.valid"
+                >
+                  <div *ngIf="name.errors.required">Name is required</div>
+                  <div *ngIf="name.errors.minlength">
+                    Minimum
+                    {{ name.errors.minlength.requiredLength }} characters
+                    required
+                  </div>
+                  <div *ngIf="name.errors.pattern">
+                    Only alphabets permitted
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/marker.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="location"
+                  #location="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.location"
+                  placeholder="Location"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="location.touched && !location.valid"
+                >
+                  <div *ngIf="location.errors.required">
+                    Location is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <img
+                      src="../../assets/icons/str-time.png"
+                      style="top: 16px"
+                      alt=""
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="startTime"
+                      pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}"
+                      #startTime="ngModel"
+                      required
+                      [(ngModel)]="restaurantDetails.start_time"
+                      placeholder="00:00:00"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="startTime.touched && !startTime.valid"
+                    >
+                      <div *ngIf="startTime.errors.required">
+                        Start time is required
+                      </div>
+                      <div *ngIf="startTime.errors.pattern">
+                        Please enter in HH:MM:SS format
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p class="d-none d-md-block to">to</p>
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <img
+                      src="../../assets/icons/end-time.png"
+                      style="top: 16px"
+                      alt=""
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="closeTime"
+                      pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}"
+                      #closeTime="ngModel"
+                      required
+                      [(ngModel)]="restaurantDetails.close_time"
+                      placeholder="23:59:59"
+                    />
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="closeTime.touched && !closeTime.valid"
+                    >
+                      <div *ngIf="closeTime.errors.required">
+                        Close time is required
+                      </div>
+                      <div *ngIf="closeTime.errors.pattern">
+                        Please enter in HH:MM:SS format
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/dish.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cuisine"
+                  #cuisine="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.cuisine"
+                  placeholder="Cuisine"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="cuisine.touched && !cuisine.valid"
+                >
+                  <div *ngIf="cuisine.errors.required">Cuisine is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img
+                  src="../../assets/icons/price.png"
+                  style="top: 18px"
+                  alt=""
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="price"
+                  pattern="[0-9]+"
+                  #price="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.price"
+                  placeholder="Price"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="price.touched && !price.valid"
+                >
+                  <div *ngIf="price.errors.required">Price is required</div>
+                  <div *ngIf="price.errors.pattern">Only numbers permitted</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img
+                  src="../../assets/icons/phone.png"
+                  style="top: 16px"
+                  alt=""
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  #phone="ngModel"
+                  pattern="[0-9]{10}"
+                  required
+                  [(ngModel)]="restaurantDetails.phone"
+                  placeholder="Phone"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="phone.touched && !phone.valid"
+                >
+                  <div *ngIf="phone.errors.required">Phone is required</div>
+                  <div *ngIf="phone.errors.pattern">
+                    Enter a valid 10 digit number
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/map.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address1"
+                  #address1="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.address1"
+                  placeholder="Address 1"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="address1.touched && !address1.valid"
+                >
+                  <div *ngIf="address1.errors.required">
+                    Address is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/map.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address2"
+                  #address2="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.address2"
+                  placeholder="Address 2"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="address2.touched && !address2.valid"
+                >
+                  <div *ngIf="address2.errors.required">
+                    Address is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/city.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="city"
+                  #city="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.city"
+                  placeholder="City"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="city.touched && !city.valid"
+                >
+                  <div *ngIf="city.errors.required">City is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/state.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="state"
+                  #state="ngModel"
+                  required
+                  [(ngModel)]="restaurantDetails.state"
+                  placeholder="State"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="state.touched && !state.valid"
+                >
+                  <div *ngIf="state.errors.required">State is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <img src="../../assets/icons/pin.png" alt="" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="pin"
+                  #pin="ngModel"
+                  pattern="[0-9]+"
+                  required
+                  [(ngModel)]="restaurantDetails.pin"
+                  placeholder="Pin"
+                />
+                <div
+                  class="alert alert-danger"
+                  *ngIf="pin.touched && !pin.valid"
+                >
+                  <div *ngIf="pin.errors.required">Pin is required</div>
+                  <div *ngIf="pin.errors.pattern">Enter a valid pin</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 d-flex justify-content-between">
+              <ng-template #mapContent let-modal>
+                <div class="modal-header">
+                  <h4
+                    class="modal-title w-100 text-center"
+                    id="modal-basic-title"
+                  >
+                    Map & Directions
+                  </h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <agm-map
+                    [latitude]="restaurantDetails.latitude/1"
+                    [longitude]="restaurantDetails.longitude/1"
+                    [zoom]="15"
+                    [disableDefaultUI]="false"
+                    [zoomControl]="false"
+                    (mapClick)="mapClicked($event)"
+                  >
+                    <agm-marker
+                      [latitude]="restaurantDetails.latitude/1"
+                      [longitude]="restaurantDetails.longitude/1"
+                      [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"
+                    ></agm-marker>
+                  </agm-map>
+                </div>
+              </ng-template>
+              <button type="button" (click)="open(mapContent)" class="btn">
+                Edit Map
+              </button>
+              <button class="btn">Edit Menu</button>
+              <button class="btn">Edit Photos</button>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="text-center">
+          <button
+            type="submit"
+            [disabled]="!editRestaurantForm.form.valid"
+            class="btn"
+            id="save"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

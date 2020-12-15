@@ -25,6 +25,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
+import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
     EditProfileComponent,
     MyRestaurantsComponent,
     AddRestaurantComponent,
+    EditRestaurantComponent,
   ],
   imports: [
     BrowserModule,
