@@ -52,6 +52,15 @@ input {
   border: 1px solid rgba(112, 98, 80, 1);
 }
 
+input#customFile{
+  position: absolute;
+  height: 45px;
+  width: 130px;
+  top: 13px;
+  opacity: 0;
+  cursor: pointer;
+}
+
 button.btn {
   background-color: rgba(192, 56, 56, 1);
   border-radius: 26px;
@@ -68,6 +77,22 @@ button.btn {
 .add-restaurant {
   background-color: rgba(242, 232, 218, 1);
   padding-bottom: 2em;
+}
+
+div.modal-content {
+  width: 640px;
+}
+
+div.modal-body {
+  padding: 0px;
+}
+
+agm-map {
+  height: 817px;
+}
+
+.modal-title {
+  color: rgba(177, 131, 71, 1);
 }
 
 .add-restaurant-card {

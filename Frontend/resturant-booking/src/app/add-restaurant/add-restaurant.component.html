@@ -8,7 +8,7 @@
 <div class="add-restaurant" style="padding-top: 2em">
   <div class="container">
     <div class="add-restaurant-card">
-      <form #addRestaurantForm='ngForm' (ngSubmit)='onSubmit()'>
+      <form #addRestaurantForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="container" style="padding: 30px 50px">
           <div class="row">
             <div class="col-12 col-lg-6">
@@ -318,22 +318,73 @@
                   *ngIf="pin.touched && !pin.valid"
                 >
                   <div *ngIf="pin.errors.required">Pin is required</div>
-                  <div *ngIf="pin.errors.pattern">
-                    Enter a valid pin
-                  </div>
+                  <div *ngIf="pin.errors.pattern">Enter a valid pin</div>
                 </div>
               </div>
             </div>
             <div class="col-12 col-lg-6 d-flex justify-content-between">
-              <button class="btn">Add Map</button>
+              <ng-template #mapContent let-modal>
+                <div class="modal-header">
+                  <h4
+                    class="modal-title w-100 text-center"
+                    id="modal-basic-title"
+                  >
+                    Map & Directions
+                  </h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <agm-map
+                    [latitude]="restaurantDetails.lat"
+                    [longitude]="restaurantDetails.lng"
+                    [zoom]="15"
+                    [disableDefaultUI]="false"
+                    [zoomControl]="false"
+                    (mapClick)="mapClicked($event)"
+                  >
+                    <agm-marker
+                      [latitude]="restaurantDetails.lat"
+                      [longitude]="restaurantDetails.lng"
+                      [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"
+                    ></agm-marker>
+                  </agm-map>
+                </div>
+              </ng-template>
+              <button type="button" (click)="open(mapContent)" class="btn">
+                Add Map
+              </button>
               <button class="btn">Add Menu</button>
-              <button class="btn">Add Photos</button>
+              <div style="position: relative">
+                <input
+                  type="file"
+                  name="uploadedImage"
+                  multiple
+                  (change)="onFileSelect($event)"
+                  id="customFile"
+                />
+                <button class="btn">Add Photos</button>
+              </div>
             </div>
           </div>
         </div>
         <hr />
         <div class="text-center">
-          <button type="submit" [disabled]='!addRestaurantForm.form.valid' class="btn" id="save">Save</button>
+          <button
+            type="submit"
+            [disabled]="!addRestaurantForm.form.valid"
+            class="btn"
+            id="save"
+          >
+            Save
+          </button>
         </div>
       </form>
     </div>

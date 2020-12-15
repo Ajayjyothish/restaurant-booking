@@ -2,7 +2,7 @@ const db = require("../db");
 
 const getTopRestaurants = (request, response, next) => {
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants order by rating desc limit 6",
+    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants order by rating desc limit 4",
     [],
     (err, res) => {
       if (err) {
@@ -355,17 +355,51 @@ const postRestaurant = (request, response) => {
     city,
     state,
     pin,
-  } = request.body
+    lat,
+    lng,
+  } = request.body;
   db.query(
-    "Insert into restaurants (name,location,start_Time,close_Time,user_id,cuisine,price,phone,address1,address2,rating,city,state,pin) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
-    [name, location, startTime, closeTime, userId, cuisine, price, phone, address1, address2, rating, city, state, pin],
+    "Insert into restaurants (name,location,start_Time,close_Time,user_id,cuisine,price,phone,address1,address2,rating,city,state,pin,latitude,longitude) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) returning id",
+    [
+      name,
+      location,
+      startTime,
+      closeTime,
+      userId,
+      cuisine,
+      price,
+      phone,
+      address1,
+      address2,
+      rating,
+      city,
+      state,
+      pin,
+      lat,
+      lng,
+    ],
     (err, res) => {
       if (err) {
         return response.status(400).json(err);
       }
-      response.json("New Restaurant Added");
+      response.send(res?.rows);
     }
-  )
+  );
+};
+
+const postPhotos = (request, response) => {
+  const userId = request.user.id;
+  const { restaurantId, url } = request.body;
+  db.query(
+    "Insert into photos (url, restaurant_id) values ($1, $2)",
+    [url, restaurantId],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("Photos' urls added to db");
+    }
+  );
 };
 
 module.exports = {
@@ -390,5 +424,6 @@ module.exports = {
   deleteFavorite,
   getUserRestaurants,
   deleteUserRestaurant,
-  postRestaurant
+  postRestaurant,
+  postPhotos
 };

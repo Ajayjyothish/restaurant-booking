@@ -56,7 +56,7 @@ export class AuthService {
 
   updateProfleImage(formData: any, newImageUrl: string): any {
     return this.http.post(
-      'api/users/uploadfile/profile/' + newImageUrl,
+      'api/users/uploadfile/profile/0/' + newImageUrl,
       formData
     );
   }

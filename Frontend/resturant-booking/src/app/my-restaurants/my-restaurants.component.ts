@@ -29,8 +29,14 @@ export class MyRestaurantsComponent implements OnInit {
     });
   }
 
-  handleDelete(valueEmmited): void {
+  resetLoadValues(): void {
     this.pageNo = 0;
+    window.scrollTo(0, 0);
+    this.shouldLoad = true;
+  }
+
+  handleDelete(valueEmmited): void {
+    this.resetLoadValues();
     this.getuserRestaurants();
   }
 

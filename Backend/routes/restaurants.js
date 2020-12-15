@@ -2,11 +2,15 @@ var express = require('express');
 var router = express.Router();
 const restaurantContoller = require('../controllers/restaurantContoller')
 const auth = require('../controllers/authContoller')
+const upload = require('../handlers/fileUpload')
+
 
 
 router.get("/top-restaurants", restaurantContoller.getTopRestaurants)
 
 router.post('/new-restaurant', auth, restaurantContoller.postRestaurant)
+
+router.post('/new-restaurant/photos', auth, restaurantContoller.postPhotos)
 
 router.get('/cities', restaurantContoller.getCities),
 

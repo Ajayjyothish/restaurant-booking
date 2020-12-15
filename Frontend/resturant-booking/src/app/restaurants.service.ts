@@ -21,6 +21,17 @@ export class RestaurantsService {
     );
   }
 
+  uploadFile(formData, restaurantId, newImageName): any {
+    return this.http.post(
+      '/api/users/uploadfile/restaurants/' + restaurantId + '/' + newImageName,
+      formData
+    );
+  }
+
+  postPhotos(body): any {
+    return this.http.post('/api/restaurants/new-restaurant/photos', body);
+  }
+
   postRestaurant(body): any {
     return this.http.post('/api/restaurants/new-restaurant', body);
   }
