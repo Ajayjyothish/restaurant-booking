@@ -1,3 +1,4 @@
+import { EditPhotosComponent } from './edit-photos/edit-photos.component';
 import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.component';
@@ -48,6 +49,11 @@ const routes: Routes = [
   {
     path: 'edit-restaurant/:restaurantId',
     component: EditRestaurantComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'edit-photos/:restaurantId',
+    component: EditPhotosComponent,
     canActivate: [AuthGuardService],
   },
 

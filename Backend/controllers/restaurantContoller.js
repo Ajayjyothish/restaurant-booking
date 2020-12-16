@@ -254,7 +254,7 @@ const getRecentSearches = (request, response, next) => {
 const getPhotos = (request, response) => {
   const { restaurantId } = request.params;
   db.query(
-    "Select url from photos where restaurant_id = $1",
+    "Select url,id from photos where restaurant_id = $1",
     [restaurantId],
     (err, res) => {
       if (err) {
@@ -264,6 +264,20 @@ const getPhotos = (request, response) => {
     }
   );
 };
+
+const deletePhoto = (request, response) =>{
+  const id = request.params.id
+  db.query(
+    "Delete from photos where id = $1",
+    [id],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("Photo has been deleted");
+    }
+  )
+}
 
 const getFavouriteRestaurants = (request, response) => {
   const userId = request.user.id;
@@ -476,5 +490,6 @@ module.exports = {
   deleteUserRestaurant,
   postRestaurant,
   postPhotos,
-  updateRestaurant
+  updateRestaurant,
+  deletePhoto
 };

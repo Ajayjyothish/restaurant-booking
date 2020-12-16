@@ -21,7 +21,7 @@ export class RestaurantsService {
     );
   }
 
-  updateRestaurant(body): any{
+  updateRestaurant(body): any {
     return this.http.post('/api/restaurants/edit-restaurant', body);
   }
 
@@ -34,6 +34,10 @@ export class RestaurantsService {
 
   postPhotos(body): any {
     return this.http.post('/api/restaurants/new-restaurant/photos', body);
+  }
+
+  deletePhoto(id): any {
+    return this.http.delete('/api/restaurants/photos/' + id);
   }
 
   postRestaurant(body): any {

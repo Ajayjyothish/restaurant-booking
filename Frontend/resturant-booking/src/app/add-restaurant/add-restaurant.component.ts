@@ -57,40 +57,43 @@ export class AddRestaurantComponent implements OnInit {
     this.restaurantDetails.lng = $event.latLng.lng();
   }
 
+  uploadPhotos(data): void{
+    if (this.myfiles.length !== 0) {
+      for (const file of this.myfiles) {
+        const formData = new FormData();
+        formData.append('uploadedImage', file);
+        const restaurantId = data[0].id;
+        this.restaurantService
+          .uploadFile(formData, restaurantId, file.name)
+          .subscribe({
+            next: () => {
+              console.log('Restaurant photos added');
+              const photo = {
+                url: `http://localhost:3000/my_uploaded_files/restaurants/${restaurantId}/${file.name}`,
+                restaurantId,
+              };
+              this.restaurantService.postPhotos(photo).subscribe({
+                next: (dbResponse) => {
+                  console.log(dbResponse);
+                },
+                error: (error) => {
+                  console.error('There was an error posting to db: ', error);
+                },
+              });
+            },
+            error: (error) => {
+              console.error('There was an error uploading photos: ', error);
+            },
+          });
+      }
+    }
+  }
+
   onSubmit(): void {
     if (this.authService.isLoggedIn()) {
       this.restaurantService.postRestaurant(this.restaurantDetails).subscribe({
         next: (data) => {
-          if (this.myfiles.length !== 0) {
-            for (const file of this.myfiles) {
-              const formData = new FormData();
-              formData.append('uploadedImage', file);
-              const restaurantId = data[0].id;
-              this.restaurantService
-                .uploadFile(formData, restaurantId, file.name)
-                .subscribe({
-                  next: () => {
-                    console.log('Restaurant photos added');
-                    const photo = {
-                      url: `http://localhost:3000/my_uploaded_files/restaurants/${restaurantId}/${file.name}`,
-                      restaurantId,
-                    };
-                    this.restaurantService.postPhotos(photo).subscribe({
-                      next: (dbResponse) => {
-                        console.log(dbResponse);
-                      },
-                      error: (error) => {
-                        console.error('There was an error posting to db: ', error);
-                      },
-                    });
-                  },
-                  error: (error) => {
-                    console.error('There was an error uploading photos: ', error);
-                  },
-                });
-            }
-          }
-
+          this.uploadPhotos(data);
           this.router.navigate(['my-restaurants']);
         },
         error: (error) => {

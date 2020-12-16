@@ -61,7 +61,7 @@ export class RestaurantCardsComponent implements OnInit {
   getPhotos(): void {
     this.restaurantsService.getPhotos(this.restaurant.id).subscribe({
       next: (data: Array<any>) => {
-        this.restaurant.photos = data;
+        this.restaurant.photos = data.slice(0, 4);
       },
       error: (error) => {
         console.error('There was an error: ', error);

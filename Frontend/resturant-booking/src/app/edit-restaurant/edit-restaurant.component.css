@@ -61,7 +61,7 @@ input#customFile {
   cursor: pointer;
 }
 
-button.btn {
+.btn {
   background-color: rgba(192, 56, 56, 1);
   border-radius: 26px;
   margin-bottom: 1em;
@@ -74,9 +74,11 @@ button.btn {
   min-width: 130px;
 }
 
+
 .edit-restaurant {
   background-color: rgba(242, 232, 218, 1);
   padding-bottom: 2em;
+  min-height: calc(100vh - 265px);
 }
 
 div.modal-content {

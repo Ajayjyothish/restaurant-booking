@@ -26,6 +26,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
+import { EditPhotosComponent } from './edit-photos/edit-photos.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.compo
     MyRestaurantsComponent,
     AddRestaurantComponent,
     EditRestaurantComponent,
+    EditPhotosComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,60 @@
+#filterbar {
+  background-color: rgba(250, 245, 238, 1);
+  height: 56px;
+}
+
+p#title {
+  color: rgba(177, 131, 71, 1);
+  font-size: 30px;
+}
+
+.edit-photos {
+  background-color: rgba(242, 232, 218, 1);
+  padding-bottom: 2em;
+  min-height: calc(100vh - 265px);
+}
+
+.edit-photos-card {
+  min-height: 324px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(224, 219, 213, 1);
+  border-radius: 10px;
+}
+
+input#customFile{
+    position: absolute;
+    height: 45px;
+    width: 130px;
+    top: 13px;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+.btn {
+  background-color: rgba(192, 56, 56, 1);
+  border-radius: 26px;
+  margin-bottom: 1em;
+  margin-top: 10px;
+  height: 49px;
+  color: rgba(255, 235, 235, 1);
+  font-family: "SF UI Display";
+  font-size: 20px;
+  font-weight: 500;
+  min-width: 130px;
+}
+
+img.photos {
+  height: 163px;
+  width: 163px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+img.delete {
+  position: absolute;
+  height: 36px;
+  width: 36px;
+  top: 15px;
+  right: 15px;
+}
