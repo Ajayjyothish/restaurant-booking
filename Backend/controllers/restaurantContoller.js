@@ -114,7 +114,7 @@ const searchKeyword = (request, response) => {
 const getRestaurant = (request, response, next) => {
   const { restaurantId } = request.params;
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating, phone, address1, latitude, longitude, address2 FROM restaurants where id = $1",
+    "Select id, name, location, cuisine, price, start_time, close_time, rating, phone, address1, latitude, longitude, address2, pin, city, state FROM restaurants where id = $1",
     [restaurantId],
     (err, res) => {
       if (err) {
@@ -254,7 +254,7 @@ const getRecentSearches = (request, response, next) => {
 const getPhotos = (request, response) => {
   const { restaurantId } = request.params;
   db.query(
-    "Select url from photos where restaurant_id = $1",
+    "Select url,id from photos where restaurant_id = $1",
     [restaurantId],
     (err, res) => {
       if (err) {
@@ -264,6 +264,20 @@ const getPhotos = (request, response) => {
     }
   );
 };
+
+const deletePhoto = (request, response) =>{
+  const id = request.params.id
+  db.query(
+    "Delete from photos where id = $1",
+    [id],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("Photo has been deleted");
+    }
+  )
+}
 
 const getFavouriteRestaurants = (request, response) => {
   const userId = request.user.id;
@@ -387,6 +401,56 @@ const postRestaurant = (request, response) => {
   );
 };
 
+const updateRestaurant = (request, response) => {
+  const userId = request.user.id;
+  const {
+    id,
+    name,
+    location,
+    start_time,
+    close_time,
+    cuisine,
+    price,
+    phone,
+    address1,
+    address2,
+    rating,
+    city,
+    state,
+    pin,
+    latitude,
+    longitude,
+  } = request.body;
+  db.query(
+    "Update restaurants set name=$1,location=$2,start_Time=$3,close_Time=$4,user_id=$5,cuisine=$6,price=$7,phone=$8,address1=$9,address2=$10,rating=$11,city=$12,state=$13,pin=$14,latitude=$15,longitude=$16 where id=$17",
+    [
+      name,
+      location,
+      start_time,
+      close_time,
+      userId,
+      cuisine,
+      price,
+      phone,
+      address1,
+      address2,
+      rating,
+      city,
+      state,
+      pin,
+      latitude,
+      longitude,
+      id
+    ],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  );
+};
+
 const postPhotos = (request, response) => {
   const userId = request.user.id;
   const { restaurantId, url } = request.body;
@@ -425,5 +489,7 @@ module.exports = {
   getUserRestaurants,
   deleteUserRestaurant,
   postRestaurant,
-  postPhotos
+  postPhotos,
+  updateRestaurant,
+  deletePhoto
 };

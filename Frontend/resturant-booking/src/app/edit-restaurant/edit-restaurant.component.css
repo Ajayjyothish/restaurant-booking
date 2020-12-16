@@ -1,0 +1,114 @@
+#filterbar {
+  background-color: rgba(250, 245, 238, 1);
+  height: 56px;
+}
+
+p#title {
+  color: rgba(177, 131, 71, 1);
+  font-size: 30px;
+}
+
+div.form-group {
+  position: relative;
+}
+.to {
+  position: absolute;
+  left: 48%;
+  top: 10px;
+  font-size: 22px;
+  font-weight: 300;
+  color: rgba(185, 185, 185, 1);
+}
+
+div.alert {
+  margin-top: 0.5em;
+  border-radius: 2em;
+}
+
+input[type="text"]::placeholder {
+  color: rgba(112, 98, 80, 1);
+  text-align: center;
+}
+
+img {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  color: rgba(112, 98, 80, 1);
+}
+
+.form-control.ng-touched.ng-invalid {
+  border: 2px solid red;
+}
+
+input {
+  text-indent: 45px;
+  font-family: "SF UI Display";
+  font-weight: 300;
+  font-size: 22px;
+  color: rgba(112, 98, 80, 1);
+  height: 63px;
+  border-radius: 2em;
+  border: 1px solid rgba(112, 98, 80, 1);
+}
+
+input#customFile {
+  position: absolute;
+  height: 45px;
+  width: 130px;
+  top: 13px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.btn {
+  background-color: rgba(192, 56, 56, 1);
+  border-radius: 26px;
+  margin-bottom: 1em;
+  margin-top: 10px;
+  height: 49px;
+  color: rgba(255, 235, 235, 1);
+  font-family: "SF UI Display";
+  font-size: 20px;
+  font-weight: 500;
+  min-width: 130px;
+}
+
+
+.edit-restaurant {
+  background-color: rgba(242, 232, 218, 1);
+  padding-bottom: 2em;
+  min-height: calc(100vh - 265px);
+}
+
+div.modal-content {
+  width: 640px;
+}
+
+div.modal-body {
+  padding: 0px;
+}
+
+agm-map {
+  height: 817px;
+}
+
+.modal-title {
+  color: rgba(177, 131, 71, 1);
+}
+
+.edit-restaurant-card {
+  min-height: 324px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(224, 219, 213, 1);
+  border-radius: 10px;
+}
+button#save {
+  width: 553px;
+  background-color: rgba(78, 30, 18, 1);
+  border-radius: 32px;
+  font-family: "SF UI Display";
+  font-size: 30px;
+  color: rgba(246, 240, 220, 1);
+  height: 63px;
+}

@@ -21,6 +21,10 @@ export class RestaurantsService {
     );
   }
 
+  updateRestaurant(body): any {
+    return this.http.post('/api/restaurants/edit-restaurant', body);
+  }
+
   uploadFile(formData, restaurantId, newImageName): any {
     return this.http.post(
       '/api/users/uploadfile/restaurants/' + restaurantId + '/' + newImageName,
@@ -30,6 +34,10 @@ export class RestaurantsService {
 
   postPhotos(body): any {
     return this.http.post('/api/restaurants/new-restaurant/photos', body);
+  }
+
+  deletePhoto(id): any {
+    return this.http.delete('/api/restaurants/photos/' + id);
   }
 
   postRestaurant(body): any {

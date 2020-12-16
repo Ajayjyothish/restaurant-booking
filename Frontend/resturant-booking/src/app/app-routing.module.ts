@@ -1,3 +1,5 @@
+import { EditPhotosComponent } from './edit-photos/edit-photos.component';
+import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -10,9 +12,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { RestaurantListingPageComponent } from './restaurant-listing-page/restaurant-listing-page.component';
 
 const routes: Routes = [
-  { path: 'home', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./homepage/homepage.module').then((m) => m.HomepageModule),
+  },
   { path: 'response-reset-password/:token', component: PasswordResetComponent },
-  { path: 'restaurant-list/:city/:filterCategory', component: RestaurantListingPageComponent },
+  {
+    path: 'restaurant-list/:city/:filterCategory',
+    component: RestaurantListingPageComponent,
+  },
   {
     path: 'restaurant-details/:restaurantId',
     component: RestaurantDetailsComponent,
@@ -30,19 +39,29 @@ const routes: Routes = [
   {
     path: 'my-restaurants',
     component: MyRestaurantsComponent,
-    canActivate: [AuthGuardService]
-  },{
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'add-restaurant',
     component: AddRestaurantComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
   },
+  {
+    path: 'edit-restaurant/:restaurantId',
+    component: EditRestaurantComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'edit-photos/:restaurantId',
+    component: EditPhotosComponent,
+    canActivate: [AuthGuardService],
+  },
+
   { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

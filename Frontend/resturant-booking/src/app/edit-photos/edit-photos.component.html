@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">Edit Photos</p>
+  </div>
+</div>
+
+<div class="edit-photos" style="padding-top: 2em">
+  <div class="container">
+    <div class="edit-photos-card">
+      <div class="w-100 d-flex justify-content-end">
+        <div style="position: relative">
+          <input
+            type="file"
+            name="uploadedImage"
+            multiple
+            (change)="onFileSelect($event)"
+            id="customFile"
+          />
+          <button class="btn m-3">Add Photos</button>
+        </div>
+      </div>
+      <div
+        *ngIf="restaurantImages.length > 0"
+        class="row"
+        style="margin: 5px"
+      >
+        <div *ngFor="let image of restaurantImages" style="position: relative">
+          <img style='cursor:pointer' (click)='deletePhoto(image.id)' class="delete" src="../../assets/icons/delete.png" alt="" />
+          <img class="photos" src="{{ image.url }}" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
