@@ -24,10 +24,25 @@
         </div>
       </ng-template>
     </ngb-carousel>
-    <div *ngIf="isLoggedIn" style="position: absolute; bottom: 25px; right: 45px; z-index: 1">
-      <img (click)='favorite()' style="cursor: pointer;" *ngIf="isFavorite" src="../../assets/icons/fav-true.png" alt="">
-      <img (click)='favorite()' style="cursor: pointer;" *ngIf="!isFavorite" src="../../assets/icons/fav-false.png" alt="">
-      <img class="ml-4" src="../../assets//icons/share.png" alt="">
+    <div
+      *ngIf="isLoggedIn"
+      style="position: absolute; bottom: 25px; right: 45px; z-index: 1"
+    >
+      <img
+        (click)="favorite()"
+        style="cursor: pointer"
+        *ngIf="isFavorite"
+        src="../../assets/icons/fav-true.png"
+        alt=""
+      />
+      <img
+        (click)="favorite()"
+        style="cursor: pointer"
+        *ngIf="!isFavorite"
+        src="../../assets/icons/fav-false.png"
+        alt=""
+      />
+      <img class="ml-4" src="../../assets//icons/share.png" alt="" />
     </div>
   </div>
 
@@ -138,7 +153,27 @@
           </div>
         </ng-template>
         <button class="btn" (click)="open(mapContent)">Map & Directions</button>
-        <button class="btn">View Menu</button>
+        <ng-template #menuContent let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title w-100 text-center">Menus</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ngx-gallery
+              [options]="galleryOptions"
+              [images]="galleryMenus"
+              class="ngx-gallery"
+            ></ngx-gallery>
+          </div>
+        </ng-template>
+        <button class="btn" (click)="open(menuContent)">View Menu</button>
 
         <ng-template #content let-modal>
           <div class="modal-header">
@@ -229,7 +264,8 @@
               </div>
             </div>
             <div class="col">
-              <p class="pt-1"
+              <p
+                class="pt-1"
                 style="
                   font-size: 16px;
                   font-weight: 300;
