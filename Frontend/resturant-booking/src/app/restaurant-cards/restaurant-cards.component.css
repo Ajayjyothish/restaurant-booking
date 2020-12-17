@@ -73,3 +73,36 @@ a.btn {
 .card-fields {
   padding-top: 5px;
 }
+
+div.modal-body {
+  padding: 0px;
+}
+
+.modal-title {
+  color: rgba(177, 131, 71, 1);
+}
+
+ngx-gallery ::ng-deep ngx-gallery-thumbnails {
+  margin-left: 60px;
+  width: calc(100% - 120px);
+}
+
+::ng-deep .ngx-gallery-thumbnail {
+  border-radius: 20px;
+}
+
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow i.fa-angle-left {
+  margin-left: -43px;
+  color: black;
+}
+
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow i.fa-angle-right {
+  position: relative;
+  right: -43px;
+  color: black;
+}
+
+.ngx-gallery {
+  display: inline-block;
+  margin-bottom: 20px;
+}

@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValidateEqualModule } from 'ng-validate-equal';
 import { RestaurantCardsComponent } from '../restaurant-cards/restaurant-cards.component';
 import { ProfileButtonComponent } from '../profile-button/profile-button.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import { ProfileButtonComponent } from '../profile-button/profile-button.compone
     NgbModule,
     AutocompleteLibModule,
     ValidateEqualModule,
+    NgxGalleryModule,
+
   ],
   exports: [
     RestaurantCardsComponent,
