@@ -342,16 +342,16 @@
                 </div>
                 <div class="modal-body">
                   <agm-map
-                    [latitude]="restaurantDetails.latitude/1"
-                    [longitude]="restaurantDetails.longitude/1"
+                    [latitude]="restaurantDetails.latitude / 1"
+                    [longitude]="restaurantDetails.longitude / 1"
                     [zoom]="15"
                     [disableDefaultUI]="false"
                     [zoomControl]="false"
                     (mapClick)="mapClicked($event)"
                   >
                     <agm-marker
-                      [latitude]="restaurantDetails.latitude/1"
-                      [longitude]="restaurantDetails.longitude/1"
+                      [latitude]="restaurantDetails.latitude / 1"
+                      [longitude]="restaurantDetails.longitude / 1"
                       [markerDraggable]="true"
                       (dragEnd)="markerDragEnd($event)"
                     ></agm-marker>
@@ -361,8 +361,18 @@
               <button type="button" (click)="open(mapContent)" class="btn">
                 Edit Map
               </button>
-              <button class="btn">Edit Menu</button>
-              <a href="edit-photos/{{restaurantDetails.id}}" style="padding-top: 9px;" class="btn">Edit Photos</a>
+              <a
+                href="edit-menus/{{ restaurantDetails.id }}"
+                style="padding-top: 9px"
+                class="btn"
+                >Edit Menus</a
+              >
+              <a
+                href="edit-photos/{{ restaurantDetails.id }}"
+                style="padding-top: 9px"
+                class="btn"
+                >Edit Photos</a
+              >
             </div>
           </div>
         </div>

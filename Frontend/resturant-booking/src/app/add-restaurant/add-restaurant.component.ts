@@ -29,6 +29,7 @@ export class AddRestaurantComponent implements OnInit {
   };
 
   myfiles = [];
+  myMenus = [];
 
   constructor(
     private restaurantService: RestaurantsService,
@@ -46,9 +47,15 @@ export class AddRestaurantComponent implements OnInit {
     });
   }
 
-  onFileSelect(event): void {
+  onPhotoSelect(event): void {
     for (const file of event.target.files) {
       this.myfiles.push(file);
+    }
+  }
+
+  onMenuSelect(event): void {
+    for (const file of event.target.files) {
+      this.myMenus.push(file);
     }
   }
 
@@ -57,7 +64,7 @@ export class AddRestaurantComponent implements OnInit {
     this.restaurantDetails.lng = $event.latLng.lng();
   }
 
-  uploadPhotos(data): void{
+  uploadPhotos(data): void {
     if (this.myfiles.length !== 0) {
       for (const file of this.myfiles) {
         const formData = new FormData();
@@ -89,11 +96,45 @@ export class AddRestaurantComponent implements OnInit {
     }
   }
 
+  uploadMenus(data): void {
+    if (this.myMenus.length !== 0) {
+      for (const menu of this.myMenus) {
+        const formData = new FormData();
+        formData.append('uploadedImage', menu);
+        const restaurantId = data[0].id;
+        this.restaurantService
+          .uploadFile(formData, restaurantId, menu.name)
+          .subscribe({
+            next: () => {
+              console.log('Restaurant Menus added');
+              const photo = {
+                url: `http://localhost:3000/my_uploaded_files/restaurants/${restaurantId}/${menu.name}`,
+                restaurantId,
+              };
+              this.restaurantService.postMenus(photo).subscribe({
+                next: (dbResponse) => {
+                  console.log(dbResponse);
+                },
+                error: (error) => {
+                  console.error('There was an error posting to db: ', error);
+                },
+              });
+            },
+            error: (error) => {
+              console.error('There was an error uploading photos: ', error);
+            },
+          });
+      }
+    }
+  }
+
+
   onSubmit(): void {
     if (this.authService.isLoggedIn()) {
       this.restaurantService.postRestaurant(this.restaurantDetails).subscribe({
         next: (data) => {
           this.uploadPhotos(data);
+          this.uploadMenus(data);
           this.router.navigate(['my-restaurants']);
         },
         error: (error) => {

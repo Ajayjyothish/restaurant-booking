@@ -265,6 +265,20 @@ const getPhotos = (request, response) => {
   );
 };
 
+const getMenus = (request, response) => {
+  const { restaurantId } = request.params;
+  db.query(
+    "Select url,id from menus where restaurant_id = $1",
+    [restaurantId],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.send(res?.rows);
+    }
+  );
+};
+
 const deletePhoto = (request, response) =>{
   const id = request.params.id
   db.query(
@@ -275,6 +289,20 @@ const deletePhoto = (request, response) =>{
         return response.status(400).json(err);
       }
       response.json("Photo has been deleted");
+    }
+  )
+}
+
+const deleteMenu = (request, response) =>{
+  const id = request.params.id
+  db.query(
+    "Delete from menus where id = $1",
+    [id],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("Menu has been deleted");
     }
   )
 }
@@ -467,6 +495,22 @@ const postPhotos = (request, response) => {
   );
 };
 
+const postMenus = (request, response) => {
+  const userId = request.user.id;
+  const { restaurantId, url } = request.body;
+  db.query(
+    "Insert into menus (url, restaurant_id) values ($1, $2)",
+    [url, restaurantId],
+    (err, res) => {
+      if (err) {
+        return response.status(400).json(err);
+      }
+      response.json("Menus' urls added to db");
+    }
+  );
+};
+
+
 module.exports = {
   getTopRestaurants,
   getAllRestaurants,
@@ -492,5 +536,8 @@ module.exports = {
   postRestaurant,
   postPhotos,
   updateRestaurant,
-  deletePhoto
+  deletePhoto,
+  postMenus,
+  getMenus,
+  deleteMenu
 };

@@ -36,8 +36,16 @@ export class RestaurantsService {
     return this.http.post('/api/restaurants/new-restaurant/photos', body);
   }
 
+  postMenus(body): any {
+    return this.http.post('/api/restaurants/new-restaurant/menus', body);
+  }
+
   deletePhoto(id): any {
     return this.http.delete('/api/restaurants/photos/' + id);
+  }
+
+  deleteMenu(id): any {
+    return this.http.delete('/api/restaurants/menus/' + id);
   }
 
   postRestaurant(body): any {
@@ -122,6 +130,10 @@ export class RestaurantsService {
 
   getPhotos(restaurantId): any {
     return this.http.get('/api/restaurants/photos/' + restaurantId);
+  }
+
+  getMenus(restaurantId): any {
+    return this.http.get('/api/restaurants/menus/' + restaurantId);
   }
 
   tConvert(time): string {
