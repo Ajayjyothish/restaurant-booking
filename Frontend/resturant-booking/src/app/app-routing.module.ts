@@ -1,3 +1,4 @@
+import { FavoritesComponent } from './favorites/favorites.component';
 import { EditPhotosComponent } from './edit-photos/edit-photos.component';
 import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'my-restaurants',
     component: MyRestaurantsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'favorites',
+    component: FavoritesComponent,
     canActivate: [AuthGuardService],
   },
   {

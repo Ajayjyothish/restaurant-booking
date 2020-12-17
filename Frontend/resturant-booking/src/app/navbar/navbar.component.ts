@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCities();
-    this.getCityRestaurants();
   }
 
   getCities(): void {
@@ -42,6 +41,7 @@ export class NavbarComponent implements OnInit {
         this.cities = data;
         this.citySearch = data[0].city;
         console.log('Cities', this.cities);
+        this.getCityRestaurants();
       },
       error: (error) => {
         console.error('There was an error: ', error);
@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
     this.restaurantsService.getCityRestaurants(this.citySearch, 0).subscribe({
       next: (data: Array<any>) => {
         this.restaurants = data;
-        console.log('We got', this.restaurants);
+        console.log('City Restaurants: ', this.restaurants);
       },
       error: (error) => {
         console.error('There was an error: ', error);
@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
       this.restaurantsService.searchRestaurant(val, this.citySearch).subscribe({
         next: (data: Array<any>) => {
           this.restaurants = data;
-          console.log('We got', this.restaurants);
+          console.log('Search: ', this.restaurants);
         },
         error: (error) => {
           console.error('There was an error: ', error);
@@ -120,8 +120,9 @@ export class NavbarComponent implements OnInit {
           },
         });
       }
-      this.router
-        .navigateByUrl('restaurant-details/' + this.restaurantSearch.id);
+      this.router.navigateByUrl(
+        'restaurant-details/' + this.restaurantSearch.id
+      );
     }
   }
 }

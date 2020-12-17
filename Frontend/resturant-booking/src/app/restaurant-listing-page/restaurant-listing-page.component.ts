@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestaurantsService } from '../restaurants.service';
 
 interface Restaurant {
@@ -22,9 +23,11 @@ export class RestaurantListingPageComponent implements OnInit {
   shouldLoad = true;
   filterCategory = 'all';
 
+
   constructor(
     private restaurantsService: RestaurantsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {
     route.params.subscribe((params) => {
       this.filterCategory = params.filterCategory;
@@ -40,6 +43,13 @@ export class RestaurantListingPageComponent implements OnInit {
     this.pageNo = 0;
     this.city = 'all';
     this.shouldLoad = true;
+  }
+
+  open(content): void {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'xl',
+    });
   }
 
   filterByAll(): void {
@@ -72,7 +82,7 @@ export class RestaurantListingPageComponent implements OnInit {
     this.chooseFunction(this.pageNo).subscribe({
       next: (data: Array<any>) => {
         this.restaurants = data;
-        console.log('We got', this.restaurants);
+        console.log('Requied Restaurant: ', this.restaurants);
       },
       error: (error) => {
         console.error('There was an error: ', error);
@@ -111,7 +121,7 @@ export class RestaurantListingPageComponent implements OnInit {
       this.chooseFunction(this.pageNo).subscribe({
         next: (data: Array<any>) => {
           this.restaurants.push(...data);
-          console.log('We got', data);
+          console.log('Scroll Data: ', data);
           if (data.length < 4) {
             this.shouldLoad = false;
           }

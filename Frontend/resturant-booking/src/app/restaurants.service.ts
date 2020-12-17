@@ -68,8 +68,8 @@ export class RestaurantsService {
     );
   }
 
-  getFavorites(): any {
-    return this.http.get('/api/restaurants/favorites');
+  getFavorites(pageNo): any {
+    return this.http.get('/api/restaurants/favorites/' + pageNo);
   }
 
   postFavorite(body): any {

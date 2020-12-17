@@ -51,7 +51,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getFavoriteRestaurants(): void {
-    this.restaurantsService.getFavorites().subscribe({
+    this.restaurantsService.getFavorites(0).subscribe({
       next: (data: Array<object>) => {
         this.favoriteRestaurants = data;
         console.log('Favorite Restaurants: ', this.favoriteRestaurants);

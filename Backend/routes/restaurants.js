@@ -50,7 +50,7 @@ router.get('/photos/:restaurantId', restaurantContoller.getPhotos)
 
 router.delete('/photos/:id', auth, restaurantContoller.deletePhoto)
 
-router.get('/favorites', auth,  restaurantContoller.getFavouriteRestaurants)
+router.get('/favorites/:pageNo', auth,  restaurantContoller.getFavouriteRestaurants)
 
 router.get('/userRestaurants/:pageNo', auth, restaurantContoller.getUserRestaurants)
 

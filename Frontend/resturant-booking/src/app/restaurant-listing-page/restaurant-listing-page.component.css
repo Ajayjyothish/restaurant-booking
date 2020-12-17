@@ -14,6 +14,19 @@ p {
   margin-top: 3px;
 }
 
+div.modal-body {
+  padding: 0px;
+}
+
+.modal-title {
+  color: rgba(177, 131, 71, 1);
+}
+
+agm-map {
+  height: 817px;
+}
+
+
 .dropdown-menu {
   background-color: rgba(250, 245, 238, 1);
 }

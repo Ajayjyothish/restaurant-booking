@@ -16,7 +16,7 @@ const getTopRestaurants = (request, response, next) => {
 const getAllRestaurants = (request, response, next) => {
   const pageNo = request.params.pageno;
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants  OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    "Select id, name, location, cuisine, price, start_time, close_time, latitude, longitude, rating  FROM restaurants  OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
@@ -30,7 +30,7 @@ const getAllRestaurants = (request, response, next) => {
 const getBreakfastRestaurants = (request, response, next) => {
   const pageNo = request.params.pageno;
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where start_time < '12:00:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    "Select id, name, location, cuisine, price, start_time, close_time, rating, latitude, longitude  FROM restaurants where start_time < '12:00:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
@@ -44,7 +44,7 @@ const getBreakfastRestaurants = (request, response, next) => {
 const getLunchRestaurants = (request, response, next) => {
   const pageNo = request.params.pageno;
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where close_time >= '15:00' and start_time <='12:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    "Select id, name, location, cuisine, price, start_time, close_time, rating, latitude, longitude  FROM restaurants where close_time >= '15:00' and start_time <='12:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
@@ -58,7 +58,7 @@ const getLunchRestaurants = (request, response, next) => {
 const getDinnerRestaurants = (request, response, next) => {
   const pageNo = request.params.pageno;
   db.query(
-    "Select id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants where close_time > '18:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
+    "Select id, name, location, cuisine, price, start_time, close_time, rating, latitude, longitude  FROM restaurants where close_time > '18:00' OFFSET ($1 * 4) ROWS  FETCH FIRST 4 ROW ONLY; ",
     [pageNo],
     (err, res) => {
       if (err) {
@@ -280,10 +280,11 @@ const deletePhoto = (request, response) =>{
 }
 
 const getFavouriteRestaurants = (request, response) => {
+  const pageNo = request.params.pageNo;
   const userId = request.user.id;
   db.query(
-    "Select restaurants.id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants inner join favorites on restaurants.id = favorites.restaurant_id where favorites.favorited_by = $1",
-    [userId],
+    "Select restaurants.id, name, location, cuisine, price, start_time, close_time, rating  FROM restaurants inner join favorites on restaurants.id = favorites.restaurant_id where favorites.favorited_by = $1 OFFSET ($2 * 4) ROWS  FETCH FIRST 4 ROW ONLY",
+    [userId, pageNo],
     (err, res) => {
       if (err) {
         return response.status(400).json(err);
