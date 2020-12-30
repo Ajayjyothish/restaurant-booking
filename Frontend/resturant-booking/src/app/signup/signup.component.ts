@@ -41,7 +41,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(newUser: SignupUser, valid: boolean): void {
-    console.log(newUser, 'valid: ', valid);
     this.serverError = '';
     this.restaurantService.postUser(newUser).subscribe({
       next: (data) => {

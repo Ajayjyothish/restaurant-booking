@@ -15,6 +15,11 @@ import { ValidateEqualModule } from 'ng-validate-equal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AgmCoreModule } from '@agm/core';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 
 import { AuthInterceptor } from './AuthInterceptor';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
@@ -27,6 +32,8 @@ import { MyRestaurantsComponent } from './my-restaurants/my-restaurants.componen
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
 import { EditPhotosComponent } from './edit-photos/edit-photos.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { EditMenusComponent } from './edit-menus/edit-menus.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +49,8 @@ import { EditPhotosComponent } from './edit-photos/edit-photos.component';
     AddRestaurantComponent,
     EditRestaurantComponent,
     EditPhotosComponent,
+    FavoritesComponent,
+    EditMenusComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +62,7 @@ import { EditPhotosComponent } from './edit-photos/edit-photos.component';
     InfiniteScrollModule,
     HomepageModule,
     NgxGalleryModule,
+    SocialLoginModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD1pTe0e5PhkfAA6DsOz2rL0Qq8etBGaxc',
     }),
@@ -65,6 +75,24 @@ import { EditPhotosComponent } from './edit-photos/edit-photos.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '990650584307-5c64v96cqp4pat4h8uitavc6fm055r13.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1039503179901777')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent],
 })

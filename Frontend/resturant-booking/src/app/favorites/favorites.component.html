@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">Favorites</p>
+  </div>
+</div>
+
+<div id="favorites-list">
+    <div class="container">
+      <div
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
+        class="row"
+      >
+        <div *ngFor="let restaurant of restaurants" class="cards col-lg-6">
+          <app-restaurant-cards [restaurant]="restaurant"></app-restaurant-cards>
+        </div>
+      </div>
+    </div>
+  </div>

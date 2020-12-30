@@ -23,6 +23,7 @@ export class RestaurantDetailsComponent implements OnInit {
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
+  galleryMenus: NgxGalleryImage[] = [];
 
   restaurant = null;
   reviews = null;
@@ -59,6 +60,7 @@ export class RestaurantDetailsComponent implements OnInit {
     this.fetchReviews();
     this.setGalleryOptions();
     this.getPhotos();
+    this.getMenus();
   }
 
   getIsFavourite(): void {
@@ -105,6 +107,25 @@ export class RestaurantDetailsComponent implements OnInit {
     } else {
       this.router.navigate(['home']);
     }
+  }
+
+  getMenus(): void {
+    this.restaurantService.getMenus(this.restaurantId).subscribe({
+      next: (data: Array<any>) => {
+        console.log('Got data');
+
+        data.map((item) => {
+          this.galleryMenus.push({
+            small: item.url,
+            medium: item.url,
+            big: item.url,
+          });
+        });
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
   }
 
   getPhotos(): void {

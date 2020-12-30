@@ -13,6 +13,8 @@ router.post("/signup", userController.user_signup );
 
 router.post("/signin", userController.user_signin);
 
+router.post('/social-login', userController.social_signup_login)
+
 router.post("/forgotpassword", userController.user_forgotPassword );
 
 router.post("/newpassword", userController.user_newPassword )

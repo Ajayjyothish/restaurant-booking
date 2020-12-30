@@ -11,6 +11,8 @@ router.post('/new-restaurant', auth, restaurantContoller.postRestaurant)
 
 router.post('/new-restaurant/photos', auth, restaurantContoller.postPhotos)
 
+router.post('/new-restaurant/menus', auth, restaurantContoller.postMenus)
+
 router.post('/edit-restaurant', auth, restaurantContoller.updateRestaurant)
 
 router.get('/cities', restaurantContoller.getCities),
@@ -48,9 +50,13 @@ router.get('/search/:cityString/:searchString', restaurantContoller.searchRestau
 
 router.get('/photos/:restaurantId', restaurantContoller.getPhotos)
 
+router.get('/menus/:restaurantId', restaurantContoller.getMenus)
+
 router.delete('/photos/:id', auth, restaurantContoller.deletePhoto)
 
-router.get('/favorites', auth,  restaurantContoller.getFavouriteRestaurants)
+router.delete('/menus/:id', auth, restaurantContoller.deleteMenu)
+
+router.get('/favorites/:pageNo', auth,  restaurantContoller.getFavouriteRestaurants)
 
 router.get('/userRestaurants/:pageNo', auth, restaurantContoller.getUserRestaurants)
 

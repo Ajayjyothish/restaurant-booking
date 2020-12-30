@@ -1,9 +1,15 @@
 import { ForgotpassComponent } from './../forgotpass/forgotpass.component';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from '../signup/signup.component';
 import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
+import { RestaurantsService } from '../restaurants.service';
 
 interface SigninUser {
   email: string;
@@ -23,12 +29,40 @@ export class LoginComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private socialAuthService: SocialAuthService,
+    private restaurantService: RestaurantsService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
     this.router.onSameUrlNavigation = 'reload';
+  }
+
+  signIn(socialProvider: string): void {
+    console.log(socialProvider);
+
+    let socialPlatformProvider;
+    if (socialProvider === 'google') {
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    } else if (socialProvider === 'facebook') {
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    }
+    this.socialAuthService.signIn(socialPlatformProvider).then((user) => {
+      this.restaurantService.socialUser(user).subscribe({
+        next: (res) => {
+          this.authService.setSession(res);
+          this.router.navigateByUrl(this.router.url);
+          this.resetForm();
+        },
+        error: (error) => {
+          console.error('Google signin error: ', error.error);
+          if (error.status === 403) {
+            this.serverError = error.error;
+          }
+        },
+      });
+    });
   }
 
   ngOnInit(): void {

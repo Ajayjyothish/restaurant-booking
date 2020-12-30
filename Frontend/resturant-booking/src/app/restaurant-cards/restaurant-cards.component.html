@@ -9,7 +9,12 @@
         </h4></a
       >
       <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
-      <img *ngIf="isFavorite" style="height: 28px; width: 31px;" src="../../assets/icons/heart.png" alt="">
+      <img
+        *ngIf="isFavorite"
+        style="height: 28px; width: 31px"
+        src="../../assets/icons/heart.png"
+        alt=""
+      />
     </div>
 
     <p style="color: rgba(175, 175, 175, 1)" class="mb-0" id="location">
@@ -44,7 +49,7 @@
       <div class="col-1">
         <img
           src="../../assets/icons/price.png"
-          style="width: 33px; padding-top:10px"
+          style="width: 33px; padding-top: 10px"
           class="icon"
           alt=""
         />
@@ -71,9 +76,7 @@
     </div>
   </div>
 
-  <div
-    class="container py-3 d-flex justify-content-between"
-  >
+  <div class="container py-3 d-flex justify-content-between">
     <div *ngIf="photos">
       <img
         class="photos"
@@ -81,13 +84,42 @@
         src="{{ photo.url }}"
       />
     </div>
-    <div *ngIf="menu;else optionButtons">
-      <button class="btn">View Menu</button>
+    <div *ngIf="menu; else optionButtons">
+      <ng-template #menuContent let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title w-100 text-center">Menus</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ngx-gallery
+            [options]="galleryOptions"
+            [images]="galleryMenus"
+            class="ngx-gallery"
+          ></ngx-gallery>
+        </div>
+      </ng-template>
+      <button class="btn" (click)="open(menuContent)">View Menu</button>
     </div>
     <ng-template #optionButtons>
       <div class="ml-auto">
-        <a href="edit-restaurant/{{restaurant.id}}" class="btn option-btn mr-3">Edit</a>
-        <a (click)='deleteClick()' class="btn option-btn" style="background-color: black;">Delete</a>
+        <a
+          href="edit-restaurant/{{ restaurant.id }}"
+          class="btn option-btn mr-3"
+          >Edit</a
+        >
+        <a
+          (click)="deleteClick()"
+          class="btn option-btn"
+          style="background-color: black"
+          >Delete</a
+        >
       </div>
     </ng-template>
   </div>

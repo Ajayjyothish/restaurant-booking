@@ -1,7 +1,13 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { RestaurantsService } from './../restaurants.service';
+import {
+  NgxGalleryOptions,
+  NgxGalleryImage,
+  NgxGalleryAnimation,
+} from '@kolkov/ngx-gallery';
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 interface Restaurant {
   id: number;
@@ -28,11 +34,14 @@ export class RestaurantCardsComponent implements OnInit {
   deleteButtonClicked: EventEmitter<string> = new EventEmitter<string>();
   isLoggedIn = this.authService.isLoggedIn();
   isFavorite = null;
+  galleryMenus: NgxGalleryImage[] = [];
+  galleryOptions: NgxGalleryOptions[];
 
   constructor(
     private restaurantsService: RestaurantsService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +49,68 @@ export class RestaurantCardsComponent implements OnInit {
     if (this.isLoggedIn) {
       this.getIsFavourite();
     }
+    this.setGalleryOptions();
+    this.getMenus();
+  }
+
+  getMenus(): void {
+    this.restaurantsService.getMenus(this.restaurant.id).subscribe({
+      next: (data: Array<any>) => {
+        data.map((item) => {
+          this.galleryMenus.push({
+            small: item.url,
+            medium: item.url,
+            big: item.url,
+          });
+        });
+      },
+      error: (error) => {
+        console.error('There was an error: ', error);
+      },
+    });
+  }
+
+  setGalleryOptions(): void {
+    this.galleryOptions = [
+      {
+        previewCloseOnClick: true,
+        previewCloseOnEsc: true,
+        width: '100%',
+        height: '575px',
+        thumbnailsColumns: 7,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        arrowNextIcon: 'fa fa-angle-right',
+        arrowPrevIcon: 'fa fa-angle-left',
+      },
+      // max-width 800
+      {
+        breakpoint: 800,
+        width: '100%',
+        height: '400px',
+        imagePercent: 80,
+        thumbnailsPercent: 20,
+        thumbnailsMargin: 20,
+        thumbnailMargin: 20,
+        thumbnailsColumns: 6,
+      },
+      // max-width 400
+      {
+        breakpoint: 400,
+        width: '100%',
+        height: '300px',
+        thumbnailsMargin: 20,
+        thumbnailMargin: 10,
+        thumbnailsColumns: 4,
+        preview: false,
+      },
+    ];
+  }
+
+  open(content): void {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'xl',
+    });
   }
 
   getIsFavourite(): void {

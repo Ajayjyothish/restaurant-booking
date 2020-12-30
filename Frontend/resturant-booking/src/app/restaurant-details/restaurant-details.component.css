@@ -90,6 +90,12 @@ agm-map {
   height: 817px;
 }
 
+ngb-carousel ::ng-deep .carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+
 .modal-title {
   color: rgba(177, 131, 71, 1);
 }

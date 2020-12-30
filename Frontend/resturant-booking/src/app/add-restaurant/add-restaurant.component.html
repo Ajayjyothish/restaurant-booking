@@ -361,14 +361,24 @@
               <button type="button" (click)="open(mapContent)" class="btn">
                 Add Map
               </button>
-              <button class="btn">Add Menu</button>
+              <div style="position: relative">
+                <input
+                  type="file"
+                  name="uploadedMenu"
+                  multiple
+                  (change)="onMenuSelect($event)"
+                  class="customFile"
+                />
+                <button class="btn">Add Menu</button>
+              </div>
+
               <div style="position: relative">
                 <input
                   type="file"
                   name="uploadedImage"
                   multiple
-                  (change)="onFileSelect($event)"
-                  id="customFile"
+                  (change)="onPhotoSelect($event)"
+                  class="customFile"
                 />
                 <button class="btn">Add Photos</button>
               </div>

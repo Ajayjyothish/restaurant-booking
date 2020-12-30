@@ -73,6 +73,49 @@ const user_signin = (request, response, next) => {
   );
 };
 
+const social_signup_login = (request, response) => {
+  const { name, email, photoUrl } = request.body;
+  db.query("SELECT id FROM USERS WHERE email=$1", [email], (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    if (result.rows.length > 0) {
+      const jwtBearerToken = jwt.sign(
+        { id: result.rows[0].id },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: 3600,
+        }
+      );
+      return response.status(200).json({
+        idToken: jwtBearerToken,
+        expiresIn: "3600",
+      });
+    } else {
+      db.query(
+        "INSERT INTO users (name, email, phone, password, profile_img) VALUES ($1, $2, $3, $4, $5) returning id",
+        [name, email, "", "", photoUrl],
+        (err, res) => {
+          if (err) {
+            return next(err);
+          }
+          const jwtBearerToken = jwt.sign(
+            { id: res.rows[0].id },
+            process.env.TOKEN_SECRET,
+            {
+              expiresIn: 3600,
+            }
+          );
+          return response.status(200).json({
+            idToken: jwtBearerToken,
+            expiresIn: "3600",
+          });
+        }
+      );
+    }
+  });
+};
+
 const user_forgotPassword = (request, response, next) => {
   const { email } = request.body;
 
@@ -183,7 +226,7 @@ const user_getProfile = (request, response, next) => {
 
 const users_updateProfile = (request, response, next) => {
   const userId = request.user.id;
-  const { name, email, phone, password, uploadedImage} = request.body;
+  const { name, email, phone, password, uploadedImage } = request.body;
 
   db.query("SELECT id FROM USERS WHERE email=$1", [email], (err, result) => {
     if (err) {
@@ -211,7 +254,7 @@ const users_updateProfile = (request, response, next) => {
       } else {
         db.query(
           "UPDATE users SET name = $1, email = $2, phone=$3, profile_img=$4 where id=$5",
-          [name, email, phone,uploadedImage, userId],
+          [name, email, phone, uploadedImage, userId],
           (err, result) => {
             if (err) {
               return response.status(400).json(err);
@@ -226,20 +269,19 @@ const users_updateProfile = (request, response, next) => {
 };
 
 const uploadImage = (req, res, next) => {
-  const file = req.file
+  const file = req.file;
   console.log(req);
   if (!file) {
-      const error = new Error('Please upload a file')
-      error.httpStatusCode = 400
-      return res.json(error)
+    const error = new Error("Please upload a file");
+    error.httpStatusCode = 400;
+    return res.json(error);
   }
   res.status(200).send({
-      statusCode: 200,
-      status: 'success',
-      uploadedFile: file
-  })
-
-}
+    statusCode: 200,
+    status: "success",
+    uploadedFile: file,
+  });
+};
 
 module.exports = {
   user_signup,
@@ -248,6 +290,6 @@ module.exports = {
   user_newPassword,
   user_getProfile,
   users_updateProfile,
-  uploadImage
-
+  uploadImage,
+  social_signup_login
 };

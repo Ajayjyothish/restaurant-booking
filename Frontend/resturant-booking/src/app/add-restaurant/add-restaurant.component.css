@@ -52,7 +52,7 @@ input {
   border: 1px solid rgba(112, 98, 80, 1);
 }
 
-input#customFile{
+input.customFile{
   position: absolute;
   height: 45px;
   width: 130px;

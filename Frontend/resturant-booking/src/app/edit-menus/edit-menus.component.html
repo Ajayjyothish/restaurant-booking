@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div id="filterbar">
+  <div class="container d-flex">
+    <p id="title">Edit Menus</p>
+  </div>
+</div>
+
+<div class="edit-menus" style="padding-top: 2em">
+  <div class="container">
+    <div class="edit-menus-card">
+      <div class="w-100 d-flex justify-content-end">
+        <div style="position: relative">
+          <input
+            type="file"
+            name="uploadedImage"
+            multiple
+            (change)="onFileSelect($event)"
+            id="customFile"
+          />
+          <button class="btn m-3">Add Menus</button>
+        </div>
+      </div>
+      <div
+        *ngIf="restaurantMenus.length > 0"
+        class="row"
+        style="margin: 5px"
+      >
+        <div *ngFor="let menu of restaurantMenus" style="position: relative">
+          <img style='cursor:pointer' (click)='deleteMenu(menu.id)' class="delete" src="../../assets/icons/delete.png" alt="" />
+          <img class="menu" src="{{ menu.url }}" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
