@@ -56,6 +56,10 @@ export class RestaurantsService {
     return this.http.post<any>('/api/users/signup', body);
   }
 
+  socialUser(body): any {
+    return this.http.post('/api/users/social-login', body);
+  }
+
   getCities(): any {
     return this.http.get('/api/restaurants/cities');
   }

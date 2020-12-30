@@ -15,6 +15,11 @@ import { ValidateEqualModule } from 'ng-validate-equal';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AgmCoreModule } from '@agm/core';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 
 import { AuthInterceptor } from './AuthInterceptor';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
@@ -57,6 +62,7 @@ import { EditMenusComponent } from './edit-menus/edit-menus.component';
     InfiniteScrollModule,
     HomepageModule,
     NgxGalleryModule,
+    SocialLoginModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD1pTe0e5PhkfAA6DsOz2rL0Qq8etBGaxc',
     }),
@@ -69,6 +75,24 @@ import { EditMenusComponent } from './edit-menus/edit-menus.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '990650584307-5c64v96cqp4pat4h8uitavc6fm055r13.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1039503179901777')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent],
 })

@@ -63,7 +63,6 @@ export class RestaurantCardsComponent implements OnInit {
             big: item.url,
           });
         });
-        console.log(this.galleryMenus);
       },
       error: (error) => {
         console.error('There was an error: ', error);

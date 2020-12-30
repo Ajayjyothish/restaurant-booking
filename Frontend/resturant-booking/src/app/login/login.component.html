@@ -91,9 +91,13 @@
     <div class="container text-center">
       <div class="row justify-content-center pb-1">
         <p class="mr-2" style="padding-top: 10px">Sign In With</p>
-        <a href="#"><img src="../../assets/icons/facebook.png" alt="" /></a>
-        <a href="#"><img src="../../assets/icons/twitter.png" alt="" /></a>
-        <a href="#"><img src="../../assets/icons/google.png" alt="" /></a>
+        <a><img src="../../assets/icons/facebook.png" (click)="signIn('facebook')" alt="" /></a>
+        <a><img src="../../assets/icons/twitter.png" alt="" /></a>
+        <a><img
+            (click)="signIn('google')"
+            src="../../assets/icons/google.png"
+            alt=""
+        /></a>
       </div>
       <div class="row justify-content-center">
         <p class="mr-2">Dont have an account?</p>

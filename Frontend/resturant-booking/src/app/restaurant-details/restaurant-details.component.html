@@ -7,20 +7,10 @@
 
 <div class="details">
   <div class="container carousel" style="padding-top: 2em; position: relative">
-    <ngb-carousel *ngIf="images">
-      <ng-template ngbSlide>
+    <ngb-carousel *ngIf="galleryImages[0]">
+      <ng-template *ngFor="let galleryImage of galleryImages" ngbSlide>
         <div class="picsum-img-wrapper">
-          <img class="carousel-image" [src]="images[0]" alt="first slide" />
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img class="carousel-image" [src]="images[1]" alt="second slide" />
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img class="carousel-image" [src]="images[2]" alt="third slide" />
+          <img class="carousel-image" [src]="galleryImage.small"/>
         </div>
       </ng-template>
     </ngb-carousel>
